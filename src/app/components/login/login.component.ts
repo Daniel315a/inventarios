@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   public labels = {
     usuario: 'Usuario',
-    contrasenna: 'Contraseña'
+    contrasenna: 'Contraseña',
+    mensajeLogin: 'Inicio de sesión'
   };
 
   public botones = {
