@@ -1,0 +1,71 @@
+<header class="hero is-light">
+    <div class="hero-body">
+        <h1 class="title has-text-centered">Inicio de sesión</h1>
+    </div>
+</header>
+
+<div class="columns columns-form-login">
+
+    <div class="column is-one-third"></div>
+    
+    <div class="column">
+
+        <form>
+
+            <!-- Usuario -->
+
+            <div class="field">
+                <div class="control has-icons-left">
+
+                    <input 
+                        type="text" 
+                        name="usuario" 
+                        class="input"
+                        placeholder="{{labels.usuario}}">
+
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- FIN: Usuario -->
+
+            <!-- Contraseña -->
+
+            <div class="field">
+                <div class="control has-icons-left">
+
+                    <input 
+                        type="text" 
+                        name="usuario" 
+                        class="input"
+                        placeholder="{{labels.contrasenna}}">
+
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- FIN: Contraseña -->
+
+            <!-- Botón de login -->
+
+            <div class="field is-grouped is-grouped-centered">
+                <div class="control">
+                    <a class="button is-primary">
+                        {{botones.login}}
+                    </a>
+                </div>
+            </div>
+
+            <!-- FIN: Botón de login -->
+
+        </form>
+
+    </div>
+
+    <div class="column is-one-third"></div>
+
+</div>

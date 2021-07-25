@@ -1,0 +1,7 @@
+<div *ngIf="loginOk; else login">
+  <app-dashboard></app-dashboard>
+</div>
+
+<ng-template #login>
+  <app-login></app-login>
+</ng-template>
