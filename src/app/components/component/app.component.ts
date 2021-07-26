@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Utilidades } from 'src/app/models/Utilidades';
+import { Utilidades } from 'src/app/models/utilidades';
 
 @Component({
   selector: 'app-root',

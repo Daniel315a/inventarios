@@ -21,7 +21,8 @@
                         type="text" 
                         name="usuario" 
                         class="input"
-                        placeholder="{{labels.usuario}}">
+                        placeholder="{{labels.usuario}}"
+                        [(ngModel)]="usuario">
 
                     <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
@@ -37,10 +38,11 @@
                 <div class="control has-icons-left">
 
                     <input 
-                        type="text" 
-                        name="usuario" 
+                        type="password" 
+                        name="contrasenna" 
                         class="input"
-                        placeholder="{{labels.contrasenna}}">
+                        placeholder="{{labels.contrasenna}}"
+                        [(ngModel)]="contrasenna">
 
                     <span class="icon is-small is-left">
                         <i class="fas fa-lock"></i>
@@ -50,11 +52,19 @@
 
             <!-- FIN: Contraseña -->
 
+            <div class="field">
+                <span class="tag is-danger is-light" *ngIf="mensaje">
+                    {{mensaje}}
+                </span>
+            </div>
+
             <!-- Botón de login -->
 
             <div class="field is-grouped is-grouped-centered">
                 <div class="control">
-                    <a class="button is-primary">
+                    <a 
+                        class="button is-primary"
+                        (click)="login()">
                         {{botones.login}}
                     </a>
                 </div>
