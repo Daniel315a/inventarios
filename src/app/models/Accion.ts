@@ -7,4 +7,11 @@ export class Accion {
         
     }
 
+    inicializar(datos: Accion): void {
+        if(!!datos){
+            this.nombre = !!datos.nombre ? datos.nombre : '';
+            this.valor = !!datos.valor ? datos.valor : false;
+        }
+    }
+
 }
