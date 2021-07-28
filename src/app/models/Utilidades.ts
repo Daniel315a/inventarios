@@ -10,4 +10,8 @@ export class Utilidades {
         return !!localStorage.getItem('usr-decoraytransforma');
     }
     
+    public static obtenerUsuario(): any{
+      return JSON.parse(localStorage.getItem('usr-decoraytransforma'));
+    }
+
 }
