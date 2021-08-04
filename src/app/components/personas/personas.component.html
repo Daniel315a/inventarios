@@ -22,19 +22,33 @@
 
 <div #divTabla class="div-tabla" [style.height.px]="altoDivTabla">
 
-    <table class="table is-fullwidth">
+    <table class="table is-fullwidth is-bordered">
 
         <thead>
             <tr>
                 <th width="15%">{{columnas.numeroDocumento}}</th>
                 <th>{{columnas.nombreCompleto}}</th>
                 <th width="15%">{{columnas.tipoPersona}}</th>
+                <th width="10%">{{columnas.acciones}}</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr>
-                
+            <tr *ngFor="let persona of listadoPersonas">
+                <td>{{persona.numeroDocumento}}</td>
+                <td>{{persona.nombreCompleto}}</td>
+                <td>{{persona.tipoPersona}}</td>
+                <td>
+
+                    <div class="buttons is-centered">
+                        <button class="button is-primary is-small">
+                            <span class="icon is-small">
+                                <i class="fas fa-user-edit"></i>
+                            </span>
+                        </button>
+                    </div>
+
+                </td>
             </tr>
         </tbody>
 
