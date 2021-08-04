@@ -8,13 +8,15 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PersonasComponent } from './components/personas/personas.component';
+import { SelectDepartamentosComponent } from './components/select-departamentos/select-departamentos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    PersonasComponent
+    PersonasComponent,
+    SelectDepartamentosComponent
   ],
   imports: [
     BrowserModule,
