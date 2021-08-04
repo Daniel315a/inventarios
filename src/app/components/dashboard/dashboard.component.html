@@ -35,3 +35,88 @@
         </div>
     </nav>
 </header>
+
+<a id="btn-ver-menu" 
+    class="button is-primary"
+    [@ocultarMenu]="btnVerMenuLateralVisible ? 'visible' : 'oculto'"
+    (@ocultarMenu.done)="establecerEstadoMenuLateral()"
+    (click)="ocultarBtnVerMenu()">
+    <i class="fas fa-bars"></i>
+</a>
+
+<aside #menuLateral
+    id="menu-lateral" 
+    [@ocultarMenu]="menuLateralVisible ? 'visible' : 'oculto'"
+    (@ocultarMenu.done)="establecerEstadoBtnVerMenu()">
+    
+    <div class="has-text-right">
+        <a id="btn-cerrar-menu">
+            <span 
+                class="icon is-small has-text-dark"
+                (click)="ocultarMenuLateral()">
+                <i class="fas fa-times"></i>
+            </span>
+        </a>
+    </div>
+
+    <ul class="menu-list-item">
+        <!-- *ngFor="let opcion of opcionesMenu" -->
+        <li class="menu-item">
+
+            <!-- <a [routerLink]="[opcion.route]" [routerLinkActive]="['menu-activo']">
+                <i [ngClass]="[opcion.icono]"></i>
+                {{ opcion.nombre }}
+            </a> -->
+
+            <a class="menu-activo">
+                <i class="fas fa-user"></i>
+                Personas
+            </a>
+
+        </li>
+
+        <li class="menu-item">
+
+            <!-- <a [routerLink]="[opcion.route]" [routerLinkActive]="['menu-activo']">
+                <i [ngClass]="[opcion.icono]"></i>
+                {{ opcion.nombre }}
+            </a> -->
+
+            <a>
+                <i class="fas fa-user"></i>
+                Facturas
+            </a>
+
+        </li>
+
+    </ul>    
+</aside>
+
+<!-- [ngClass]="menuLateralVisible ? 'seccion-componentes menu-visible' : 'seccion-componentes menu-oculto'" -->
+<section #divContenedor 
+        class="seccion-componentes"
+        [@establecerTamannoContenedor]="menuLateralVisible ? 'menu-visible' : 'menu-oculto'">
+    <div>
+        
+        <div class="field is-horizontal">
+            <div class="field-label is-normal"><label class="level-left">Campo</label></div>
+            <div class="field-body"><input type="text" class="input"></div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal"><label class="level-left">Campo</label></div>
+            <div class="field-body"><input type="text" class="input"></div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal"><label class="level-left">Campo</label></div>
+            <div class="field-body"><input type="text" class="input"></div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal"><label class="level-left">Campo</label></div>
+            <div class="field-body"><input type="text" class="input"></div>
+        </div>
+
+    </div>
+</section>

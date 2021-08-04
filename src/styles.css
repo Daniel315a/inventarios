@@ -145,12 +145,15 @@ h1 {
 
 /*Menu Lateral*/
 
-.menu-lateral {
+#menu-lateral {
     position: fixed;
     top: var(--header-size);
     width: var(--aside-size);
     height: 100vh;
     padding: 10px;
+    animation-name: aparicion-menu-lateral;
+    animation-duration: 0.3s;
+    background-color: var(--neutroLuz);
 }
 
 .menu-list-item {
@@ -185,10 +188,19 @@ h1 {
 
 .seccion-componentes{
     display: inline-block;
-    width: calc(100% - var(--aside-size));
-    margin-left: var(--aside-size);
-    margin-top: var(--header-size);
+    margin-top: calc(var(--header-size) + 10px);
     padding: 10px;
+    border-style: solid;
+}
+
+.menu-visible {
+    margin-left: var(--aside-size);
+    width: calc(100% - var(--aside-size));
+}
+
+.menu-oculto {
+    margin-left: 0px;
+    width: 100%;
 }
 
 .tabla{
@@ -202,6 +214,47 @@ h1 {
 
 .oculto{
     display: none;
+}
+
+#btn-ver-menu {
+    position: fixed;
+    left: 0;
+    top:60px;
+    border-radius: 0 4px 4px 0px;
+    width: 35px;
+    animation-name: aparicion-boton-menu;
+    animation-duration: 0.3s;
+}
+
+@keyframes aparicion-boton-menu {
+    0% {
+        left: -35px;
+    }
+}
+
+@keyframes aparicion-menu-lateral {
+    from {
+        left: -300px;
+    }
+    to {
+        left: 0px;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+  
+    #btn-ver-menu {
+        display: none;
+    }
+    
+}
+
+@media only screen and (max-width: 700px) {
+  
+    #menu-lateral {
+        display: none;
+    }
+    
 }
 
 /* div{
