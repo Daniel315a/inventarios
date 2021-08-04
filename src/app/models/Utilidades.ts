@@ -14,4 +14,12 @@ export class Utilidades {
       return JSON.parse(localStorage.getItem('usr-decoraytransforma'));
     }
 
+    public static encriptar(cadena: string): string {
+      return '';
+    }
+
+    public static desencriptar(cadena: string): string {
+      return '';
+    }
+
 }
