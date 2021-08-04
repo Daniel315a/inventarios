@@ -190,7 +190,6 @@ h1 {
     display: inline-block;
     margin-top: calc(var(--header-size) + 10px);
     padding: 10px;
-    border-style: solid;
 }
 
 .menu-visible {
@@ -203,7 +202,7 @@ h1 {
     width: 100%;
 }
 
-.tabla{
+.div-tabla{
     overflow: auto;
     border: 1px solid gray;
 }
@@ -219,11 +218,12 @@ h1 {
 #btn-ver-menu {
     position: fixed;
     left: 0;
-    top:60px;
+    top:120px;
     border-radius: 0 4px 4px 0px;
     width: 35px;
     animation-name: aparicion-boton-menu;
     animation-duration: 0.3s;
+    z-index: 1;
 }
 
 @keyframes aparicion-boton-menu {

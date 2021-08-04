@@ -1,1 +1,43 @@
-<p>personas works!</p>
+<div #divForm class="form-filtros">
+    
+    <div class="field">
+
+        <div class="control is-expanded has-icons-left">
+            
+            <input 
+                class="input"
+                type="text" 
+                name=""
+                placeholder="{{labels.buscar}}">
+
+            <span class="icon is-small is-left">
+                <i class="fas fa-search"></i>
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div #divTabla class="div-tabla" [style.height.px]="altoDivTabla">
+
+    <table class="table is-fullwidth">
+
+        <thead>
+            <tr>
+                <th width="15%">{{columnas.numeroDocumento}}</th>
+                <th>{{columnas.nombreCompleto}}</th>
+                <th width="15%">{{columnas.tipoPersona}}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
