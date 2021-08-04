@@ -1,1 +1,6 @@
-<p>select-departamentos works!</p>
+<select 
+    name="departamento" 
+    [(ngModel)]="departamento.id"
+    (change)="onDepartamentoSeleccionado()">
+    <option *ngFor="let departamento of departamentos" [value]="departamento.id">{{departamento.nombre}}</option>
+</select>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Departamento } from 'src/app/models/departamento';
 
 @Component({
   selector: 'app-select-departamentos',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectDepartamentosComponent implements OnInit {
 
+  public departamento: Departamento = new Departamento();
+  public departamentos: Array<Departamento> = new Array<Departamento>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public onDepartamentoSeleccionado(){
+
   }
 
 }
