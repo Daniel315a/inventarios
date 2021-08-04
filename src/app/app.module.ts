@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PersonasComponent } from './components/personas/personas.component';
 import { SelectDepartamentosComponent } from './components/select-departamentos/select-departamentos.component';
+import { SelectMunicipiosComponent } from './components/select-municipios/select-municipios.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SelectDepartamentosComponent } from './components/select-departamentos/
     DashboardComponent,
     LoginComponent,
     PersonasComponent,
-    SelectDepartamentosComponent
+    SelectDepartamentosComponent,
+    SelectMunicipiosComponent
   ],
   imports: [
     BrowserModule,
