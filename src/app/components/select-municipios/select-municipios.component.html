@@ -1,1 +1,6 @@
-<p>select-municipios works!</p>
+<select 
+    name="municipio" 
+    [(ngModel)]="municipio.id"
+    (change)="onMunicipioSeleccionado()">
+    <option *ngFor="let municipio of municipios" [value]="municipio.id">{{municipio.nombre}}</option>
+</select>

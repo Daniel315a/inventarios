@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Municipio } from 'src/app/models/municipio';
 
 @Component({
   selector: 'app-select-municipios',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectMunicipiosComponent implements OnInit {
 
+  public municipio: Municipio = new Municipio();
+  public municipios: Array<Municipio> = new Array<Municipio>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public onMunicipioSeleccionado(){
+
   }
 
 }
