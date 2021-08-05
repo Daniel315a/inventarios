@@ -1,1 +1,6 @@
-<p>select-tipos-persona works!</p>
+<select 
+    name="tipoPersona" 
+    [(ngModel)]="tipoPersona.id"
+    (change)="onTipoSeleccionado()">
+    <option *ngFor="let tipoPersona of tiposPersona" [value]="tipoPersona.id">{{tipoPersona.nombre}}</option>
+</select>
