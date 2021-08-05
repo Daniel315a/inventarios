@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PersonasComponent } from './components/personas/personas.component';
 import { SelectDepartamentosComponent } from './components/select-departamentos/select-departamentos.component';
 import { SelectMunicipiosComponent } from './components/select-municipios/select-municipios.component';
+import { PersonaComponent } from './components/persona/persona.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SelectMunicipiosComponent } from './components/select-municipios/select
     LoginComponent,
     PersonasComponent,
     SelectDepartamentosComponent,
-    SelectMunicipiosComponent
+    SelectMunicipiosComponent,
+    PersonaComponent
   ],
   imports: [
     BrowserModule,
