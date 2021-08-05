@@ -1,1 +1,6 @@
-<p>select-tipos-documento works!</p>
+<select 
+    name="tipoDocumento" 
+    [(ngModel)]="tipoDocumento.id"
+    (change)="onTipoSeleccionado()">
+    <option *ngFor="let tipoDocumento of tiposDocumento" [value]="tipoDocumento.id">{{tipoDocumento.nombre}}</option>
+</select>

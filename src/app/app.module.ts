@@ -11,7 +11,8 @@ import { PersonasComponent } from './components/personas/personas.component';
 import { SelectDepartamentosComponent } from './components/select-departamentos/select-departamentos.component';
 import { SelectMunicipiosComponent } from './components/select-municipios/select-municipios.component';
 import { PersonaComponent } from './components/persona/persona.component';
-import { SelectTipoPersonaComponent } from './components/select-tipo-persona/select-tipo-persona.component';
+import { SelectTiposPersonaComponent } from './components/select-tipos-persona/select-tipos-persona.component';
+import { SelectTiposDocumentoComponent } from './components/select-tipos-documento/select-tipos-documento.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SelectTipoPersonaComponent } from './components/select-tipo-persona/sel
     SelectDepartamentosComponent,
     SelectMunicipiosComponent,
     PersonaComponent,
-    SelectTipoPersonaComponent
+    SelectTiposPersonaComponent,
+    SelectTiposDocumentoComponent
   ],
   imports: [
     BrowserModule,
