@@ -21,6 +21,7 @@ export class SelectTiposDocumentoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.consultarTiposDocumento();
   }
 
   public onTipoSeleccionado(){
