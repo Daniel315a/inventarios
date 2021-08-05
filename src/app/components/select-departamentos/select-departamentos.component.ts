@@ -36,8 +36,8 @@ export class SelectDepartamentosComponent implements OnInit {
   }
 
   public onDepartamentoSeleccionado(){
-    this.departamento = this.departamentos.find(departamento => departamento.id == this.departamento.id);
-    this.departamentoSeleccionado.emit(this.departamento);
+    let departamento = this.departamentos.find(departamento => departamento.id == this.departamento.id);
+    this.departamentoSeleccionado.emit(departamento);
   }
 
 }
