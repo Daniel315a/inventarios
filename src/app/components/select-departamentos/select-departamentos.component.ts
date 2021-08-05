@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Departamento } from 'src/app/models/departamento';
 import { DepartamentoService } from 'src/app/services/departamento.service';
 
@@ -14,6 +14,8 @@ export class SelectDepartamentosComponent implements OnInit {
 
   public departamento: Departamento = new Departamento();
   public departamentos: Array<Departamento> = new Array<Departamento>();
+  @Output()
+  public departamentoSeleccionado: EventEmitter<Departamento> = new EventEmitter<Departamento>();
 
   constructor(
     private _departamentoService: DepartamentoService
@@ -34,7 +36,8 @@ export class SelectDepartamentosComponent implements OnInit {
   }
 
   public onDepartamentoSeleccionado(){
-
+    this.departamento = this.departamentos.find(departamento => departamento.id == this.departamento.id);
+    this.departamentoSeleccionado.emit(this.departamento);
   }
 
 }
