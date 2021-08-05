@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TipoPersona } from 'src/app/models/tipo-persona';
 import { TipoPersonaService } from 'src/app/services/tipo-persona.service';
 
@@ -14,6 +14,8 @@ export class SelectTiposPersonaComponent implements OnInit {
 
   public tipoPersona: TipoPersona = new TipoPersona();
   public tiposPersona: Array<TipoPersona> = new Array<TipoPersona>();
+  @Output()
+  public tipoPersonaSeleccionado: EventEmitter<TipoPersona> = new EventEmitter<TipoPersona>();
 
   constructor(
     private _tipoPersonaService: TipoPersonaService
@@ -24,13 +26,24 @@ export class SelectTiposPersonaComponent implements OnInit {
   }
 
   public consultarTiposPersona(){
+    this.tiposPersona = new Array<TipoPersona>();
     this._tipoPersonaService.consultarTodos().subscribe(
       result => {
         if(result.resultado){
-          this.tiposPersona = result.datos;
+          result.datos.forEach(objTipoPersona => {
+            const tipoPersona: TipoPersona = new TipoPersona();
+            tipoPersona.inicializar(objTipoPersona);
+
+            this.tiposPersona.push(tipoPersona);
+          });
         }
       }
     );
+  }
+
+  public onTipoSeleccionado(){
+    let tipoPersona = this.tiposPersona.find(tipoPersona => tipoPersona.id == this.tipoPersona.id);
+    this.tipoPersonaSeleccionado.emit(tipoPersona);
   }
 
 }
