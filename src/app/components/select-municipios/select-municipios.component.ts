@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Departamento } from 'src/app/models/departamento';
 import { Municipio } from 'src/app/models/municipio';
 import { MunicipioService } from 'src/app/services/municipio.service';
@@ -16,6 +16,7 @@ export class SelectMunicipiosComponent implements OnInit {
   public departamento: Departamento = new Departamento();
   public municipio: Municipio = new Municipio();
   public municipios: Array<Municipio> = new Array<Municipio>();
+  public municipioSeleccionado: EventEmitter<Municipio> = new EventEmitter<Municipio>();
 
   constructor(
     private _municipioService: MunicipioService
@@ -26,7 +27,8 @@ export class SelectMunicipiosComponent implements OnInit {
   }
 
   public onMunicipioSeleccionado(){
-
+    let municipio = this.municipios.find(municipio => municipio.id == this.municipio.id);
+    this.municipioSeleccionado.emit(municipio);
   }
 
   public consultarMunicipios(){
