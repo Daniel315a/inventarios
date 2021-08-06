@@ -83,4 +83,8 @@ export class ProductosComponent implements OnInit, AfterViewInit {
     );
   }
 
+  public limpiarProducto(){
+    this.producto = new Producto();
+  }
+
 }
