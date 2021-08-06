@@ -46,15 +46,18 @@ export class ProductoService {
 
     public crear(producto: Producto): Observable<any>{
         const usuario = Utilidades.obtenerUsuario();
-        const parametros: HttpParams = new HttpParams().
+        let parametros: HttpParams = new HttpParams().
         set('token', usuario.token).
         set('solicitud', 'crear').
         set('id_empresa', usuario.empresa.id).
-        set('referencia', producto.referencia).
         set('detalle', producto.detalle).
         set('cantidad_interna', producto.cantidadInterna.toString()).
         set('cantidad_disponible', producto.cantidadDisponible.toString()).
         set('precio', producto.precio.toString());
+
+        if(producto.referencia != ''){
+            parametros = parametros.set('referencia', producto.referencia);
+        }
 
         return this._http.post(this.url, parametros);
     }
