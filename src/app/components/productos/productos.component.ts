@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
+import { Utilidades } from 'src/app/models/utilidades';
 import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
@@ -38,6 +39,10 @@ export class ProductosComponent implements OnInit, AfterViewInit {
     guardar: 'Guardar',
     eliminar: 'Eliminar'
   };
+
+  public mensajes = {
+    preguntaEliminar: '¿Está seguro de eliminar el registro? Esta opción no se puede deshacer.'
+  }
 
   constructor(
     private _productoService: ProductoService
@@ -84,14 +89,16 @@ export class ProductosComponent implements OnInit, AfterViewInit {
   }
 
   public deshabilitarProducto(){
-    this._productoService.deshabilitarProducto(this.producto.id).subscribe(
-      result => {
-        if(result.resultado){
-          this.producto = new Producto();
-          this.consultarProductos();
+    Utilidades.dialogPregunta('', this.mensajes.preguntaEliminar, 'Sí, eliminar').then((result) => {
+      this._productoService.deshabilitarProducto(this.producto.id).subscribe(
+        result => {
+          if(result.resultado){
+            this.producto = new Producto();
+            this.consultarProductos();
+          }
         }
-      }
-    );
+      );
+    });
   }
 
   public limpiarProducto(){
