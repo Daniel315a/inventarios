@@ -13,6 +13,7 @@ import { SelectMunicipiosComponent } from './components/select-municipios/select
 import { PersonaComponent } from './components/persona/persona.component';
 import { SelectTiposPersonaComponent } from './components/select-tipos-persona/select-tipos-persona.component';
 import { SelectTiposDocumentoComponent } from './components/select-tipos-documento/select-tipos-documento.component';
+import { ProductosComponent } from './components/productos/productos.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SelectTiposDocumentoComponent } from './components/select-tipos-documen
     SelectMunicipiosComponent,
     PersonaComponent,
     SelectTiposPersonaComponent,
-    SelectTiposDocumentoComponent
+    SelectTiposDocumentoComponent,
+    ProductosComponent
   ],
   imports: [
     BrowserModule,
