@@ -143,6 +143,26 @@
             </tr>
         </thead>
 
+        <tbody>
+
+            <tr *ngFor="let producto of productos">
+                <td>{{producto.referencia}}</td>
+                <td>{{producto.detalle}}</td>
+                <td>
+
+                    <div class="buttons is-centered">
+                        <button class="button is-primary is-small">
+                            <span class="icon is-small">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                        </button>
+                    </div>
+
+                </td>
+            </tr>
+
+        </tbody>
+
     </table>
 
 </div>

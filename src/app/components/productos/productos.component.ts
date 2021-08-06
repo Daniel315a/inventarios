@@ -1,10 +1,14 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
+import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css'],
+  providers: [
+    ProductoService
+  ],
   host: {
     '(window:resize)': 'onResize($event)'
   },
@@ -12,6 +16,7 @@ import { Producto } from 'src/app/models/producto';
 export class ProductosComponent implements OnInit, AfterViewInit {
 
   public producto: Producto = new Producto();
+  public productos: Array<any> = new Array<any>();
 
   /**
    * Propiedades del diseño
@@ -34,9 +39,12 @@ export class ProductosComponent implements OnInit, AfterViewInit {
     eliminar: 'Eliminar'
   };
 
-  constructor() { }
+  constructor(
+    private _productoService: ProductoService
+  ) { }
 
   ngOnInit(): void {
+    this.consultarProductos();
   }
 
   ngAfterViewInit(): void {
@@ -52,6 +60,16 @@ export class ProductosComponent implements OnInit, AfterViewInit {
     if(altoDivTabla != this.altoDivTabla){
       this.altoDivTabla = altoDivTabla;
     }
+  }
+
+  public consultarProductos(){
+    this._productoService.consultarPorEmpresa().subscribe(
+      result => {
+        if(result.resultado){
+          this.productos = result.datos;
+        }
+      }
+    );
   }
 
 }
