@@ -42,7 +42,8 @@ export class ProductosComponent implements OnInit, AfterViewInit {
 
   public mensajes = {
     preguntaEliminar: '¿Está seguro de eliminar el registro? Esta opción no se puede deshacer.',
-    productoCreado: 'El producto se ha creado correctamente'
+    productoCreado: 'El producto se ha creado correctamente',
+    productoActualizado: 'El producto se ha actualizado correctamente'
   }
 
   constructor(
@@ -129,6 +130,18 @@ export class ProductosComponent implements OnInit, AfterViewInit {
     );
   }
 
-  private actualizar(){}
+  private actualizar(){
+    this._productoService.actualizar(this.producto).subscribe(
+      result => {
+        if(result.resultado){
+          Utilidades.dialogSuccess(this.mensajes.productoActualizado);
+          this.consultarProductos();
+        }
+      },
+      error => {
+        Utilidades.dialogErrorHttp(error.error.codigo_http, error.error.mensaje);
+      }
+    );
+  }
 
 }
