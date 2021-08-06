@@ -83,6 +83,17 @@ export class ProductosComponent implements OnInit, AfterViewInit {
     );
   }
 
+  public deshabilitarProducto(){
+    this._productoService.deshabilitarProducto(this.producto.id).subscribe(
+      result => {
+        if(result.resultado){
+          this.producto = new Producto();
+          this.consultarProductos();
+        }
+      }
+    );
+  }
+
   public limpiarProducto(){
     this.producto = new Producto();
   }
