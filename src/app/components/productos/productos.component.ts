@@ -72,4 +72,15 @@ export class ProductosComponent implements OnInit, AfterViewInit {
     );
   }
 
+  public consultarPorId(id: number){
+    this._productoService.consultarProductoPorId(id).subscribe(
+      result => {
+        if(result.resultado){
+          this.producto = new Producto();
+          this.producto.inicializar(result.datos);
+        }
+      }
+    );
+  }
+
 }

@@ -23,4 +23,14 @@ export class ProductoService {
         return this._http.get(this.url, {params: parametros});
     }
 
+    public consultarProductoPorId(id: number): Observable<any>{
+        const usuario = Utilidades.obtenerUsuario();
+        const parametros: HttpParams = new HttpParams().
+        set('token', usuario.token).
+        set('solicitud', 'consultar_por_id').
+        set('id', id.toString());
+
+        return this._http.get(this.url, {params: parametros});
+    }
+
 }
