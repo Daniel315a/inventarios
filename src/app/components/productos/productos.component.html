@@ -1,1 +1,148 @@
-<p>productos works!</p>
+<div #divForm class="form-filtros">
+
+    <form autocomplete="off">
+
+        <!-- Referencia -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.referencia}}</label>
+            </div>
+            <div class="field-body">
+
+                <div class="control">
+                    <input 
+                        class="input"
+                        type="text"
+                        name="referencia"
+                        [(ngModel)]="producto.referencia">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FIN: Referencia -->
+
+        <!-- Detalle -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.detalle}}</label>
+            </div>
+            <div class="field-body">
+
+                <input 
+                    class="input"
+                    type="text"
+                    name="detalle"
+                    [(ngModel)]="producto.detalle">
+
+            </div>
+        </div>
+
+        <!-- FIN: Detalle -->
+
+        <!-- Cantidad interna -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.cantidadInterna}}</label>
+            </div>
+            <div class="field-body">
+
+                <div class="control">
+                    <input 
+                        class="input"
+                        type="text"
+                        name="cantidadInterna"
+                        [(ngModel)]="producto.cantidadInterna">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FIN: Cantidad interna -->
+
+        <!-- Cantidad disponible -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.cantidadDisponible}}</label>
+            </div>
+            <div class="field-body">
+
+                <div class="control">
+                    <input 
+                        class="input"
+                        type="text"
+                        name="cantidadDisponible"
+                        [(ngModel)]="producto.cantidadDisponible">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FIN: Cantidad disponible -->
+
+        <!-- Precio -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.precio}}</label>
+            </div>
+            <div class="field-body">
+
+                <div class="control">
+                    <input 
+                        class="input has-text-right"
+                        type="text"
+                        name="precio"
+                        [(ngModel)]="producto.precio">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FIN: Precio -->
+
+        <!-- Botones -->
+
+        <div class="field is-grouped is-grouped-right">
+            
+            <div class="control">
+                <button class="button is-primary">{{botones.guardar}}</button>
+            </div>
+
+            <div class="control">
+                <button class="button is-danger">{{botones.eliminar}}</button>
+            </div>
+
+            <div class="control">
+                <button class="button">
+                    <span class="icon is-small"><i class="fas fa-eraser"></i></span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- FIN: Botones -->
+
+    </form>
+
+</div>
+
+<div #divTabla class="div-tabla" [style.height.px]="altoDivTabla">
+
+    <table class="table is-fullwidth is-bordered">
+
+        <thead>
+            <tr>
+                <th width="15%">Referencia</th>
+                <th>Detalle</th>
+                <th width="10%">Acciones</th>
+            </tr>
+        </thead>
+
+    </table>
+
+</div>
