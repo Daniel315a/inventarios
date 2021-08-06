@@ -1,1 +1,121 @@
-<p>persona works!</p>
+<form autocomplete="off">
+
+    <!-- Tipo de persona -->
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="level-left">{{labels.tipo}}</label>
+        </div>
+        <div class="field-body">
+            <div class="control">
+                
+                <div class="select">
+                    <app-select-tipos-persona
+                        (tipoPersonaSeleccionado)="tipoPersonaSeleccionado($event)">
+                    </app-select-tipos-persona>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FIN: Tipo de persona -->
+
+    <!-- Departamento -->
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="level-left">{{labels.departamento}}</label>
+        </div>
+        <div class="field-body">
+
+            <div class="control">
+
+                <div class="select">
+
+                    <app-select-departamentos
+                        (departamentoSeleccionado)="departamentoSeleccionado($event)">
+                    </app-select-departamentos>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FIN: Departamento -->
+
+    <!-- Municipio -->
+    
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="level-left">{{labels.municipio}}</label>
+        </div>
+        <div class="field-body">
+
+            <div class="control">
+
+                <div class="select">
+
+                    <app-select-municipios
+                        #selectMunicipios
+                        (municipioSeleccionado)="municipioSeleccionado($event)">
+                    </app-select-municipios>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- FIN: Municipio -->
+
+    <!-- Tipo de documento -->
+    
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="level-left">{{labels.tipoDocumento}}</label>
+        </div>
+        <div class="field-body">
+
+            <div class="control">
+
+                <div class="select">
+
+                    <app-select-tipos-documento
+                        (tipoDocumentoSeleccionado)="tipoDocumentoSeleccionado($event)">
+                    </app-select-tipos-documento>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- FIN: Tipo de documento -->
+
+    <!-- Número de documento -->
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="level-left">{{labels.numeroDocumento}}</label>
+        </div>
+        <div class="field-body">
+
+            <div class="control">
+                <input 
+                    class="input"
+                    type="text"
+                    name="numeroDocumento"
+                    [(ngModel)]="persona.numeroDocumento">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FIN: Número de documento -->
+
+</form>

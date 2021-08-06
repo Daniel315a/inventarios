@@ -1,9 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Utilidades } from 'src/app/models/utilidades';
 import { trigger, style, transition, state, animate } from '@angular/animations';
-import { Municipio } from 'src/app/models/municipio';
-import { Departamento } from 'src/app/models/departamento';
-import { SelectMunicipiosComponent } from '../select-municipios/select-municipios.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -124,17 +121,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     {
       this.renderer.setStyle(this.divContenedor.nativeElement, 'width', '100%');
     }
-  }
-
-  public departamento: Departamento = new Departamento();
-  public municipio: Municipio = new Municipio();
-  @ViewChild('selectMunicipios')
-  public selectMunicipios: SelectMunicipiosComponent;
-
-  public departamentoSeleccionado(departamento){
-    this.departamento = departamento;
-    this.selectMunicipios.departamento = this.departamento;
-    this.selectMunicipios.consultarMunicipios();
   }
 
 }
