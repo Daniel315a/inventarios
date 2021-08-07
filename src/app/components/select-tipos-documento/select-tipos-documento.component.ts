@@ -30,10 +30,19 @@ export class SelectTiposDocumentoComponent implements OnInit {
   }
 
   public consultarTiposDocumento(){
+    this.tiposDocumento = new Array<TipoDocumento>();
+
+    this.tiposDocumento.push(new TipoDocumento(
+      0,
+      'Seleccione un tipo de documento'
+    ));
+
     this._tipoDocumentoService.consultarTodos().subscribe(
       result => {
         if(result.resultado){
-          this.tiposDocumento = result.datos;
+          result.datos.forEach(tipoDocumento => {
+            this.tiposDocumento.push(tipoDocumento);
+          });
         }
       }
     );
