@@ -184,6 +184,10 @@ h1 {
     cursor: default;
 }
 
+.div-inferior {
+    margin-top: 10px;
+}
+
 /*Sección de componentes*/
 
 .seccion-componentes{

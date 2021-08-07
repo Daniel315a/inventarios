@@ -21,9 +21,23 @@ export class PersonaComponent implements OnInit {
     tipo: 'Tipo',
     departamento: 'Departamento',
     municipio: 'Municipio',
-    tipoDocumento: 'Tipo de documento',
-    numeroDocumento: 'Número de documento'
+    domicilio: 'Domicilio',
+    identificacion: 'Identificación',
+    numeroDocumento: 'Número de documento',
+    nombreCompleto: 'Nombre completo',
+    nombres: 'Nombres',
+    apellidos: 'Apellidos',
+    razonSocial: 'Razón social',
+    contacto: 'Información de contacto',
+    direccion: 'Direccion',
+    telefono: 'telefono',
+    email: 'E-mail'
   };
+
+  public botones = {
+    eliminar: 'Eliminar',
+    guardar: 'Guardar'
+  }
 
   constructor() { }
 
