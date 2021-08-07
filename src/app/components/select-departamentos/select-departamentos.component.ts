@@ -26,10 +26,19 @@ export class SelectDepartamentosComponent implements OnInit {
   }
 
   private consultarDepartamentos(){
+    this.departamentos = new Array<Departamento>();
+
+    this.departamentos.push(new Departamento(
+      0,
+      'Seleccione un departamento'
+    ));
+
     this._departamentoService.consultarTodos().subscribe(
       result => {
         if(result.resultado){
-          this.departamentos = result.datos;
+          result.datos.forEach(departamento => {
+            this.departamentos.push(departamento);
+          });
         }
       }
     );

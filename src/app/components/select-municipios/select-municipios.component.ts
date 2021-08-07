@@ -33,13 +33,20 @@ export class SelectMunicipiosComponent implements OnInit {
   }
 
   public consultarMunicipios(){
+    this.municipios = new Array<Municipio>();
+    
+    this.municipios.push(new Municipio(
+      0,
+      'Seleccione un municipio'
+    ));
+
     this._municipioService.consultarPorDepartamento(this.departamento).subscribe(
       result => {
         if(result.resultado){
-          this.municipios = result.datos;
-
-          this.municipios.forEach(municipio => {
+          result.datos.forEach(municipio => {
             municipio.departamento = this.departamento;
+
+            this.municipios.push(municipio);
           });
         }
       }
