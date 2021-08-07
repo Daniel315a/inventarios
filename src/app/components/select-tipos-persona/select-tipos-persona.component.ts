@@ -27,6 +27,14 @@ export class SelectTiposPersonaComponent implements OnInit {
 
   public consultarTiposPersona(){
     this.tiposPersona = new Array<TipoPersona>();
+
+    this.tiposPersona.push(
+      new TipoPersona(
+        0,
+        'Seleccione un tipo de persona'
+      )
+    );
+
     this._tipoPersonaService.consultarTodos().subscribe(
       result => {
         if(result.resultado){
