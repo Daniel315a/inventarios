@@ -64,7 +64,7 @@ export class PersonaService {
         set('solicitud', 'crear').
         set('municipio', persona.municipio.id.toString()).
         set('tipo', persona.tipo.id.toString()).
-        set('empresa', persona.empresa.id.toString()).
+        set('empresa', usuario.empresa.id.toString()).
         set('tipo_documento', persona.tipoDocumento.id.toString()).
         set('numero_documento', persona.numeroDocumento).
         set('nombres', persona.nombres).
@@ -86,7 +86,7 @@ export class PersonaService {
         set('id', persona.id.toString()).
         set('municipio', persona.municipio.id.toString()).
         set('tipo', persona.tipo.id.toString()).
-        set('empresa', persona.empresa.id.toString()).
+        set('empresa', usuario.empresa.id.toString()).
         set('tipo_documento', persona.tipoDocumento.id.toString()).
         set('numero_documento', persona.numeroDocumento).
         set('nombres', persona.nombres).

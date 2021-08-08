@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { utils } from 'protractor';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { Persona } from 'src/app/models/persona';
 import { Utilidades } from 'src/app/models/utilidades';
 import { PersonaService } from 'src/app/services/persona.service';
@@ -30,6 +29,10 @@ export class PersonaComponent implements OnInit, AfterViewInit {
   public listadoPersonas: PersonasComponent;
   @ViewChild('selectMunicipios')
   public selectMunicipios: SelectMunicipiosComponent;
+  @Input()
+  public creacionPersona: boolean = false;
+  @Output()
+  public personaCreada: EventEmitter<Persona> = new EventEmitter<Persona>();
 
   public labels = {
     tipo: 'Tipo',
@@ -42,7 +45,7 @@ export class PersonaComponent implements OnInit, AfterViewInit {
     nombres: 'Nombres',
     apellidos: 'Apellidos',
     razonSocial: 'Razón social',
-    contacto: 'Información de contacto',
+    contacto: 'Contacto',
     direccion: 'Direccion',
     telefono: 'telefono',
     email: 'E-mail'
@@ -69,10 +72,12 @@ export class PersonaComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.listadoPersonas.consultarListado();
-    setTimeout(() => {
-      this.onResize();
-    });
+    if(!this.creacionPersona){
+      this.listadoPersonas.consultarListado();
+      setTimeout(() => {
+        this.onResize();
+      });
+    }
   }
 
   public departamentoSeleccionado(departamento){
@@ -94,11 +99,13 @@ export class PersonaComponent implements OnInit, AfterViewInit {
   }
 
   public onResize(){
-    let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-    let altoDivTabla = window.innerHeight - altoDivForm - 140;
-    
-    if(altoDivTabla != this.listadoPersonas.altoTabla){
-      this.listadoPersonas.altoTabla = altoDivTabla;
+    if(!this.creacionPersona){
+      let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
+      let altoDivTabla = window.innerHeight - altoDivForm - 140;
+      
+      if(altoDivTabla != this.listadoPersonas.altoTabla){
+        this.listadoPersonas.altoTabla = altoDivTabla;
+      }
     }
   }
 
@@ -129,7 +136,13 @@ export class PersonaComponent implements OnInit, AfterViewInit {
       result=> {
         if(result.resultado){
           this.persona.id = result.datos.id;
-          this.listadoPersonas.consultarListado();
+          
+          if(this.creacionPersona){
+            this.personaCreada.emit(this.persona);
+          } else {
+            this.listadoPersonas.consultarListado();
+          }
+
           Utilidades.dialogSuccess(this.mensajes.personaCreada);
         }
       },

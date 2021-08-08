@@ -40,7 +40,9 @@
 
             <div class="control">
             
-                <button class="button is-primary">
+                <button 
+                    class="button is-primary"
+                    (click)="abrirModalCrearPersona()">
                     <span class="icon is-small">
                         <i class="fas fa-plus"></i>
                     </span>
@@ -65,6 +67,22 @@
                 [esBuscador]="true"
                 (personaSeleccionada)="personaSeleccionada($event)">
             </app-personas>
+
+        </div>
+    </div>
+</div>
+
+<div [ngClass]="modalCrearPersonaActivo ? 'modal is-active' : 'modal'">
+    <div 
+        class="modal-background"
+        (click)="cerrarModalCrearPersona()"></div>
+    <div class="modal-content modal-listado">
+        <div class="box" >
+
+            <app-persona
+                [creacionPersona]="true"
+                (personaCreada)="personaCreada($event)">
+            </app-persona>
 
         </div>
     </div>

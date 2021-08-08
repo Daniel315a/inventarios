@@ -207,7 +207,7 @@
                 </button>
             </div>
 
-            <div class="control">
+            <div class="control" *ngIf="!creacionPersona">
                 <button 
                     class="button is-danger"
                     [disabled]="persona.id == 0"
@@ -229,7 +229,7 @@
     </form>
 </div>
 
-<div class="div-inferior">
+<div class="div-inferior" *ngIf="!creacionPersona">
     <app-personas 
         #listadoPersonas
         (personaSeleccionada)="personaSeleccionada($event)">

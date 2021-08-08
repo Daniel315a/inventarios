@@ -24,9 +24,12 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
    */
   @Input()
   public labelPersona: string = '';
+  @Input()
+  public tipoPersona: TipoPersona = new TipoPersona();
   @ViewChild('listadoPersonas')
   public listadoPersonas: PersonasComponent;
   public modalConsultarPersonasActivo: boolean = false;
+  public modalCrearPersonaActivo: boolean = false;
 
   public labels = {
     numeroDocumento: 'Número de documento',
@@ -42,7 +45,7 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void{
-    this.listadoPersonas.consultarListadoPorTipo(Utilidades.getTipoCliente());
+    this.listadoPersonas.consultarListadoPorTipo(this.tipoPersona);
     setTimeout(() => {
       this.listadoPersonas.altoTabla = 300;
     });
@@ -83,11 +86,26 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
   }
 
   public abrirModalConsultarPersonas(){
+    this.listadoPersonas.consultarListadoPorTipo(this.tipoPersona);
     this.modalConsultarPersonasActivo = true;
   }
   
   public cerrarModalConsultarPersonas(){
     this.modalConsultarPersonasActivo = false;
+  }
+
+  public abrirModalCrearPersona(){
+    this.modalCrearPersonaActivo = true;
+  }
+  
+  public cerrarModalCrearPersona(){
+    this.modalCrearPersonaActivo = false;
+  }
+
+  public personaCreada(persona){
+    this.persona = persona;
+    this.nombrePersona = !!this.persona.razonSocial ? this.persona.razonSocial : this.persona.nombres + ' ' + this.persona.apellidos;
+    this.cerrarModalCrearPersona();
   }
 
 }
