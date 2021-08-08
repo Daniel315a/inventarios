@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TipoPersona } from 'src/app/models/tipo-persona';
 import { TipoPersonaService } from 'src/app/services/tipo-persona.service';
 
@@ -12,6 +12,7 @@ import { TipoPersonaService } from 'src/app/services/tipo-persona.service';
 })
 export class SelectTiposPersonaComponent implements OnInit {
 
+  @Input()
   public tipoPersona: TipoPersona = new TipoPersona();
   public tiposPersona: Array<TipoPersona> = new Array<TipoPersona>();
   @Output()
@@ -22,6 +23,11 @@ export class SelectTiposPersonaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    setInterval(() => {
+      // console.log(this.tipoPersona);
+    }, 3000);
+
     this.consultarTiposPersona();
   }
 

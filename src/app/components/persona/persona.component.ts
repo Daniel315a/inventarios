@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Persona } from 'src/app/models/persona';
+import { PersonaService } from 'src/app/services/persona.service';
 import { PersonasComponent } from '../personas/personas.component';
 import { SelectMunicipiosComponent } from '../select-municipios/select-municipios.component';
 
@@ -7,6 +8,9 @@ import { SelectMunicipiosComponent } from '../select-municipios/select-municipio
   selector: 'app-persona',
   templateUrl: './persona.component.html',
   styleUrls: ['./persona.component.css'],
+  providers: [
+    PersonaService
+  ],
   host: {
     '(window:resize)': 'onResize($event)'
   },
@@ -47,7 +51,9 @@ export class PersonaComponent implements OnInit, AfterViewInit {
     guardar: 'Guardar'
   }
 
-  constructor() { }
+  constructor(
+    private _personaService: PersonaService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -83,6 +89,20 @@ export class PersonaComponent implements OnInit, AfterViewInit {
     if(altoDivTabla != this.listadoPersonas.altoTabla){
       this.listadoPersonas.altoTabla = altoDivTabla;
     }
+  }
+
+  public personaSeleccionada(id: number){
+    this._personaService.consultarPorId(id).subscribe(
+      result => {
+        if(result.datos){
+          this.persona = new Persona();
+          this.persona.inicializar(result.datos);
+
+          this.departamentoSeleccionado(this.persona.municipio.departamento);
+          this.selectMunicipios.municipio = this.persona.municipio;
+        }
+      }
+    );
   }
 
 }

@@ -12,6 +12,7 @@
                     
                     <div class="select">
                         <app-select-tipos-persona
+                            [tipoPersona]="persona.tipo"
                             (tipoPersonaSeleccionado)="tipoPersonaSeleccionado($event)">
                         </app-select-tipos-persona>
                     </div>
@@ -37,6 +38,7 @@
                         <div class="select">
         
                             <app-select-tipos-documento
+                                [tipoDocumento]="persona.tipoDocumento"
                                 (tipoDocumentoSeleccionado)="tipoDocumentoSeleccionado($event)">
                             </app-select-tipos-documento>
         
@@ -126,6 +128,7 @@
                         <div class="select">
         
                             <app-select-departamentos
+                                [departamento]="persona.municipio.departamento"
                                 (departamentoSeleccionado)="departamentoSeleccionado($event)">
                             </app-select-departamentos>
         
@@ -220,5 +223,8 @@
 </div>
 
 <div class="div-inferior">
-    <app-personas #listadoPersonas></app-personas>
+    <app-personas 
+        #listadoPersonas
+        (personaSeleccionada)="personaSeleccionada($event)">
+    </app-personas>
 </div>

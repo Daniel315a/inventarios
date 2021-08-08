@@ -36,12 +36,14 @@
         <tbody>
             <tr *ngFor="let persona of listadoPersonas">
                 <td>{{persona.numeroDocumento}}</td>
-                <td>{{persona.nombreCompleto}}</td>
-                <td>{{persona.tipoPersona}}</td>
+                <td>{{!!persona.razonSocial ? persona.razonSocial : persona.nombres + ' ' + persona.apellidos}}</td>
+                <td>{{persona.tipo.nombre}}</td>
                 <td>
 
                     <div class="buttons is-centered">
-                        <button class="button is-primary is-small">
+                        <button 
+                            (click)="onPersonaSeleccionada(persona.id)"
+                            class="button is-primary is-small">
                             <span class="icon is-small">
                                 <i class="fas fa-user-edit"></i>
                             </span>

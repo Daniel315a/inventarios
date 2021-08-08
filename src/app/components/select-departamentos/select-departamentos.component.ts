@@ -12,6 +12,7 @@ import { DepartamentoService } from 'src/app/services/departamento.service';
 })
 export class SelectDepartamentosComponent implements OnInit {
 
+  @Input()
   public departamento: Departamento = new Departamento();
   public departamentos: Array<Departamento> = new Array<Departamento>();
   @Output()

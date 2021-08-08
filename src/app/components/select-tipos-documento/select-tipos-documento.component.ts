@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { TipoDocumento } from 'src/app/models/tipo-documento';
 import { TipoDocumentoService } from 'src/app/services/tipo-documento.service';
 
@@ -12,6 +12,7 @@ import { TipoDocumentoService } from 'src/app/services/tipo-documento.service';
 })
 export class SelectTiposDocumentoComponent implements OnInit {
 
+  @Input()
   public tipoDocumento: TipoDocumento = new TipoDocumento();
   public tiposDocumento: Array<TipoDocumento> = new Array<TipoDocumento>();
   public tipoDocumentoSeleccionado: EventEmitter<TipoDocumento> = new EventEmitter<TipoDocumento>();
