@@ -1,1 +1,78 @@
-<p>listado-facturas works!</p>
+<div #divForm class="form-filtros">
+
+    <div class="field is-grouped">
+
+        <div class="control">
+
+            <input 
+                class="input" 
+                type="date" 
+                name="fechaInicial">
+
+        </div>
+
+        <div class="control">
+
+            <input 
+                class="input" 
+                type="date" 
+                name="fechaFinal">
+
+        </div>
+
+        <div class="control is-expanded has-icons-left">
+            
+            <input 
+                class="input"
+                type="text" 
+                placeholder="{{labels.buscar}}"
+                name="filtro">
+
+            <span class="icon is-small is-left">
+                <i class="fas fa-search"></i>
+            </span>
+            
+        </div>
+
+    </div>
+
+</div>
+
+<div class="div-tabla" [style.height.px]="altoDivTabla">
+
+    <table class="table is-bordered is-fullwidth">
+
+        <thead>
+            <tr>
+                <th width="15%">{{columnas.numeroFactura}}</th>
+                <th>{{columnas.nombreCliente}}</th>
+                <th width="15%">{{columnas.valorTotal}}</th>
+                <th width="10%">{{columnas.acciones}}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let factura of facturas">
+
+                <td>{{factura.consecutivo}}</td>
+                <td>{{factura.nombreCliente}}</td>
+                <td>{{factura.valorTotal}}</td>
+                <td>
+                    <div class="buttons is-centered">
+                        <button 
+                            class="button">
+                            <span class="icon is-small">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                        </button>
+                    </div>
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

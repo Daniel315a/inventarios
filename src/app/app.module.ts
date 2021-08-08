@@ -14,7 +14,7 @@ import { PersonaComponent } from './components/persona/persona.component';
 import { SelectTiposPersonaComponent } from './components/select-tipos-persona/select-tipos-persona.component';
 import { SelectTiposDocumentoComponent } from './components/select-tipos-documento/select-tipos-documento.component';
 import { ProductosComponent } from './components/productos/productos.component';
-import { ListadoFacturasComponent } from './component/listado-facturas/listado-facturas.component';
+import { ListadoFacturasComponent } from './components/listado-facturas/listado-facturas.component';
 
 @NgModule({
   declarations: [
