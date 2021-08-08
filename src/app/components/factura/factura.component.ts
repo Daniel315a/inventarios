@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FacturaComponent implements OnInit {
 
+  /**
+   * Propiedades del diseño
+   */
+
+  public labels = {
+    cliente: 'Cliente'
+  }
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,1 +1,52 @@
-<p>txt-persona works!</p>
+<div class="field is-horizontal">
+    <div class="field-label is-normal">
+        <label class="level-left">{{labelPersona}}</label>
+    </div>
+    <div class="field-body">
+
+        <div class="field is-grouped">
+
+            <div class="control">
+                <input 
+                    class="input"
+                    type="text" 
+                    placeholder="{{labels.numeroDocumento}}"
+                    name="numeroDocumento"
+                    [(ngModel)]="persona.numeroDocumento"
+                    (blur)="consultarPersonaPorNumeroDocumento()">
+            </div>
+
+            <div class="control is-expanded">
+                <input 
+                    class="input"
+                    type="text" 
+                    placeholder="{{labels.nombreCompleto}}"
+                    name="nombreCompleto"
+                    [(ngModel)]="nombrePersona"
+                    disabled>
+            </div>
+
+            <div class="control">
+            
+                <button class="button is-primary">
+                    <span class="icon is-small">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </button>
+
+            </div>
+
+            <div class="control">
+            
+                <button class="button is-primary">
+                    <span class="icon is-small">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
