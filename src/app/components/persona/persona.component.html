@@ -1,222 +1,224 @@
-<form autocomplete="off">
+<div #divForm class="div-form">
+    <form autocomplete="off">
 
-    <!-- Tipo de persona -->
+        <!-- Tipo de persona -->
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            <label class="level-left">{{labels.tipo}}</label>
-        </div>
-        <div class="field-body">
-            <div class="control">
-                
-                <div class="select">
-                    <app-select-tipos-persona
-                        (tipoPersonaSeleccionado)="tipoPersonaSeleccionado($event)">
-                    </app-select-tipos-persona>
-                </div>
-
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.tipo}}</label>
             </div>
-        </div>
-    </div>
-
-    <!-- FIN: Tipo de persona -->
-
-    <!-- Tipo y número de documento -->
-    
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            <label class="level-left">{{labels.identificacion}}</label>
-        </div>
-        <div class="field-body">
-
-            <div class="field is-grouped">
-
+            <div class="field-body">
                 <div class="control">
-
+                    
                     <div class="select">
-    
-                        <app-select-tipos-documento
-                            (tipoDocumentoSeleccionado)="tipoDocumentoSeleccionado($event)">
-                        </app-select-tipos-documento>
-    
+                        <app-select-tipos-persona
+                            (tipoPersonaSeleccionado)="tipoPersonaSeleccionado($event)">
+                        </app-select-tipos-persona>
                     </div>
-    
-                </div>
-    
-                <div class="control is-expanded">
-                    <input 
-                        class="input"
-                        type="text"
-                        placeholder="{{labels.numeroDocumento}}"
-                        name="numeroDocumento"
-                        [(ngModel)]="persona.numeroDocumento">
-                </div>
 
-            </div>
-
-        </div>
-    </div>
-    
-    <!-- FIN: Tipo de documento -->
-
-    <!-- Nombre completo -->
-
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            <label class="level-left">{{labels.nombreCompleto}}</label>
-        </div>
-        <div class="field-body">
-
-            <div class="field is-grouped">
-                <div class="control is-expanded">
-                    <input 
-                        class="input" 
-                        type="text"
-                        placeholder="{{labels.nombres}}"
-                        name="nombres"
-                        [(ngModel)]="persona.nombres">
-                </div>
-                <div class="control is-expanded">
-                    <input 
-                        class="input" 
-                        type="text"
-                        placeholder="{{labels.apellidos}}"
-                        name="apellidos"
-                        [(ngModel)]="persona.apellidos">
                 </div>
             </div>
-
         </div>
-    </div>
 
-    <!-- FIN: Nombre completo -->
+        <!-- FIN: Tipo de persona -->
 
-    <!-- Razón social -->
+        <!-- Tipo y número de documento -->
+        
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.identificacion}}</label>
+            </div>
+            <div class="field-body">
 
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            <label class="level-left">{{labels.razonSocial}}</label>
-        </div>
-        <div class="field-body">
+                <div class="field is-grouped">
 
-            <input 
-                class="input" 
-                type="text" 
-                name="razonSocial"
-                [(ngModel)]="persona.razonSocial">
+                    <div class="control">
 
-        </div>
-    </div>
-
-    <!-- FIN: Razón social -->
-
-    <!-- Domicilio -->
-
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            <label class="level-left">{{labels.domicilio}}</label>
-        </div>
-        <div class="field-body">
-
-            <div class="field is-grouped">
-
-                <div class="control">
-
-                    <div class="select">
-    
-                        <app-select-departamentos
-                            (departamentoSeleccionado)="departamentoSeleccionado($event)">
-                        </app-select-departamentos>
-    
+                        <div class="select">
+        
+                            <app-select-tipos-documento
+                                (tipoDocumentoSeleccionado)="tipoDocumentoSeleccionado($event)">
+                            </app-select-tipos-documento>
+        
+                        </div>
+        
                     </div>
-    
-                </div>
-    
-                <div class="control">
-    
-                    <div class="select">
-    
-                        <app-select-municipios
-                            #selectMunicipios
-                            (municipioSeleccionado)="municipioSeleccionado($event)">
-                        </app-select-municipios>
-    
+        
+                    <div class="control is-expanded">
+                        <input 
+                            class="input"
+                            type="text"
+                            placeholder="{{labels.numeroDocumento}}"
+                            name="numeroDocumento"
+                            [(ngModel)]="persona.numeroDocumento">
                     </div>
-    
-                </div>
 
-                <div class="control is-expanded">
-                    <input 
-                        class="input" 
-                        type="text" 
-                        placeholder="{{labels.direccion}}"
-                        name="direccion"
-                        [(ngModel)]="persona.direccion">
                 </div>
 
             </div>
-
-        </div>
-    </div>
-
-    <!-- FIN: Domicilio -->
-
-    <!-- Dirección y teléfono -->
-
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-            <label class="level-left">{{labels.contacto}}</label>
-        </div>
-        <div class="field-body">
-
-            <div class="field is-grouped">
-                <div class="control is-expanded">
-                    <input 
-                        class="input" 
-                        type="text" 
-                        placeholder="{{labels.telefono}}"
-                        name="telefono"
-                        [(ngModel)]="persona.telefono">
-                </div>
-                <div class="control is-expanded">
-                    <input 
-                        class="input" 
-                        type="email"
-                        placeholder="{{labels.email}}" 
-                        name="email"
-                        [(ngModel)]="persona.email">
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- FIN: Dirección y teléfono -->
-
-    <div class="field is-grouped is-grouped-right">
-
-        <div class="control">
-            <button class="button is-primary">
-                {{botones.guardar}}
-            </button>
-        </div>
-
-        <div class="control">
-            <button class="button is-danger">
-                {{botones.eliminar}}
-            </button>
         </div>
         
-        <div class="control">
-            <button class="button">
-                <span class="icon has-text-primary"><i class="fas fa-eraser"></i></span>
-            </button>
+        <!-- FIN: Tipo de documento -->
+
+        <!-- Nombre completo -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.nombreCompleto}}</label>
+            </div>
+            <div class="field-body">
+
+                <div class="field is-grouped">
+                    <div class="control is-expanded">
+                        <input 
+                            class="input" 
+                            type="text"
+                            placeholder="{{labels.nombres}}"
+                            name="nombres"
+                            [(ngModel)]="persona.nombres">
+                    </div>
+                    <div class="control is-expanded">
+                        <input 
+                            class="input" 
+                            type="text"
+                            placeholder="{{labels.apellidos}}"
+                            name="apellidos"
+                            [(ngModel)]="persona.apellidos">
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-    </div>
+        <!-- FIN: Nombre completo -->
 
-</form>
+        <!-- Razón social -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.razonSocial}}</label>
+            </div>
+            <div class="field-body">
+
+                <input 
+                    class="input" 
+                    type="text" 
+                    name="razonSocial"
+                    [(ngModel)]="persona.razonSocial">
+
+            </div>
+        </div>
+
+        <!-- FIN: Razón social -->
+
+        <!-- Domicilio -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.domicilio}}</label>
+            </div>
+            <div class="field-body">
+
+                <div class="field is-grouped">
+
+                    <div class="control">
+
+                        <div class="select">
+        
+                            <app-select-departamentos
+                                (departamentoSeleccionado)="departamentoSeleccionado($event)">
+                            </app-select-departamentos>
+        
+                        </div>
+        
+                    </div>
+        
+                    <div class="control">
+        
+                        <div class="select">
+        
+                            <app-select-municipios
+                                #selectMunicipios
+                                (municipioSeleccionado)="municipioSeleccionado($event)">
+                            </app-select-municipios>
+        
+                        </div>
+        
+                    </div>
+
+                    <div class="control is-expanded">
+                        <input 
+                            class="input" 
+                            type="text" 
+                            placeholder="{{labels.direccion}}"
+                            name="direccion"
+                            [(ngModel)]="persona.direccion">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FIN: Domicilio -->
+
+        <!-- Dirección y teléfono -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.contacto}}</label>
+            </div>
+            <div class="field-body">
+
+                <div class="field is-grouped">
+                    <div class="control is-expanded">
+                        <input 
+                            class="input" 
+                            type="text" 
+                            placeholder="{{labels.telefono}}"
+                            name="telefono"
+                            [(ngModel)]="persona.telefono">
+                    </div>
+                    <div class="control is-expanded">
+                        <input 
+                            class="input" 
+                            type="email"
+                            placeholder="{{labels.email}}" 
+                            name="email"
+                            [(ngModel)]="persona.email">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FIN: Dirección y teléfono -->
+
+        <div class="field is-grouped is-grouped-right">
+
+            <div class="control">
+                <button class="button is-primary">
+                    {{botones.guardar}}
+                </button>
+            </div>
+
+            <div class="control">
+                <button class="button is-danger">
+                    {{botones.eliminar}}
+                </button>
+            </div>
+            
+            <div class="control">
+                <button class="button">
+                    <span class="icon has-text-primary"><i class="fas fa-eraser"></i></span>
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+</div>
 
 <div class="div-inferior">
-    <app-personas></app-personas>
+    <app-personas #listadoPersonas></app-personas>
 </div>

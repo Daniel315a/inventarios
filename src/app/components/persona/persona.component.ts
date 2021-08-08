@@ -1,19 +1,27 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Persona } from 'src/app/models/persona';
+import { PersonasComponent } from '../personas/personas.component';
 import { SelectMunicipiosComponent } from '../select-municipios/select-municipios.component';
 
 @Component({
   selector: 'app-persona',
   templateUrl: './persona.component.html',
-  styleUrls: ['./persona.component.css']
+  styleUrls: ['./persona.component.css'],
+  host: {
+    '(window:resize)': 'onResize($event)'
+  },
 })
-export class PersonaComponent implements OnInit {
+export class PersonaComponent implements OnInit, AfterViewInit {
 
   public persona: Persona = new Persona();
 
   /**
    * Propiedades del diseño
    */
+  @ViewChild('divForm')
+  public divForm: ElementRef;
+  @ViewChild('listadoPersonas')
+  public listadoPersonas: PersonasComponent;
   @ViewChild('selectMunicipios')
   public selectMunicipios: SelectMunicipiosComponent;
 
@@ -44,6 +52,12 @@ export class PersonaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.onResize();
+    });
+  }
+
   public departamentoSeleccionado(departamento){
     this.persona.municipio.departamento = departamento;
     this.selectMunicipios.departamento = this.persona.municipio.departamento;
@@ -60,6 +74,15 @@ export class PersonaComponent implements OnInit {
 
   public tipoDocumentoSeleccionado(tipoDocumento){
     this.persona.tipoDocumento = tipoDocumento;
+  }
+
+  public onResize(){
+    let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
+    let altoDivTabla = window.innerHeight - altoDivForm - 140;
+    
+    if(altoDivTabla != this.listadoPersonas.altoTabla){
+      this.listadoPersonas.altoTabla = altoDivTabla;
+    }
   }
 
 }

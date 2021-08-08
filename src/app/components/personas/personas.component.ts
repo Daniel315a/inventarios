@@ -12,18 +12,14 @@ import { PersonaService } from 'src/app/services/persona.service';
     PersonaService
   ]
 })
-export class PersonasComponent implements OnInit, AfterViewInit {
+export class PersonasComponent implements OnInit {
 
   /**
    * Propiedades del diseño
    */
 
-  public listadoPersonas: Array<any> = new Array<any>(); 
-  public altoDivTabla: number = 0;
-  @ViewChild('divTabla')
-  public divTabla: ElementRef;
-  @ViewChild('divForm')
-  public divForm: ElementRef;
+  public listadoPersonas: Array<any> = new Array<any>();
+  public altoTabla: number = 0;
 
   public labels = {
     buscar: 'Buscar...'
@@ -42,21 +38,6 @@ export class PersonasComponent implements OnInit, AfterViewInit {
   
   ngOnInit(): void {
     this.consultarListado();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.onResize();
-    });
-  }
-
-  public onResize(){
-    let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-    let altoDivTabla = window.innerHeight - altoDivForm - 110;
-    
-    if(altoDivTabla != this.altoDivTabla){
-      this.altoDivTabla = altoDivTabla;
-    }
   }
 
   private consultarListado(){
