@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Persona } from "../models/persona";
+import { TipoPersona } from "../models/tipo-persona";
 import { Utilidades } from "../models/utilidades";
 
 @Injectable()
@@ -23,6 +24,18 @@ export class PersonaService {
 
         return this._http.get(this.url, {params:  parametros});
     }
+
+    public consultarListadoPorTipo(tipo: TipoPersona): Observable<any>{
+        const usuario = Utilidades.obtenerUsuario();
+        const parametros: HttpParams = new HttpParams().
+        set('token', usuario.token).
+        set('solicitud', 'consultar_por_tipo').
+        set('empresa', usuario.empresa.id).
+        set('tipo', tipo.id.toString());
+
+        return this._http.get(this.url, {params:  parametros});
+    }
+
 
     public consultarPorId(id: number): Observable<any> {
         const usuario = Utilidades.obtenerUsuario();
