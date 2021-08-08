@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Persona } from 'src/app/models/persona';
+import { TipoPersona } from 'src/app/models/tipo-persona';
 import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class PersonasComponent implements OnInit {
   @Output()
   public personaSeleccionada:EventEmitter<number> = new EventEmitter<number>();
   public altoTabla: number = 0;
-
+  
   public labels = {
     buscar: 'Buscar...'
   };
@@ -37,13 +38,29 @@ export class PersonasComponent implements OnInit {
   ) { }
   
   ngOnInit(): void {
-    this.consultarListado();
   }
 
   public consultarListado(){
     this.personas = new Array<Persona>();
 
     this._personaService.consultarListado().subscribe(
+      result => {
+        if(result.resultado){
+          result.datos.forEach(item => {
+            let persona: Persona = new Persona();
+            persona.inicializar(item);
+
+            this.personas.push(persona);
+          });
+        }
+      }
+    );
+  }
+
+  public consultarListadoPorTipo(tipoPersona: TipoPersona){
+    this.personas = new Array<Persona>();
+
+    this._personaService.consultarListadoPorTipo(tipoPersona).subscribe(
       result => {
         if(result.resultado){
           result.datos.forEach(item => {

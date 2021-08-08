@@ -65,9 +65,11 @@ export class PersonaComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
+    
   }
 
   ngAfterViewInit(): void {
+    this.listadoPersonas.consultarListado();
     setTimeout(() => {
       this.onResize();
     });
