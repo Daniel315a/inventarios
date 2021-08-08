@@ -15,6 +15,8 @@ import { SelectTiposPersonaComponent } from './components/select-tipos-persona/s
 import { SelectTiposDocumentoComponent } from './components/select-tipos-documento/select-tipos-documento.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { ListadoFacturasComponent } from './components/listado-facturas/listado-facturas.component';
+import { FacturaComponent } from './components/factura/factura.component';
+import { TxtPersonaComponent } from './components/txt-persona/txt-persona.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ListadoFacturasComponent } from './components/listado-facturas/listado-
     SelectTiposPersonaComponent,
     SelectTiposDocumentoComponent,
     ProductosComponent,
-    ListadoFacturasComponent
+    ListadoFacturasComponent,
+    FacturaComponent,
+    TxtPersonaComponent
   ],
   imports: [
     BrowserModule,
