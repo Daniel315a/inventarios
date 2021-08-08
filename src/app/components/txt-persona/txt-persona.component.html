@@ -28,7 +28,9 @@
 
             <div class="control">
             
-                <button class="button is-primary">
+                <button 
+                    class="button is-primary"
+                    (click)="abrirModalConsultarPersonas()">
                     <span class="icon is-small">
                         <i class="fas fa-search"></i>
                     </span>
@@ -48,5 +50,22 @@
 
         </div>
 
+    </div>
+</div>
+
+<div [ngClass]="modalConsultarPersonasActivo ? 'modal is-active' : 'modal'">
+    <div 
+        class="modal-background"
+        (click)="cerrarModalConsultarPersonas()"></div>
+    <div class="modal-content modal-listado">
+        <div class="box" >
+
+            <app-personas 
+                #listadoPersonas
+                [esBuscador]="true"
+                (personaSeleccionada)="personaSeleccionada($event)">
+            </app-personas>
+
+        </div>
     </div>
 </div>

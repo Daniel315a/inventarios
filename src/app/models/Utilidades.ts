@@ -1,8 +1,10 @@
+import { environment } from "src/environments/environment";
 import Swal from "sweetalert2";
+import { TipoPersona } from "./tipo-persona";
 import { Usuario } from "./usuario";
 
 export class Utilidades {
-    
+     
     static establecerUsuario(usuario: Usuario): void {
       localStorage.setItem('usr-decoraytransforma', JSON.stringify(usuario));
     }
@@ -92,6 +94,13 @@ export class Utilidades {
           icon: 'success',
           html: html
       })
+  }
+
+  static getTipoCliente(): TipoPersona {
+    return new TipoPersona(
+        environment.tipoPersonaCliente.id, 
+        environment.tipoPersonaCliente.nombre
+    );
   }
 
 }

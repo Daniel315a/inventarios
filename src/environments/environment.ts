@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost/decora_transforma/'
+  url: 'http://localhost/decora_transforma/',
+  tipoPersonaCliente: {
+    id: 1,
+    nombre: 'Cliente'
+  }
 };
 
 /*

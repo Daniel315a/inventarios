@@ -1,6 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Persona } from 'src/app/models/persona';
+import { TipoPersona } from 'src/app/models/tipo-persona';
+import { Utilidades } from 'src/app/models/utilidades';
 import { PersonaService } from 'src/app/services/persona.service';
+import { environment } from 'src/environments/environment';
+import { PersonasComponent } from '../personas/personas.component';
 
 @Component({
   selector: 'app-txt-persona',
@@ -10,7 +14,7 @@ import { PersonaService } from 'src/app/services/persona.service';
     PersonaService
   ]
 })
-export class TxtPersonaComponent implements OnInit {
+export class TxtPersonaComponent implements OnInit, AfterViewInit {
 
   public persona: Persona = new Persona();
   public nombrePersona: string = '';
@@ -20,6 +24,9 @@ export class TxtPersonaComponent implements OnInit {
    */
   @Input()
   public labelPersona: string = '';
+  @ViewChild('listadoPersonas')
+  public listadoPersonas: PersonasComponent;
+  public modalConsultarPersonasActivo: boolean = false;
 
   public labels = {
     numeroDocumento: 'Número de documento',
@@ -31,17 +38,56 @@ export class TxtPersonaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
+  }
+
+  ngAfterViewInit(): void{
+    this.listadoPersonas.consultarListadoPorTipo(Utilidades.getTipoCliente());
+    setTimeout(() => {
+      this.listadoPersonas.altoTabla = 300;
+    });
   }
 
   public consultarPersonaPorNumeroDocumento(){
     this._personaService.consultarPorNumeroDocumento(this.persona.numeroDocumento).subscribe(
       result => {
         if(result.resultado){
+          this.persona = new Persona();
+          this.nombrePersona = '';
+          
           this.persona.inicializar(result.datos);
           this.nombrePersona = !!this.persona.razonSocial ? this.persona.razonSocial : this.persona.nombres + ' ' + this.persona.apellidos;
         }
       }
     );
+  }
+
+  public consultarPersonaPorId(){
+    this._personaService.consultarPorId(this.persona.id).subscribe(
+      result => {
+        if(result.resultado){
+          this.persona = new Persona();
+          this.nombrePersona = '';
+          
+          this.persona.inicializar(result.datos);
+          this.nombrePersona = !!this.persona.razonSocial ? this.persona.razonSocial : this.persona.nombres + ' ' + this.persona.apellidos;
+        }
+      }
+    );
+  }
+
+  public personaSeleccionada(id: number){
+    this.persona.id = id;
+    this.consultarPersonaPorId();
+    this.cerrarModalConsultarPersonas();
+  }
+
+  public abrirModalConsultarPersonas(){
+    this.modalConsultarPersonasActivo = true;
+  }
+  
+  public cerrarModalConsultarPersonas(){
+    this.modalConsultarPersonasActivo = false;
   }
 
 }

@@ -211,6 +211,10 @@ h1 {
     border: 1px solid gray;
 }
 
+.modal-listado {
+    width: 900px;
+}
+
 .form-filtros{
     margin-bottom: 10px;
 }

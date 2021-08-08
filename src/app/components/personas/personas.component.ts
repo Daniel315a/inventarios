@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Persona } from 'src/app/models/persona';
 import { TipoPersona } from 'src/app/models/tipo-persona';
 import { PersonaService } from 'src/app/services/persona.service';
@@ -21,13 +21,15 @@ export class PersonasComponent implements OnInit {
   @Output()
   public personaSeleccionada:EventEmitter<number> = new EventEmitter<number>();
   public altoTabla: number = 0;
+  @Input()
+  public esBuscador: boolean = false;
   
   public labels = {
     buscar: 'Buscar...'
   };
 
   public columnas = {
-    numeroDocumento: 'Número de documento',
+    numeroDocumento: 'Nº documento',
     nombreCompleto: 'Nombre completo / Razón social',
     tipoPersona: 'Tipo',
     acciones: 'Acciones'
@@ -74,8 +76,13 @@ export class PersonasComponent implements OnInit {
     );
   }
 
-  private onPersonaSeleccionada(id: number){
-    this.personaSeleccionada.emit(id);
+  private onPersonaSeleccionada(id: number, clickFila: boolean = false){
+    if(this.esBuscador && clickFila){
+      this.personaSeleccionada.emit(id);
+    } else if (!this.esBuscador && !clickFila) {
+      this.personaSeleccionada.emit(id);
+    }
+
   }
 
 }

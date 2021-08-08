@@ -26,19 +26,20 @@
 
         <thead>
             <tr>
-                <th width="15%">{{columnas.numeroDocumento}}</th>
+                <th width="20%">{{columnas.numeroDocumento}}</th>
                 <th>{{columnas.nombreCompleto}}</th>
                 <th width="15%">{{columnas.tipoPersona}}</th>
-                <th width="10%">{{columnas.acciones}}</th>
+                <th *ngIf="!esBuscador" width="10%">{{columnas.acciones}}</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let persona of personas">
+            <tr *ngFor="let persona of personas"
+                (click)="onPersonaSeleccionada(persona.id, true)">
                 <td>{{persona.numeroDocumento}}</td>
                 <td>{{!!persona.razonSocial ? persona.razonSocial : persona.nombres + ' ' + persona.apellidos}}</td>
                 <td>{{persona.tipo.nombre}}</td>
-                <td>
+                <td *ngIf="!esBuscador">
 
                     <div class="buttons is-centered">
                         <button 
