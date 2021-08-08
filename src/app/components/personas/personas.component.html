@@ -34,7 +34,7 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let persona of listadoPersonas">
+            <tr *ngFor="let persona of personas">
                 <td>{{persona.numeroDocumento}}</td>
                 <td>{{!!persona.razonSocial ? persona.razonSocial : persona.nombres + ' ' + persona.apellidos}}</td>
                 <td>{{persona.tipo.nombre}}</td>

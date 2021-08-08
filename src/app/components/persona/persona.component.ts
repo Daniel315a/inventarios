@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { utils } from 'protractor';
 import { Persona } from 'src/app/models/persona';
+import { Utilidades } from 'src/app/models/utilidades';
 import { PersonaService } from 'src/app/services/persona.service';
 import { PersonasComponent } from '../personas/personas.component';
 import { SelectMunicipiosComponent } from '../select-municipios/select-municipios.component';
@@ -49,6 +51,13 @@ export class PersonaComponent implements OnInit, AfterViewInit {
   public botones = {
     eliminar: 'Eliminar',
     guardar: 'Guardar'
+  }
+
+  public mensajes = {
+    personaCreada: 'La persona se ha creado correctamente',
+    personaActualizada: 'La persona se ha actualizado correctamente',
+    preguntaEliminar: '¿Está seguro de eliminar el registro? Esta opción no se puede deshacer.',
+    personaEliminada: 'La persona se ha eliminado correctamente'
   }
 
   constructor(
@@ -105,4 +114,47 @@ export class PersonaComponent implements OnInit, AfterViewInit {
     );
   }
 
+  public guardar(){
+   if(this.persona.id == 0){
+     this.crear();
+   } else {
+     this.actualizar();
+   }
+  }
+
+  private crear(){
+    this._personaService.crear(this.persona).subscribe(
+      result=> {
+        if(result.resultado){
+          this.persona.id = result.datos.id;
+          this.listadoPersonas.consultarListado();
+          Utilidades.dialogSuccess(this.mensajes.personaCreada);
+        }
+      },
+      error => {
+        Utilidades.dialogErrorHttp(error.error.codigo_http, error.error.mensaje);
+      }
+    );
+  }
+
+  private actualizar(){
+    this._personaService.actualizar(this.persona).subscribe(
+      result=> {
+        if(result.resultado){
+          this.listadoPersonas.consultarListado();
+          Utilidades.dialogSuccess(this.mensajes.personaActualizada);
+        }
+      },
+      error => {
+        Utilidades.dialogErrorHttp(error.error.codigo_http, error.error.mensaje);
+      }
+    );
+  }
+
+  public eliminar(){}
+
+  public limpiar(){
+    this.persona = new Persona();
+  }
+  
 }

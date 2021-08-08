@@ -16,7 +16,7 @@ export class PersonasComponent implements OnInit {
    * Propiedades del diseño
    */
 
-  public listadoPersonas: Array<any> = new Array<any>();
+  public personas: Array<Persona> = new Array<Persona>();
   @Output()
   public personaSeleccionada:EventEmitter<number> = new EventEmitter<number>();
   public altoTabla: number = 0;
@@ -40,7 +40,9 @@ export class PersonasComponent implements OnInit {
     this.consultarListado();
   }
 
-  private consultarListado(){
+  public consultarListado(){
+    this.personas = new Array<Persona>();
+
     this._personaService.consultarListado().subscribe(
       result => {
         if(result.resultado){
@@ -48,7 +50,7 @@ export class PersonasComponent implements OnInit {
             let persona: Persona = new Persona();
             persona.inicializar(item);
 
-            this.listadoPersonas.push(persona);
+            this.personas.push(persona);
           });
         }
       }
