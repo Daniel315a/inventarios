@@ -4,5 +4,9 @@ export const environment = {
   tipoPersonaCliente: {
     id: 1,
     nombre: 'Cliente'
+  },
+  tipoPersonaVendedor: {
+    id: 2,
+    nombre: 'Vendedor'
   }
 };
