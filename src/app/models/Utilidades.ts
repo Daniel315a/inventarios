@@ -4,7 +4,7 @@ import { TipoPersona } from "./tipo-persona";
 import { Usuario } from "./usuario";
 
 export class Utilidades {
-     
+    
     static establecerUsuario(usuario: Usuario): void {
       localStorage.setItem('usr-decoraytransforma', JSON.stringify(usuario));
     }
@@ -100,6 +100,13 @@ export class Utilidades {
     return new TipoPersona(
         environment.tipoPersonaCliente.id, 
         environment.tipoPersonaCliente.nombre
+    );
+  }
+
+  static getTipoVendedor(): TipoPersona {
+    return new TipoPersona(
+        environment.tipoPersonaVendedor.id, 
+        environment.tipoPersonaVendedor.nombre
     );
   }
 
