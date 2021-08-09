@@ -28,8 +28,10 @@
         <!-- Cliente -->
 
         <app-txt-persona
+            #txtCliente
             [labelPersona]="labels.cliente"
-            [tipoPersona]="tipoPersonaCliente">
+            [tipoPersona]="tipoPersonaCliente"
+            [persona]="factura.cliente">
         </app-txt-persona>
 
         <!-- FIN: Cliente -->
@@ -37,8 +39,10 @@
         <!-- Vendedor -->
 
         <app-txt-persona
+            #txtVendedor
             [labelPersona]="labels.vendedor"
-            [tipoPersona]="tipoPersonaVendedor">
+            [tipoPersona]="tipoPersonaVendedor"
+            [persona]="factura.vendedor">
         </app-txt-persona>
 
         <!-- FIN: Vendedor -->
@@ -212,10 +216,16 @@
 <div class="field is-grouped is-grouped-right">
     
     <div class="control">
-        <button class="button is-primary">{{botones.guardar}}</button>
+        <button 
+            class="button is-primary"
+            (click)="crear()">
+            {{botones.guardar}}
+        </button>
     </div>
     <div class="control">
-        <button class="button">
+        <button 
+            class="button"
+            (click)="limpiarCampos()">
             <span class="icon is-small has-text-primary">
                 <i class="fas fa-eraser"></i>
             </span>

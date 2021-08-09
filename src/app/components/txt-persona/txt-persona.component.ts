@@ -1,9 +1,7 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { Persona } from 'src/app/models/persona';
 import { TipoPersona } from 'src/app/models/tipo-persona';
-import { Utilidades } from 'src/app/models/utilidades';
 import { PersonaService } from 'src/app/services/persona.service';
-import { environment } from 'src/environments/environment';
 import { PersonasComponent } from '../personas/personas.component';
 
 @Component({
@@ -16,12 +14,14 @@ import { PersonasComponent } from '../personas/personas.component';
 })
 export class TxtPersonaComponent implements OnInit, AfterViewInit {
 
-  public persona: Persona = new Persona();
+  @Input()
   public nombrePersona: string = '';
 
   /**
    * Propiedades del diseño
    */
+  @Input()
+  public persona: Persona = new Persona();
   @Input()
   public labelPersona: string = '';
   @Input()
@@ -81,7 +81,7 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
     );
   }
 
-  public personaSeleccionada(id: number){
+  public personaSeleccionadaEnListado(id: number){
     this.persona.id = id;
     this.consultarPersonaPorId();
     this.cerrarModalConsultarPersonas();

@@ -4,11 +4,16 @@ import { Factura } from 'src/app/models/factura';
 import { TipoPersona } from 'src/app/models/tipo-persona';
 import { Utilidades } from 'src/app/models/utilidades';
 import { roundHalfEven } from 'round-half-even';
+import { FacturaService } from 'src/app/services/factura.service';
+import { TxtPersonaComponent } from '../txt-persona/txt-persona.component';
 
 @Component({
   selector: 'app-factura',
   templateUrl: './factura.component.html',
   styleUrls: ['./factura.component.css'],
+  providers:[
+    FacturaService
+  ],
   host: {
     '(window:resize)': 'onResize($event)'
   },
@@ -24,6 +29,10 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   @ViewChild('divForm')
   public divForm: ElementRef;
+  @ViewChild('txtCliente')
+  public txtCliente: TxtPersonaComponent;
+  @ViewChild('txtVendedor')
+  public txtVendedor: TxtPersonaComponent;
   public tipoPersonaCliente: TipoPersona = Utilidades.getTipoCliente();
   public tipoPersonaVendedor: TipoPersona = Utilidades.getTipoVendedor();
   public altoTablaDetalles: number = 0;
@@ -56,7 +65,13 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     guardar: 'Guardar'
   }
 
-  constructor() { }
+  public mensajes = {
+    facturaCreada: 'La factura se ha creado correctamente'
+  }
+
+  constructor(
+    private _facturaService: FacturaService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -116,4 +131,29 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     detalle.esInstalacion = checked;
   }
 
+  public crear(){
+    this._facturaService.crear(this.factura).subscribe(
+      result => {
+        if(result.resultado){
+          this.limpiarCampos();
+          Utilidades.dialogSuccess(this.mensajes.facturaCreada);
+        }
+      }
+    );
+  }
+
+  public limpiarCampos(){
+    this.factura = new Factura();
+    this.txtCliente.nombrePersona = '';
+    this.txtVendedor.nombrePersona = '';
+  }
+
+  public clienteSeleccionado(cliente){
+    this.factura.cliente = cliente;
+  }
+
+  public vendedorSeleccionado(vendedor){
+    this.factura.vendedor = vendedor;
+  }
+  
 }
