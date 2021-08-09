@@ -334,14 +334,25 @@
 <!-- FIN: Totales -->
 
 <div class="field is-grouped is-grouped-right">
-    
+
+    <div class="control">
+        <button 
+            class="button is-danger"
+            (click)="anularFactura()"
+            [disabled]="factura.id == 0">
+            {{botones.anular}}
+        </button>
+    </div>
+
     <div class="control">
         <button 
             class="button is-primary"
-            (click)="crear()">
+            (click)="crear()"
+            [disabled]="factura.id != 0">
             {{botones.guardar}}
         </button>
     </div>
+
     <div class="control">
         <button 
             class="button"

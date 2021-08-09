@@ -16,4 +16,25 @@ export class Factura{
         public totalIva: number = 0.00
     ){}
 
+    public inicializar(datos){
+        if(!!datos){
+            this.id = !!datos.id ? datos.id : this.id;
+            this.fecha = !!datos.fecha ? datos.fecha : this.fecha;
+            this.cliente.inicializar(datos.cliente);
+            this.vendedor.inicializar(datos.vendedor);
+            this.valorTotal = !!datos.valor_total ? datos.valor_total : this.valorTotal;
+            this.porcentajeComision = !!datos.porcentaje_comision ? datos.porcentaje_comision : this.porcentajeComision;
+            this.valorComision = !!datos.valor_comision ? datos.valor_comision : this.valorComision;
+            this.totalDescuento = !!datos.total_descuento ? datos.total_descuento : this.totalDescuento;
+            this.totalIva = !!datos.total_iva ? datos.total_iva : this.totalIva;
+
+            datos.detalles.forEach(detalle => {
+                let objDetalle: DetalleFactura = new DetalleFactura();
+                objDetalle.inicializar(detalle);
+
+                this.detalles.push(objDetalle);
+            });
+        }
+    }
+
 }

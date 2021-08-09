@@ -3,9 +3,9 @@ import { DetalleFactura } from 'src/app/models/detalle-factura';
 import { Factura } from 'src/app/models/factura';
 import { TipoPersona } from 'src/app/models/tipo-persona';
 import { Utilidades } from 'src/app/models/utilidades';
-import { roundHalfEven } from 'round-half-even';
 import { FacturaService } from 'src/app/services/factura.service';
 import { TxtPersonaComponent } from '../txt-persona/txt-persona.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-factura',
@@ -67,18 +67,25 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   public botones = {
     agregarDetalle: 'Agregar detalle',
-    guardar: 'Guardar'
+    guardar: 'Guardar',
+    anular: 'Anular'
   }
 
   public mensajes = {
-    facturaCreada: 'La factura se ha creado correctamente'
+    facturaCreada: 'La factura se ha creado correctamente',
+    preguntaAnular: '¿Está seguro de anular la factura? Esta opción no se puede deshacer.'
   }
 
   constructor(
+    private route: ActivatedRoute,
     private _facturaService: FacturaService
   ) { }
 
   ngOnInit(): void {
+    if(this.route.snapshot.queryParams.id != undefined) {
+      this.factura.id =  this.route.snapshot.queryParams.id;
+      this.consultarPorId();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -189,6 +196,23 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   public vendedorSeleccionado(vendedor){
     this.factura.vendedor = vendedor;
+  }
+
+  public consultarPorId(){
+    this._facturaService.consultarPorId(this.factura.id).subscribe(
+      result => {
+        if(result.resultado){
+          this.factura = new Factura();
+          this.factura.inicializar(result.datos);
+        }
+      }
+    );
+  }
+
+  public anularFactura(){
+    Utilidades.dialogPregunta('', this.mensajes.preguntaAnular, 'Sí, anular').then((result) => {
+
+    });
   }
   
 }

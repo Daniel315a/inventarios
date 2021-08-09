@@ -23,6 +23,16 @@ export class FacturaService {
         return this._http.get(this.url, { params: parametros });
     }
 
+    public consultarPorId(id: number): Observable<any>{
+        const usuario = Utilidades.obtenerUsuario();
+        const parametros: HttpParams = new HttpParams().
+        set('token', usuario.token).
+        set('solicitud', 'por_id').
+        set('id', id.toString());
+
+        return this._http.get(this.url, { params: parametros });
+    }
+
     public crear(factura: Factura): Observable<any>{
         let detalles: string = JSON.stringify(factura.detalles);
 
