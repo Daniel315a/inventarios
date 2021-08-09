@@ -73,6 +73,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     {
       route: 'productos',
       nombre: 'Productos',
+      icono: 'fas fa-scroll'
+    },
+    {
+      route: 'personas',
+      nombre: 'Personas',
       icono: 'fas fa-user'
     },
     {
@@ -88,7 +93,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     {
       route: 'prestamos',
       nombre: 'Prestamos',
-      icono: 'fab fa-leanpub'
+      icono: 'fas fa-book-open'
     }
   ];
 

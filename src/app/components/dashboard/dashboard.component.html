@@ -64,7 +64,8 @@
             class="menu-item"
             *ngFor="let opcion of opcionesMenu">
 
-            <a [routerLink]="[opcion.route]" [routerLinkActive]="['menu-activo']">
+            <a [routerLink]="[opcion.route]" 
+                [routerLinkActive]="['menu-activo']">
                 <i [ngClass]="[opcion.icono]"></i>
                 {{ opcion.nombre }}
             </a>

@@ -38,6 +38,10 @@ export class ListadoFacturasComponent implements OnInit, AfterViewInit {
     acciones: 'Acciones'
   };
 
+  public botones = {
+    nuevo: 'Crear factura'
+  }
+
   constructor(
     private _facturaService: FacturaService
   ) { }
