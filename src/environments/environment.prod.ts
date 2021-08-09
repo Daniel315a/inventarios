@@ -8,5 +8,9 @@ export const environment = {
   tipoPersonaVendedor: {
     id: 2,
     nombre: 'Vendedor'
+  },
+  tipoPersonaDistribuidor: {
+    id: 4,
+    nombre: 'Vendedor'
   }
 };

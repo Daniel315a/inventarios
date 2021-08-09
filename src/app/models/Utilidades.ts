@@ -110,6 +110,13 @@ export class Utilidades {
     );
   }
 
+  static getTipoDistribuidor(): TipoPersona {
+    return new TipoPersona(
+        environment.tipoPersonaDistribuidor.id, 
+        environment.tipoPersonaDistribuidor.nombre
+    );
+  }
+
   static redondear(x: number): number {
     return 2 * Math.round(x / 2);  
  }
