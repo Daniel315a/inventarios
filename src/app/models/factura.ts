@@ -12,7 +12,8 @@ export class Factura{
         public valorTotal: number = 0.0,
         public porcentajeComision: number = 0.00,
         public valorComision: number = 0.00,
-        public totalDescuento: number = 0.00
+        public totalDescuento: number = 0.00,
+        public totalIva: number = 0.00
     ){}
 
 }

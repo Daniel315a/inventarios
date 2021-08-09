@@ -43,8 +43,12 @@ export class FacturaService {
         set('fecha', factura.fecha).
         set('id_cliente', factura.cliente.id.toString()).
         set('id_vendedor', factura.vendedor.id.toString()).
+        set('valor_total', factura.valorTotal.toString()).
+        set('porcentaje_comision', factura.porcentajeComision.toString()).
+        set('valor_comision', factura.valorComision.toString()).
+        set('total_descuento', factura.totalDescuento.toString()).
+        set('total_iva', factura.totalIva.toString()).
         set('detalles', detalles);
-
 
         return this._http.post(this.url, parametros);
     }

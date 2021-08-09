@@ -46,7 +46,12 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     iva: '% IVA',
     descuento: '% Dto',
     esInstalacion: 'Instalación',
-    valorUnitario: 'Precio unitario'
+    valorUnitario: 'Precio unitario',
+    comision: 'Porcentaje de comisión',
+    totalDescuento: 'Descuento',
+    totalIva: 'IVA',
+    totalFactura: 'Total',
+    valorComision: 'Comisión'
   }
 
   public columnas = {
@@ -84,7 +89,7 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   public onResize(){
     let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-    let altoDivTabla = window.innerHeight - altoDivForm - 160;
+    let altoDivTabla = window.innerHeight - altoDivForm - 370;
     
     if(altoDivTabla != this.altoTablaDetalles){
       this.altoTablaDetalles = altoDivTabla;
@@ -102,6 +107,7 @@ export class FacturaComponent implements OnInit, AfterViewInit {
       this.calcularTotalesDetalle();
       this.factura.detalles.push(this.detalleActual);
       this.detalleActual = new DetalleFactura();
+      this.calcularTotales();
     }
   }
 
@@ -127,8 +133,37 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     this.detalleActual.precioTotal += this.detalleActual.valorIva;
   }
 
+  public calcularTotales(){
+    let valorTotal: number = 0;
+    let valorComision: number = 0;
+    let totalDescuento: number = 0;
+    let totalIva: number = 0;
+    let netoComision: number = 0;
+
+    this.factura.detalles.forEach(detalle => {
+      valorTotal += detalle.precioTotal;
+      totalDescuento += detalle.valorDescuento;
+      totalIva += detalle.valorIva;
+
+      if(!detalle.esInstalacion){
+        netoComision += (detalle.cantidad + detalle.precioUnitario) - detalle.valorDescuento;
+      }
+
+    });
+
+    valorComision = netoComision * (this.factura.porcentajeComision / 100);
+
+    this.factura.valorTotal = Utilidades.redondear(valorTotal);
+    this.factura.totalDescuento = Utilidades.redondear(totalDescuento);
+    this.factura.totalIva = Utilidades.redondear(totalIva);
+    this.factura.valorComision = Utilidades.redondear(valorComision);
+
+    console.log(this.factura);
+  }
+
   public establecerDetalleInstalacion(detalle: DetalleFactura, checked){
     detalle.esInstalacion = checked;
+    this.calcularTotales();
   }
 
   public crear(){

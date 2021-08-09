@@ -47,6 +47,30 @@
 
         <!-- FIN: Vendedor -->
 
+        <!-- Porcentaje comisión -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">
+                    {{labels.comision}}
+                </label>
+            </div>
+            <div class="field-body">
+                <div class="control">
+
+                    <input 
+                        class="input"
+                        type="number"
+                        name="porcentajeComision"
+                        [(ngModel)]="factura.porcentajeComision"
+                        (blur)="calcularTotales()">
+                        
+                </div>
+            </div>
+        </div>
+
+        <!-- FIN: Porcentaje comisión -->
+
         <!-- Detalles -->
 
         <div class="box">
@@ -212,6 +236,102 @@
 </div>
 
 <br>
+
+<!-- Totales -->
+
+    <div class="field is-grouped is-grouped-right">
+        
+        <div class="control">
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label>{{labels.totalDescuento}}</label>
+                </div>
+                <div class="field-body">
+                    <div class="control txt-valor">
+                        <input 
+                            class="input"
+                            type="text"
+                            name="totalDescuento"
+                            [(ngModel)]="factura.totalDescuento"
+                            disabled></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="field is-grouped is-grouped-right">
+        
+        <div class="control">
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label>{{labels.totalIva}}</label>
+                </div>
+                <div class="field-body">
+                    <div class="control txt-valor">
+                        <input 
+                            class="input"
+                            type="text"
+                            name="totalIva"
+                            [(ngModel)]="factura.totalIva"
+                            disabled></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="field is-grouped is-grouped-right">
+        
+        <div class="control">
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label>{{labels.totalFactura}}</label>
+                </div>
+                <div class="field-body">
+                    <div class="control txt-valor">
+                        <input 
+                            class="input"
+                            type="text"
+                            name="totalFactura"
+                            [(ngModel)]="factura.valorTotal"
+                            disabled></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="field is-grouped is-grouped-right">
+        
+        <div class="control">
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label>{{labels.valorComision}}</label>
+                </div>
+                <div class="field-body">
+                    <div class="control txt-valor">
+                        <input 
+                            class="input"
+                            type="text"
+                            name="comision"
+                            [(ngModel)]="factura.valorComision"
+                            disabled></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+<!-- FIN: Totales -->
 
 <div class="field is-grouped is-grouped-right">
     
