@@ -52,17 +52,19 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
   }
 
   public consultarPersonaPorNumeroDocumento(){
-    this._personaService.consultarPorNumeroDocumento(this.persona.numeroDocumento).subscribe(
-      result => {
-        if(result.resultado){
-          this.persona = new Persona();
-          this.nombrePersona = '';
-          
-          this.persona.inicializar(result.datos);
-          this.nombrePersona = !!this.persona.razonSocial ? this.persona.razonSocial : this.persona.nombres + ' ' + this.persona.apellidos;
+    if(!!this.persona.numeroDocumento){
+      this._personaService.consultarPorNumeroDocumento(this.persona.numeroDocumento).subscribe(
+        result => {
+          if(result.resultado){
+            this.persona = new Persona();
+            this.nombrePersona = '';
+            
+            this.persona.inicializar(result.datos);
+            this.nombrePersona = !!this.persona.razonSocial ? this.persona.razonSocial : this.persona.nombres + ' ' + this.persona.apellidos;
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   public consultarPersonaPorId(){
