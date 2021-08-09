@@ -1,13 +1,45 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { CotizacionesComponent } from "./components/cotizaciones/cotizaciones.component";
+import { FacturaComponent } from "./components/factura/factura.component";
+import { ListadoFacturasComponent } from "./components/listado-facturas/listado-facturas.component";
+import { PersonaComponent } from "./components/persona/persona.component";
+import { PrestamoComponent } from "./components/prestamo/prestamo.component";
+import { ProductosComponent } from "./components/productos/productos.component";
 
 const routes: Routes = [
-    
+    {
+        path: '',
+        component: ProductosComponent
+    },
+    {
+        path: 'productos',
+        component: ProductosComponent
+    },
+    {
+        path: 'personas',
+        component: PersonaComponent
+    },
+    {
+        path: 'facturas',
+        component: ListadoFacturasComponent
+    },
+    {
+        path: 'factura',
+        component: FacturaComponent
+    },
+    {
+        path: 'cotizaciones',
+        component: CotizacionesComponent
+    },
+    {
+        path: 'prestamos',
+        component: PrestamoComponent
+    }
 ];
 
 @NgModule({
-    imports: [ RouterModule.forChild(routes) ],
+    imports: [RouterModule.forRoot(routes)],
     exports: [ RouterModule ]
 })
 export class AppRoutingModule { }

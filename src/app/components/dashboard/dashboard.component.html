@@ -60,32 +60,14 @@
     </div>
 
     <ul class="menu-list-item">
-        <!-- *ngFor="let opcion of opcionesMenu" -->
-        <li class="menu-item">
+        <li 
+            class="menu-item"
+            *ngFor="let opcion of opcionesMenu">
 
-            <!-- <a [routerLink]="[opcion.route]" [routerLinkActive]="['menu-activo']">
+            <a [routerLink]="[opcion.route]" [routerLinkActive]="['menu-activo']">
                 <i [ngClass]="[opcion.icono]"></i>
                 {{ opcion.nombre }}
-            </a> -->
-
-            <a class="menu-activo">
-                <i class="fas fa-user"></i>
-                Productos
             </a>
-
-        </li>
-
-        <li class="menu-item">
-
-            <!-- <a [routerLink]="[opcion.route]" [routerLinkActive]="['menu-activo']">
-                <i [ngClass]="[opcion.icono]"></i>
-                {{ opcion.nombre }}
-            </a> -->
-
-            <!-- <a>
-                <i class="fas fa-user"></i>
-                Facturas
-            </a> -->
 
         </li>
 
@@ -98,7 +80,7 @@
         [@establecerTamannoContenedor]="menuLateralVisible ? 'menu-visible' : 'menu-oculto'">
     <div>
         
-        <app-factura></app-factura>
+        <router-outlet></router-outlet>
 
     </div>
 </section>

@@ -18,6 +18,11 @@ import { ListadoFacturasComponent } from './components/listado-facturas/listado-
 import { FacturaComponent } from './components/factura/factura.component';
 import { TxtPersonaComponent } from './components/txt-persona/txt-persona.component';
 import { SelectProductosComponent } from './components/select-productos/select-productos.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CotizacionesComponent } from './components/cotizaciones/cotizaciones.component';
+import { PrestamosComponent } from './components/prestamos/prestamos.component';
+import { CotizacionComponent } from './components/cotizacion/cotizacion.component';
+import { PrestamoComponent } from './components/prestamo/prestamo.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +39,14 @@ import { SelectProductosComponent } from './components/select-productos/select-p
     ListadoFacturasComponent,
     FacturaComponent,
     TxtPersonaComponent,
-    SelectProductosComponent
+    SelectProductosComponent,
+    CotizacionesComponent,
+    PrestamosComponent,
+    CotizacionComponent,
+    PrestamoComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

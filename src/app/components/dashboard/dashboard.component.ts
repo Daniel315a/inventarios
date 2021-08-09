@@ -69,6 +69,29 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     cerrarSesion: 'Cerrar sesión'
   };
 
+  public opcionesMenu = [
+    {
+      route: 'productos',
+      nombre: 'Productos',
+      icono: 'fas fa-user'
+    },
+    {
+      route: 'facturas',
+      nombre: 'Facturas',
+      icono: 'fas fa-file-invoice'
+    },
+    {
+      route: 'cotizaciones',
+      nombre: 'Cotizaciones',
+      icono: 'fas fa-file-invoice-dollar'
+    },
+    {
+      route: 'prestamos',
+      nombre: 'Prestamos',
+      icono: 'fab fa-leanpub'
+    }
+  ];
+
   constructor(
     private renderer: Renderer2
   ) { }
