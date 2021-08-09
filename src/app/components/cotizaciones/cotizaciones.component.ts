@@ -22,7 +22,7 @@ export class CotizacionesComponent implements OnInit, AfterViewInit {
 
   @ViewChild('divForm')
   public divForm: ElementRef;
-  public altoTablaDetalles: number = 100;
+  public altoTablaDetalles: number = 0;
   public tipoPersonaCliente = Utilidades.getTipoCliente();
 
   public labels = {
