@@ -73,7 +73,8 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   public mensajes = {
     facturaCreada: 'La factura se ha creado correctamente',
-    preguntaAnular: '¿Está seguro de anular la factura? Esta opción no se puede deshacer.'
+    preguntaAnular: '¿Está seguro de anular la factura? Esta opción no se puede deshacer.',
+    facturaAnulada: 'La factura se ha anulado correctamente'
   }
 
   constructor(
@@ -211,7 +212,13 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   public anularFactura(){
     Utilidades.dialogPregunta('', this.mensajes.preguntaAnular, 'Sí, anular').then((result) => {
-
+      this._facturaService.anular(this.factura.id).subscribe(
+        result => {
+          if(result.resultado){
+            Utilidades.dialogSuccess(this.mensajes.facturaAnulada);
+          }
+        }
+      );
     });
   }
   

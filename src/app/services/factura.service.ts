@@ -63,4 +63,14 @@ export class FacturaService {
         return this._http.post(this.url, parametros);
     }
 
+    public anular(id: number): Observable<any>{
+        const usuario = Utilidades.obtenerUsuario();
+        const parametros: HttpParams = new HttpParams().
+        set('token', usuario.token).
+        set('solicitud', 'anular').
+        set('id', id.toString());
+
+        return this._http.post(this.url, parametros);
+    }
+
 }
