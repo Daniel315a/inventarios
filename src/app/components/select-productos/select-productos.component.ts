@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { Utilidades } from 'src/app/models/utilidades';
 import { ProductoService } from 'src/app/services/producto.service';
@@ -15,6 +15,8 @@ export class SelectProductosComponent implements OnInit {
 
   public producto: Producto = new Producto();
   public productos: Array<Producto> = new Array<Producto>();
+  @Output()
+  public productoSeleccionado: EventEmitter<Producto> = new EventEmitter<Producto>();
 
   constructor(
     private _productoService: ProductoService
@@ -46,8 +48,9 @@ export class SelectProductosComponent implements OnInit {
     );
   }
 
-  public productoSeleccionado(){
-
+  public onProductoSeleccionado(){
+    let producto = this.productos.find(producto => producto.id == this.producto.id);
+    this.productoSeleccionado.emit(producto);
   }
 
 }

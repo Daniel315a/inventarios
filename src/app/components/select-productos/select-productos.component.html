@@ -1,6 +1,6 @@
 <select 
     name="producto" 
     [(ngModel)]="producto.id"
-    (change)="productoSeleccionado()">
+    (change)="onProductoSeleccionado()">
     <option *ngFor="let producto of productos" [value]="producto.id">{{producto.detalle}}</option>
 </select>

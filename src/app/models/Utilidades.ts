@@ -110,4 +110,8 @@ export class Utilidades {
     );
   }
 
+  static redondear(x: number): number {
+    return 2 * Math.round(x / 2);  
+ }
+
 }

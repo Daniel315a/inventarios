@@ -17,6 +17,7 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { ListadoFacturasComponent } from './components/listado-facturas/listado-facturas.component';
 import { FacturaComponent } from './components/factura/factura.component';
 import { TxtPersonaComponent } from './components/txt-persona/txt-persona.component';
+import { SelectProductosComponent } from './components/select-productos/select-productos.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TxtPersonaComponent } from './components/txt-persona/txt-persona.compon
     ProductosComponent,
     ListadoFacturasComponent,
     FacturaComponent,
-    TxtPersonaComponent
+    TxtPersonaComponent,
+    SelectProductosComponent
   ],
   imports: [
     BrowserModule,

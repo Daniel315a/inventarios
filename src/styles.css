@@ -234,6 +234,14 @@ h1 {
     z-index: 1;
 }
 
+.txt-pequenno {
+    width: 120px;
+}
+
+.txt-valor {
+    width: 160px;
+}
+
 @keyframes aparicion-boton-menu {
     0% {
         left: -35px;

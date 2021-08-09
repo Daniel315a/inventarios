@@ -1,4 +1,225 @@
-<app-txt-persona
-    [labelPersona]="labels.cliente"
-    [tipoPersona]="tipoPersonaCliente">
-</app-txt-persona>
+<div #divForm class="form-filtros">
+
+    <form autocomplete="off">
+
+        <!-- Fecha -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.fecha}}</label>
+            </div>
+            <div class="field-body">
+                
+                <div class="control">
+
+                    <input 
+                        class="input"
+                        type="date"
+                        name="fecha"
+                        [(ngModel)]="factura.fecha">
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FIN: Fecha -->
+
+        <!-- Cliente -->
+
+        <app-txt-persona
+            [labelPersona]="labels.cliente"
+            [tipoPersona]="tipoPersonaCliente">
+        </app-txt-persona>
+
+        <!-- FIN: Cliente -->
+
+        <!-- Vendedor -->
+
+        <app-txt-persona
+            [labelPersona]="labels.vendedor"
+            [tipoPersona]="tipoPersonaVendedor">
+        </app-txt-persona>
+
+        <!-- FIN: Vendedor -->
+
+        <!-- Detalles -->
+
+        <div class="box">
+
+            <div class="field is-grouped">
+
+                <!-- Cantidad -->
+
+                <div class="control txt-pequenno">
+                    <input 
+                        class="input" 
+                        type="number"
+                        placeholder="{{labels.cantidad}}"
+                        name="cantidad"
+                        [(ngModel)]="detalleActual.cantidad">
+                </div>
+
+                <!-- FIN: Cantidad -->
+
+                <!-- Producto -->
+
+                <div class="control">
+                        
+                    <div class="select">
+                        
+                        <app-select-productos
+                            (productoSeleccionado)="productoSeleccionado($event)"></app-select-productos>
+
+                    </div>
+
+                </div>
+
+                <!-- FIN: Producto -->
+
+                <!-- Descripción -->
+
+                <div class="control is-expanded">
+                    <input 
+                        class="input"
+                        type="text"
+                        placeholder="{{labels.detalle}}"
+                        name="detalle"
+                        [(ngModel)]="detalleActual.descripcion">
+                </div>
+
+                <!-- FIN: Descripción -->
+
+                <!-- IVA -->
+
+                <div class="control txt-pequenno">
+                    <input 
+                        class="input"
+                        type="number"
+                        placeholder="{{labels.iva}}"
+                        name="iva"
+                        [(ngModel)]="detalleActual.porcentajeIva">
+                </div>
+
+                <!-- FIN: IVA -->
+
+                <!-- Descuento -->
+
+                <div class="control txt-pequenno">
+                    <input 
+                        class="input"
+                        type="number"
+                        placeholder="{{labels.descuento}}"
+                        name="descuento"
+                        [(ngModel)]="detalleActual.porcentajeDescuento">
+                </div>
+
+                <!-- FIN: Descuento -->
+
+                <!-- Valor unitario -->
+
+                <div class="control txt-valor">
+                    <input 
+                        class="input"
+                        type="number"
+                        placeholder="{{labels.valorUnitario}}"
+                        name="valorUnitario"
+                        [(ngModel)]="detalleActual.precioUnitario">
+                </div>
+
+                <!-- FIN: Valor unitario -->
+
+                <div class="control">
+                    <button 
+                        class="button is-primary"
+                        (click)="agregarDetalle()">
+                        <span class="icon is-small">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                    </button>
+                </div>
+                
+                <div class="control">
+                    <button class="button is-danger">
+                        <span class="icon is-small">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FIN: Detalles -->
+
+    </form>
+
+</div>
+
+<div #divTablaDetalles class="div-tabla" [style.height.px]="altoTablaDetalles">
+
+    <table class="table is-fullwidth is-bordered">
+
+        <thead>
+
+            <tr>
+                <th width="5%">{{columnas.cantidad}}</th>
+                <th width="8%">{{columnas.referenciaProducto}}</th>
+                <th>{{columnas.descripcion}}</th>
+                <th width="10%">{{columnas.valorUnitario}}</th>
+                <th width="10%">{{columnas.iva}}</th>
+                <th width="10%">{{columnas.descuento}}</th>
+                <th width="10%">{{columnas.valorTotal}}</th>
+                <th width="5%">{{columnas.instalacion}}</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let detalle of factura.detalles">
+
+                <td>{{detalle.cantidad}}</td>
+                <td>{{detalle.producto.referencia}}</td>
+                <td>{{detalle.descripcion}}</td>
+                <td>{{detalle.precioUnitario}}</td>
+                <td>{{detalle.valorIva}}</td>
+                <td>{{detalle.valorDescuento}}</td>
+                <td>{{detalle.precioTotal}}</td>
+                <td>
+
+                    <div class="has-text-centered">
+                        <label class="checkbox">
+                            <input 
+                                type="checkbox"
+                                (change)="establecerDetalleInstalacion(detalle, $event.target.checked)">
+                        </label>
+                    </div>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<br>
+
+<div class="field is-grouped is-grouped-right">
+    
+    <div class="control">
+        <button class="button is-primary">{{botones.guardar}}</button>
+    </div>
+    <div class="control">
+        <button class="button">
+            <span class="icon is-small has-text-primary">
+                <i class="fas fa-eraser"></i>
+            </span>
+        </button>
+    </div>
+
+</div>
