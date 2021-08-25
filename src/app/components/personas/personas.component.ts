@@ -29,7 +29,7 @@ export class PersonasComponent implements OnInit {
   };
 
   public columnas = {
-    numeroDocumento: 'Nº documento',
+    numeroDocumento: 'N° documento',
     nombreCompleto: 'Nombre completo / Razón social',
     tipoPersona: 'Tipo',
     acciones: 'Acciones'
