@@ -1,1 +1,52 @@
-<p>listado-cotizaciones works!</p>
+<div #divForm class="form-filtros">
+
+    <div class="field is-grouped">
+
+        <div class="control is-expanded has-icons-left">
+
+            <input 
+                class="input"
+                type="text" 
+                placeholder="{{labels.buscar}}"
+                name="">
+
+            <span class="icon is-small is-left">
+                <i class="fas fa-search"></i>
+            </span>
+
+        </div>
+
+        <div class="control">
+
+            <a 
+                class="button is-primary"
+                [routerLink]="['/cotizacion']">
+                <span>
+                    {{botones.nuevo}}
+                </span>
+                <span class="icon is-small">
+                    <i class="fas fa-plus"></i>
+                </span>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="div-tabla" [style.height.px]="altoDivTabla">
+
+    <table class="table is-bordered is-fullwidth">
+
+        <thead>
+            <tr>
+                <th width="15%">{{columnas.documentoCliente}}</th>
+                <th>{{columnas.nombreCliente}}</th>
+                <th width="10%">{{columnas.acciones}}</th>
+            </tr>
+        </thead>
+
+    </table>
+
+</div>
