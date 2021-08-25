@@ -23,7 +23,7 @@ export class ListadoFacturasComponent implements OnInit, AfterViewInit {
 
   @ViewChild('divForm')
   public divForm: ElementRef;
-  public altoDivTabla: number = 200;
+  public altoDivTabla: number;
   @Input()
   public componenteHijo: boolean = false;
 
