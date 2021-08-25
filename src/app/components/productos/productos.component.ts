@@ -40,6 +40,12 @@ export class ProductosComponent implements OnInit, AfterViewInit {
     eliminar: 'Eliminar'
   };
 
+  public columnas = {
+    referencia: 'Referencia',
+    detalle: 'Detalle',
+    acciones: 'Acciones'
+  }
+
   public mensajes = {
     preguntaEliminar: '¿Está seguro de eliminar el registro? Esta opción no se puede deshacer.',
     productoCreado: 'El producto se ha creado correctamente',
