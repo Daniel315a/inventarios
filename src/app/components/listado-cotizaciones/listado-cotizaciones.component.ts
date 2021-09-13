@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { CotizacionService } from 'src/app/services/cotizacion.service';
 
 @Component({
   selector: 'app-listado-cotizaciones',
@@ -7,8 +8,13 @@ import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angula
   host: {
     '(window:resize)': 'onResize($event)'
   },
+  providers: [
+    CotizacionService
+  ]
 })
 export class ListadoCotizacionesComponent implements OnInit, AfterViewInit {
+
+  public listadoCotizaciones: Array<any> = new Array<any>();
 
   /**
    * Propiedades del diseño
@@ -30,9 +36,12 @@ export class ListadoCotizacionesComponent implements OnInit, AfterViewInit {
     acciones: 'Acciones'
   }
 
-  constructor() { }
+  constructor(
+    private _cotizacionService: CotizacionService
+  ) { }
 
   ngOnInit(): void {
+    this.consultarListado();
   }
 
   ngAfterViewInit(): void {
@@ -48,6 +57,18 @@ export class ListadoCotizacionesComponent implements OnInit, AfterViewInit {
     if(altoDivTabla != this.altoDivTabla){
       this.altoDivTabla = altoDivTabla;
     }
+  }
+
+  public consultarListado(){
+    this.listadoCotizaciones = new Array<any>();
+
+    this._cotizacionService.consultarListado().subscribe(
+      result => {
+        if(result.resultado){
+          this.listadoCotizaciones = result.datos;
+        }
+      }
+    );
   }
 
 }

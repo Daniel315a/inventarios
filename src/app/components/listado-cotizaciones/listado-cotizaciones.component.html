@@ -47,6 +47,37 @@
             </tr>
         </thead>
 
+        <tbody>
+
+            <tr *ngFor="let cotizacion of listadoCotizaciones">
+
+                <td>
+                    {{cotizacion.numero_documento}}
+                </td>
+                <td>
+                    {{cotizacion.nombre}}
+                </td>
+                <td>
+                    
+                    <div class="buttons is-centered">
+
+                        <a 
+                            class="button is-small is-primary"
+                            [routerLink]="['/cotizacion']" 
+                            [queryParams]="{id: cotizacion.id}">
+                            <span class="icon is-small">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                        </a>
+                    
+                    </div>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
     </table>
 
 </div>
