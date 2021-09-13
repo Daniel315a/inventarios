@@ -24,6 +24,7 @@ import { PrestamosComponent } from './components/prestamos/prestamos.component';
 import { CotizacionComponent } from './components/cotizacion/cotizacion.component';
 import { PrestamoComponent } from './components/prestamo/prestamo.component';
 import { ListadoCotizacionesComponent } from './components/listado-cotizaciones/listado-cotizaciones.component';
+import { ListadoPrestamosComponent } from './components/listado-prestamos/listado-prestamos.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ListadoCotizacionesComponent } from './components/listado-cotizaciones/
     PrestamosComponent,
     CotizacionComponent,
     PrestamoComponent,
-    ListadoCotizacionesComponent
+    ListadoCotizacionesComponent,
+    ListadoPrestamosComponent
   ],
   imports: [
     AppRoutingModule,
