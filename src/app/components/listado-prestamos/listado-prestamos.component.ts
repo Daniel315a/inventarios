@@ -1,11 +1,20 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { PrestamoService } from 'src/app/services/prestamo.service';
 
 @Component({
   selector: 'app-listado-prestamos',
   templateUrl: './listado-prestamos.component.html',
-  styleUrls: ['./listado-prestamos.component.css']
+  styleUrls: ['./listado-prestamos.component.css'],
+  host: {
+    '(window:resize)': 'onResize($event)'
+  },
+  providers: [
+    PrestamoService
+  ]
 })
 export class ListadoPrestamosComponent implements OnInit, AfterViewInit {
+
+  public listadoPrestamos: Array<any> = new Array<any>();
 
   /**
    * Propiedades del diseño
@@ -30,9 +39,12 @@ export class ListadoPrestamosComponent implements OnInit, AfterViewInit {
     acciones: "Acciones"
   }
 
-  constructor() { }
+  constructor(
+    private _prestamoService: PrestamoService
+  ) { }
 
   ngOnInit(): void {
+      this.consultarListado();
   }
 
   ngAfterViewInit(): void {
@@ -48,6 +60,18 @@ export class ListadoPrestamosComponent implements OnInit, AfterViewInit {
     if(altoDivTabla != this.altoDivTabla){
       this.altoDivTabla = altoDivTabla;
     }
+  }
+
+  public consultarListado(){
+    this.listadoPrestamos = new Array<any>();
+
+    this._prestamoService.consultarListado().subscribe(
+      result => {
+        if(result.resultado){
+          this.listadoPrestamos = result.datos;
+        }
+      }
+    );
   }
 
 }

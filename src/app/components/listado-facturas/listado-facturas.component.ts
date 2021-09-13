@@ -33,7 +33,7 @@ export class ListadoFacturasComponent implements OnInit, AfterViewInit {
 
   public columnas = {
     numeroFactura: 'N° factura',
-    nombreCliente: 'Nombre / Razón social del cliente',
+    nombreCliente: 'Nombre / Razón social',
     valorTotal: 'Valor total',
     acciones: 'Acciones'
   };

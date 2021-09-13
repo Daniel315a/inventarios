@@ -50,13 +50,16 @@
 
         <tbody>
 
-            <!-- <tr *ngFor="let cotizacion of listadoCotizaciones">
+            <tr *ngFor="let prestamo of listadoPrestamos">
 
                 <td>
-                    {{cotizacion.numero_documento}}
+                    {{prestamo.numero_documento}}
                 </td>
                 <td>
-                    {{cotizacion.nombre}}
+                    {{prestamo.nombre}}
+                </td>
+                <td>
+                    {{prestamo.fecha_prestamo}}
                 </td>
                 <td>
                     
@@ -64,8 +67,8 @@
 
                         <a 
                             class="button is-small is-primary"
-                            [routerLink]="['/cotizacion']" 
-                            [queryParams]="{id: cotizacion.id}">
+                            [routerLink]="['/prestamo']" 
+                            [queryParams]="{id: prestamo.id}">
                             <span class="icon is-small">
                                 <i class="fas fa-edit"></i>
                             </span>
@@ -75,7 +78,7 @@
 
                 </td>
 
-            </tr> -->
+            </tr>
 
         </tbody>
 
