@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'filtroPersonas'
 })
-export class FiltroPersonasPipePipe implements PipeTransform {
+export class FiltroPersonasPipe implements PipeTransform {
 
   transform(personas: any, args: any[]): any {
     const resultado = [];

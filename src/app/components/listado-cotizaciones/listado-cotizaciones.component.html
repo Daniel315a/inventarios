@@ -8,7 +8,8 @@
                 class="input"
                 type="text" 
                 placeholder="{{labels.buscar}}"
-                name="">
+                name="filtro"
+                [(ngModel)]="filtro">
 
             <span class="icon is-small is-left">
                 <i class="fas fa-search"></i>
@@ -49,10 +50,10 @@
 
         <tbody>
 
-            <tr *ngFor="let cotizacion of listadoCotizaciones">
+            <tr *ngFor="let cotizacion of listadoCotizaciones | filtroCotizaciones: [ filtro ]">
 
                 <td>
-                    {{cotizacion.numero_documento}}
+                    {{cotizacion.numeroDocumento}}
                 </td>
                 <td>
                     {{cotizacion.nombre}}

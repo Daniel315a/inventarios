@@ -15,6 +15,7 @@ import { CotizacionService } from 'src/app/services/cotizacion.service';
 export class ListadoCotizacionesComponent implements OnInit, AfterViewInit {
 
   public listadoCotizaciones: Array<any> = new Array<any>();
+  public filtro: string;
 
   /**
    * Propiedades del diseño
@@ -65,7 +66,18 @@ export class ListadoCotizacionesComponent implements OnInit, AfterViewInit {
     this._cotizacionService.consultarListado().subscribe(
       result => {
         if(result.resultado){
-          this.listadoCotizaciones = result.datos;
+          
+          result.datos.forEach(item => {
+            let cotizacion: any = new Object();
+
+            cotizacion.id = item.id;
+            cotizacion.numeroDocumento = item.numero_documento;
+            cotizacion.nombre = item.nombre;
+
+            this.listadoCotizaciones.push(cotizacion);
+          });
+
+          this.filtro = '';
         }
       }
     );

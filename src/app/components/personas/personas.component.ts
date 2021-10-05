@@ -74,6 +74,8 @@ export class PersonasComponent implements OnInit {
 
             this.personas.push(persona);
           });
+          
+          this.filtro = '';
         }
       }
     );
