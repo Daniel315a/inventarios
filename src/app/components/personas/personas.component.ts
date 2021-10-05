@@ -17,6 +17,7 @@ export class PersonasComponent implements OnInit {
    * Propiedades del diseño
    */
 
+  public filtro: string;
   public personas: Array<Persona> = new Array<Persona>();
   @Output()
   public personaSeleccionada:EventEmitter<number> = new EventEmitter<number>();
@@ -54,6 +55,8 @@ export class PersonasComponent implements OnInit {
 
             this.personas.push(persona);
           });
+
+          this.filtro = '';
         }
       }
     );

@@ -7,8 +7,9 @@
             <input 
                 class="input"
                 type="text" 
-                name=""
-                placeholder="{{labels.buscar}}">
+                name="filtro"
+                placeholder="{{labels.buscar}}"
+                [(ngModel)]="filtro">
 
             <span class="icon is-small is-left">
                 <i class="fas fa-search"></i>
@@ -34,7 +35,7 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let persona of personas"
+            <tr *ngFor="let persona of personas | filtroPersonas: [ filtro ]"
                 (click)="onPersonaSeleccionada(persona.id, true)">
                 <td>{{persona.numeroDocumento}}</td>
                 <td>{{!!persona.razonSocial ? persona.razonSocial : persona.nombres + ' ' + persona.apellidos}}</td>

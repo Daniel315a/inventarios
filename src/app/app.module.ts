@@ -26,6 +26,7 @@ import { PrestamoComponent } from './components/prestamo/prestamo.component';
 import { ListadoCotizacionesComponent } from './components/listado-cotizaciones/listado-cotizaciones.component';
 import { ListadoPrestamosComponent } from './components/listado-prestamos/listado-prestamos.component';
 import { FiltroFacturasPipePipe } from './pipes/filtro-facturas-pipe.pipe';
+import { FiltroPersonasPipePipe } from './pipes/filtro-personas-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { FiltroFacturasPipePipe } from './pipes/filtro-facturas-pipe.pipe';
     PrestamoComponent,
     ListadoCotizacionesComponent,
     ListadoPrestamosComponent,
-    FiltroFacturasPipePipe
+    FiltroFacturasPipePipe,
+    FiltroPersonasPipePipe
   ],
   imports: [
     AppRoutingModule,
