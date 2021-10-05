@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
 import { FacturaService } from 'src/app/services/factura.service';
 
 @Component({
@@ -26,6 +25,9 @@ export class ListadoFacturasComponent implements OnInit, AfterViewInit {
   public altoDivTabla: number;
   @Input()
   public componenteHijo: boolean = false;
+  public filtro: string;
+  public fechaInicialFiltro: Date;
+  public fechaFinalFiltro: Date;
 
   public labels = {
     buscar: 'Buscar...'
@@ -83,16 +85,19 @@ export class ListadoFacturasComponent implements OnInit, AfterViewInit {
             factura.consecutivo = item.consecutivo;
             factura.fecha = item.fecha;
             factura.nombreCliente = item.nombre_cliente;
+            factura.nombreVendedor = item.nombre_completo_vendedor;
             factura.valorTotal = item.valor_total;
 
             this.facturas.push(factura);
           });
 
+          this.filtro = '';
+          this.fechaInicialFiltro = this.facturas[0].fecha;
+          this.fechaFinalFiltro = this.facturas[this.facturas.length - 1].fecha;
+
         }
       }
     );
-
-    console.log(this.facturas);
   }
 
 }

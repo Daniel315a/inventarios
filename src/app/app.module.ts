@@ -25,6 +25,7 @@ import { CotizacionComponent } from './components/cotizacion/cotizacion.componen
 import { PrestamoComponent } from './components/prestamo/prestamo.component';
 import { ListadoCotizacionesComponent } from './components/listado-cotizaciones/listado-cotizaciones.component';
 import { ListadoPrestamosComponent } from './components/listado-prestamos/listado-prestamos.component';
+import { FiltroFacturasPipePipe } from './pipes/filtro-facturas-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ListadoPrestamosComponent } from './components/listado-prestamos/listad
     CotizacionComponent,
     PrestamoComponent,
     ListadoCotizacionesComponent,
-    ListadoPrestamosComponent
+    ListadoPrestamosComponent,
+    FiltroFacturasPipePipe
   ],
   imports: [
     AppRoutingModule,

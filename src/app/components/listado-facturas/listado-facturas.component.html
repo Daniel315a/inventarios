@@ -7,7 +7,8 @@
             <input 
                 class="input" 
                 type="date" 
-                name="fechaInicial">
+                name="fechaInicial"
+                [(ngModel)]="fechaInicialFiltro">
 
         </div>
 
@@ -16,7 +17,8 @@
             <input 
                 class="input" 
                 type="date" 
-                name="fechaFinal">
+                name="fechaFinal"
+                [(ngModel)]="fechaFinalFiltro">
 
         </div>
 
@@ -26,7 +28,8 @@
                 class="input"
                 type="text" 
                 placeholder="{{labels.buscar}}"
-                name="filtro">
+                name="filtro"
+                [(ngModel)]="filtro">
 
             <span class="icon is-small is-left">
                 <i class="fas fa-search"></i>
@@ -67,7 +70,7 @@
 
         <tbody>
 
-            <tr *ngFor="let factura of facturas">
+            <tr *ngFor="let factura of facturas | filtroFacturas: [ filtro, fechaInicialFiltro, fechaFinalFiltro ]">
 
                 <td>{{factura.consecutivo}}</td>
                 <td>{{factura.nombreCliente}}</td>

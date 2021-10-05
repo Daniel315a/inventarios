@@ -165,8 +165,6 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     this.factura.totalDescuento = Utilidades.redondear(totalDescuento);
     this.factura.totalIva = Utilidades.redondear(totalIva);
     this.factura.valorComision = Utilidades.redondear(valorComision);
-
-    console.log(this.factura);
   }
 
   public establecerDetalleInstalacion(detalle: DetalleFactura, checked){

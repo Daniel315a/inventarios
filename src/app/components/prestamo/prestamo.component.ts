@@ -44,7 +44,7 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
 
   public botones = {
     guardar: 'Guardar',
-    registrarEntrega: 'Registrar entrega',
+    registrarEntrega: 'Registrar devolución',
     eliminar: 'Eliminar'
   }
 

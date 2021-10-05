@@ -41,6 +41,10 @@ const routes: Routes = [
     {
         path: 'prestamos',
         component: ListadoPrestamosComponent
+    },
+    {
+        path: 'prestamo',
+        component: PrestamoComponent
     }
 ];
 

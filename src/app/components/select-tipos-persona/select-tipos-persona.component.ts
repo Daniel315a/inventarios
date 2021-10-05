@@ -23,11 +23,6 @@ export class SelectTiposPersonaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    setInterval(() => {
-      // console.log(this.tipoPersona);
-    }, 3000);
-
     this.consultarTiposPersona();
   }
 
