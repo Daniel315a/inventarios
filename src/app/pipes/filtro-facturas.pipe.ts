@@ -9,12 +9,12 @@ export class FiltroFacturasPipe implements PipeTransform {
     const resultado = [];
     const fechaInicial: Date = args[1];
     const fechaFinal: Date = args[2];
-
+    const filtroTexto = args[0].toLowerCase();
+    
     for(const factura of facturas){
       const nombreCliente = factura.nombreCliente.toLowerCase();
       const nombreVendedor = factura.nombreVendedor.toLowerCase();
       const fecha: Date = factura.fecha;
-      const filtroTexto = args[0].toLowerCase();
       
       if((nombreCliente.indexOf(filtroTexto) > -1 || nombreVendedor.indexOf(filtroTexto) > -1) &&
           (fecha >= fechaInicial && fecha <= fechaFinal)){

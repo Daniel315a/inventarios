@@ -24,7 +24,7 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
   @ViewChild('divForm')
   public divForm: ElementRef;
   public tipoPersonaDistribuidor: TipoPersona = Utilidades.getTipoDistribuidor();
-  public tipoPersonaVendedir: TipoPersona = Utilidades.getTipoVendedor();
+  public tipoPersonaVendedor: TipoPersona = Utilidades.getTipoVendedor();
   public altoTablaDetalles: number = 0;
 
   public labels = {
@@ -75,6 +75,10 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
   public agregarDetalle(){
     this.prestamo.detalles.push(this.detalleActual);
     this.detalleActual = new DetallePrestamo();
+  }
+
+  public limpiar(){
+    this.prestamo = new Prestamo();
   }
 
 }
