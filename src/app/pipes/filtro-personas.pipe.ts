@@ -7,9 +7,12 @@ export class FiltroPersonasPipe implements PipeTransform {
 
   transform(personas: any, args: any[]): any {
     const resultado = [];
-    
+    let iteraciones: number = 0;
+
     for(const persona of personas)
     {
+      iteraciones++;
+
       const nombres = persona.nombres.toLowerCase();
       const apellidos = persona.apellidos.toLowerCase();
       const razonSocial = persona.razonSocial.toLowerCase();
@@ -24,10 +27,9 @@ export class FiltroPersonasPipe implements PipeTransform {
           tipo.indexOf(filtroTexto) > -1){
             resultado.push(persona);
           }
-
     }
 
-    return resultado;
+    return iteraciones > 0 ? resultado : personas;
   }
 
 }

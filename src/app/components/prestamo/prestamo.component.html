@@ -15,7 +15,8 @@
                     <input 
                         class="input"
                         type="date"
-                        name="">
+                        name="fecha"
+                        [(ngModel)]="prestamo.fecha">
 
                 </div>
 
@@ -24,22 +25,44 @@
 
         <!-- FIN: Fecha -->
 
+        <!-- Fecha de entrega -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label for="" class="level-left">{{labels.fechaEntrega}}</label>
+            </div>
+            <div class="field field-body">
+                <div class="control">
+                    <input 
+                        class="input"
+                        type="date" 
+                        name="fechaEntrega"
+                        [(ngModel)]="prestamo.fechaEntrega"
+                        disabled>
+                </div>
+            </div>
+        </div>
+
+        <!-- FIN: Fecha de entrega -->
+
         <!-- Distribuidor -->
 
-        <app-txt-persona
+        <app-txt-persona #txtDistribuidor
             #txtDistribuidor
             [labelPersona]="labels.distribuidor"
-            [tipoPersona]="tipoPersonaDistribuidor">
+            [tipoPersona]="tipoPersonaDistribuidor"
+            [persona]="prestamo.distribuidor">
         </app-txt-persona>
 
         <!-- FIN: Distribuidor -->
 
         <!-- Empleado -->
 
-        <app-txt-persona
+        <app-txt-persona #txtEncargado
             #txtDistribuidor
             [labelPersona]="labels.encargado"
-            [tipoPersona]="tipoPersonaVendedor">
+            [tipoPersona]="tipoPersonaVendedor"
+            [persona]="prestamo.encargado">
         </app-txt-persona>
 
         <!-- FIN: Empleado -->
@@ -54,7 +77,8 @@
 
             <textarea 
                 class="textarea"
-                name="">
+                name="notas"
+                [(ngModel)]="prestamo.notas">
             </textarea>
 
             </div>
@@ -146,7 +170,9 @@
 <div class="field is-grouped is-grouped-right">
 
     <div class="control">
-        <button class="button is-primary">
+        <button 
+            class="button is-primary"
+            (click)="guardar()">
             {{botones.guardar}}
         </button>
     </div>

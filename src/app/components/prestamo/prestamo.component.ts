@@ -3,11 +3,16 @@ import { DetallePrestamo } from 'src/app/models/detalle-prestamo';
 import { Prestamo } from 'src/app/models/prestamo';
 import { TipoPersona } from 'src/app/models/tipo-persona';
 import { Utilidades } from 'src/app/models/utilidades';
+import { PrestamoService } from 'src/app/services/prestamo.service';
+import { TxtPersonaComponent } from '../txt-persona/txt-persona.component';
 
 @Component({
   selector: 'app-prestamo',
   templateUrl: './prestamo.component.html',
   styleUrls: ['./prestamo.component.css'],
+  providers:[
+    PrestamoService
+  ],
   host: {
     '(window:resize)': 'onResize($event)'
   }
@@ -26,6 +31,10 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
   public tipoPersonaDistribuidor: TipoPersona = Utilidades.getTipoDistribuidor();
   public tipoPersonaVendedor: TipoPersona = Utilidades.getTipoVendedor();
   public altoTablaDetalles: number = 0;
+  @ViewChild('txtDistribuidor')
+  public txtDistribuidor: TxtPersonaComponent;
+  @ViewChild('txtDistribuidor')
+  public txtEncargado: TxtPersonaComponent;
 
   public labels = {
     fecha: 'Fecha',
@@ -48,7 +57,13 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
     eliminar: 'Eliminar'
   }
 
-  constructor() { }
+  public mensajes = {
+    registroCreado: 'El registro se ha creado correctamente'
+  }
+
+  constructor(
+    private _prestamoService: PrestamoService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -79,6 +94,29 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
 
   public limpiar(){
     this.prestamo = new Prestamo();
+    this.txtDistribuidor.nombrePersona = '';
+    this.txtEncargado.nombrePersona = '';
   }
+
+  public guardar(){
+    if(this.prestamo.id == 0){
+      this.crear();
+    } else {
+      this.actualizar();
+    }
+  }
+
+  public crear(){
+    this._prestamoService.crear(this.prestamo).subscribe(
+      result => {
+        if(result.resultado){
+          this.prestamo.id = result.datos.id;
+          Utilidades.dialogSuccess(this.mensajes.registroCreado);
+        }
+      }
+    );
+  }
+
+  public actualizar(){}
 
 }

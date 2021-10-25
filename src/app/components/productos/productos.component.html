@@ -12,7 +12,7 @@
 
                 <div class="control">
                     <input 
-                        class="input is-small"
+                        class="input"
                         type="text"
                         name="referencia"
                         [(ngModel)]="producto.referencia">
@@ -32,7 +32,7 @@
             <div class="field-body">
 
                 <input 
-                    class="input is-small"
+                    class="input"
                     type="text"
                     name="detalle"
                     [(ngModel)]="producto.detalle">
@@ -52,7 +52,7 @@
 
                 <div class="control">
                     <input 
-                        class="input is-small"
+                        class="input"
                         type="text"
                         name="cantidadInterna"
                         [(ngModel)]="producto.cantidadInterna">
@@ -73,7 +73,7 @@
 
                 <div class="control">
                     <input 
-                        class="input is-small"
+                        class="input"
                         type="text"
                         name="cantidadDisponible"
                         [(ngModel)]="producto.cantidadDisponible">
@@ -87,14 +87,14 @@
         <!-- Precio -->
 
         <div class="field is-horizontal">
-            <div class="field-label is-small">
+            <div class="field-label">
                 <label class="level-left">{{labels.precio}}</label>
             </div>
             <div class="field-body">
 
                 <div class="control">
                     <input 
-                        class="input is-small has-text-right"
+                        class="input has-text-right"
                         type="text"
                         name="precio"
                         [(ngModel)]="producto.precio">
@@ -126,7 +126,7 @@
                 <button 
                     class="button"
                     (click)="limpiarProducto()">
-                    <span class="icon is-small has-text-primary"><i class="fas fa-eraser"></i></span>
+                    <span class="icon has-text-primary"><i class="fas fa-eraser"></i></span>
                 </button>
             </div>
 
@@ -159,9 +159,9 @@
 
                     <div class="buttons is-centered">
                         <button 
-                            class="button is-primary is-small"
+                            class="button is-primary"
                             (click)="consultarPorId(producto.id)">
-                            <span class="icon is-small">
+                            <span class="icon">
                                 <i class="fas fa-edit"></i>
                             </span>
                         </button>

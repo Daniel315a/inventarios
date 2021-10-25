@@ -189,14 +189,6 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     this.txtVendedor.nombrePersona = '';
   }
 
-  public clienteSeleccionado(cliente){
-    this.factura.cliente = cliente;
-  }
-
-  public vendedorSeleccionado(vendedor){
-    this.factura.vendedor = vendedor;
-  }
-
   public consultarPorId(){
     this._facturaService.consultarPorId(this.factura.id).subscribe(
       result => {
