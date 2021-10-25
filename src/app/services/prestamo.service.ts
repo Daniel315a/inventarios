@@ -7,7 +7,7 @@ import { Utilidades } from "../models/utilidades";
 
 @Injectable()
 export class PrestamoService{
-
+    
     private url: string = environment.url + 'Prestamo';
 
     constructor(
@@ -36,6 +36,17 @@ export class PrestamoService{
         set('fecha_prestamo', prestamo.fecha).
         set('notas', prestamo.notas).
         set('detalles', detalles);
+
+        return this._http.post(this.url, parametros);
+    }
+
+    public eliminarDetalle(id: number): Observable<any>  {
+        const usuario = Utilidades.obtenerUsuario();
+
+        const parametros: HttpParams = new HttpParams().
+        set('token', usuario.token).
+        set('solicitud', 'eliminar_detalle').
+        set('id', id.toString());
 
         return this._http.post(this.url, parametros);
     }

@@ -147,6 +147,7 @@
             <tr>
                 <th width="10%">{{columnas.cantidad}}</th>
                 <th>{{columnas.producto}}</th>
+                <th width="10%">{{columnas.acciones}}</th>
             </tr>
         </thead>
 
@@ -155,6 +156,17 @@
             <tr *ngFor="let detalle of prestamo.detalles">
                 <td>{{detalle.cantidad}}</td>
                 <td>{{detalle.producto.detalle}}</td>
+                <td>
+                    <div class="buttons is-centered">
+                        <button 
+                            class="button is-danger"
+                            (click)="eliminarDetalle(detalle)">
+                            <span class="icon is-small">
+                                <i class="fas fa-trash-alt"></i>
+                            </span>
+                        </button>
+                    </div>
+                </td>
             </tr>
 
         </tbody>

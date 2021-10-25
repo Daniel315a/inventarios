@@ -33,7 +33,7 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
   public altoTablaDetalles: number = 0;
   @ViewChild('txtDistribuidor')
   public txtDistribuidor: TxtPersonaComponent;
-  @ViewChild('txtDistribuidor')
+  @ViewChild('txtEncargado')
   public txtEncargado: TxtPersonaComponent;
 
   public labels = {
@@ -48,7 +48,8 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
 
   public columnas = {
     cantidad: 'Cantidad',
-    producto: 'Producto'
+    producto: 'Producto',
+    acciones: 'Acciones'
   }
 
   public botones = {
@@ -110,7 +111,8 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
     this._prestamoService.crear(this.prestamo).subscribe(
       result => {
         if(result.resultado){
-          this.prestamo.id = result.datos.id;
+          console.log(result.datos);
+          this.prestamo.inicializar(result.datos);
           Utilidades.dialogSuccess(this.mensajes.registroCreado);
         }
       }
@@ -118,5 +120,24 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
   }
 
   public actualizar(){}
+
+  public eliminarDetalle(detalle: DetallePrestamo){
+    if(detalle.id == 0){
+      this.quitarDetalleLista(detalle);
+    } else {
+      this._prestamoService.eliminarDetalle(detalle.id).subscribe(
+        result => {
+          if(result.resultado){
+            this.quitarDetalleLista(detalle);
+          }
+        }
+      );
+    }
+  }
+
+  private quitarDetalleLista(detalle: DetallePrestamo){
+    const indice = this.prestamo.detalles.indexOf(detalle);
+    this.prestamo.detalles.splice(indice);
+  }
 
 }
