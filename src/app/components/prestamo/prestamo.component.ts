@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DetallePrestamo } from 'src/app/models/detalle-prestamo';
 import { Prestamo } from 'src/app/models/prestamo';
 import { TipoPersona } from 'src/app/models/tipo-persona';
@@ -64,10 +65,15 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private _prestamoService: PrestamoService
   ) { }
 
   ngOnInit(): void {
+    if(this.route.snapshot.queryParams.id != undefined) {
+      this.prestamo.id =  this.route.snapshot.queryParams.id;
+      this.consultarPorId();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -87,6 +93,16 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
 
   public productoSeleccionado(producto){
     this.detalleActual.producto = producto;
+  }
+
+  public consultarPorId(){
+    this._prestamoService.consultarPorId(this.prestamo.id).subscribe(
+      result => {
+        if(result.resultado){
+          this.prestamo.inicializar(result.datos);
+        }
+      }
+    );
   }
 
   public agregarDetalle(){
