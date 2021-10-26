@@ -40,6 +40,21 @@ export class PrestamoService{
         return this._http.post(this.url, parametros);
     }
 
+    public actualizar(prestamo: Prestamo): Observable<any> {
+        const usuario = Utilidades.obtenerUsuario();
+        
+        const parametros: HttpParams = new HttpParams().
+        set('token', usuario.token).
+        set('solicitud', 'actualizar').
+        set('id', prestamo.id.toString()).
+        set('id_distribuidor', prestamo.distribuidor.id.toString()).
+        set('id_empleado', prestamo.encargado.id.toString()).
+        set('fecha_devolucion', prestamo.fechaEntrega).
+        set('notas', prestamo.notas);
+
+        return this._http.post(this.url, parametros);
+    }
+
     public eliminarDetalle(id: number): Observable<any>  {
         const usuario = Utilidades.obtenerUsuario();
 

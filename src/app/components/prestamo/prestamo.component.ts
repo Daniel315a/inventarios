@@ -59,7 +59,8 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
   }
 
   public mensajes = {
-    registroCreado: 'El registro se ha creado correctamente'
+    registroCreado: 'El registro se ha creado correctamente',
+    registroActualizado: 'El registro se ha actualizado correctamente'
   }
 
   constructor(
@@ -111,7 +112,6 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
     this._prestamoService.crear(this.prestamo).subscribe(
       result => {
         if(result.resultado){
-          console.log(result.datos);
           this.prestamo.inicializar(result.datos);
           Utilidades.dialogSuccess(this.mensajes.registroCreado);
         }
@@ -119,7 +119,16 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
     );
   }
 
-  public actualizar(){}
+  public actualizar(){
+    this._prestamoService.actualizar(this.prestamo).subscribe(
+      result => {
+        if(result.resultado){
+          this.prestamo.inicializar(result.datos);
+          Utilidades.dialogSuccess(this.mensajes.registroActualizado);
+        }
+      }
+    );
+  }
 
   public eliminarDetalle(detalle: DetallePrestamo){
     if(detalle.id == 0){
