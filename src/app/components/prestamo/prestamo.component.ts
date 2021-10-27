@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DetallePrestamo } from 'src/app/models/detalle-prestamo';
@@ -36,6 +37,7 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
   public txtDistribuidor: TxtPersonaComponent;
   @ViewChild('txtEncargado')
   public txtEncargado: TxtPersonaComponent;
+  public modalDevolucionActivo: boolean = false;
 
   public labels = {
     fecha: 'Fecha',
@@ -108,8 +110,20 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
   }
 
   public agregarDetalle(){
-    this.prestamo.detalles.push(this.detalleActual);
-    this.detalleActual = new DetallePrestamo();
+    
+    if(this.prestamo.id > 0){
+      this._prestamoService.crearDetalle(this.prestamo.id, this.detalleActual).subscribe(
+        result => {
+          if(result.resultado){
+            this.prestamo.detalles.push(this.detalleActual);
+            this.detalleActual = new DetallePrestamo();      
+          }
+        }
+      );
+    } else {
+      this.prestamo.detalles.push(this.detalleActual);
+      this.detalleActual = new DetallePrestamo();
+    }
   }
 
   public limpiar(){
@@ -124,6 +138,8 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
     } else {
       this.actualizar();
     }
+
+    this.modalDevolucionActivo = false;
   }
 
   public crear(){
@@ -182,6 +198,14 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
         }
       }
     );
+  }
+
+  public cerrarModalDevolucion(){
+    this.modalDevolucionActivo = false;
+  }
+
+  public abrirModalDevolucion(){
+    this.modalDevolucionActivo = true;
   }
 
 }

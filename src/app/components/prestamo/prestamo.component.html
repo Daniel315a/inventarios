@@ -190,7 +190,10 @@
     </div>
 
     <div class="control">
-        <button class="button is-primary">
+        <button 
+            class="button is-primary"
+            (click)="abrirModalDevolucion()"
+            [disabled]="prestamo.id == 0">
             {{botones.registrarEntrega}}
         </button>
     </div>
@@ -198,7 +201,8 @@
     <div class="control">
         <button 
             class="button is-danger"
-            (click)="eliminar()">
+            (click)="eliminar()"
+            [disabled]="prestamo.id == 0">
             {{botones.eliminar}}
         </button>
     </div>
@@ -216,3 +220,47 @@
 </div>
 
 <!-- FIN: Botones -->
+
+<!-- Modal devolución -->
+
+<div [ngClass]="modalDevolucionActivo ? 'modal is-active' : 'modal'">
+    <div 
+        class="modal-background"
+        (click)="cerrarModalDevolucion()"></div>
+    <div class="modal-content modal-listado">
+        <div class="box">
+
+            <!-- Fecha de entrega -->
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label for="" class="level-left">{{labels.fechaEntrega}}</label>
+                </div>
+                <div class="field field-body">
+                    <div class="control">
+                        <input 
+                            class="input"
+                            type="date" 
+                            name="fechaEntrega"
+                            [(ngModel)]="prestamo.fechaEntrega">
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-grouped is-grouped-right">
+                <div class="control">
+                    <button 
+                        class="button is-primary"
+                        (click)="guardar()">
+                        {{botones.registrarEntrega}}
+                    </button>
+                </div>
+            </div>
+
+            <!-- FIN: Fecha de entrega -->
+
+        </div>
+    </div>
+</div>
+
+<!-- FIN: Modal devolución -->

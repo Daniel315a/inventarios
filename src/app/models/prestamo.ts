@@ -27,12 +27,14 @@ export class Prestamo{
             this.distribuidor.inicializar(datos.distribuidor);
             this.encargado.inicializar(datos.empleado);
 
-            datos.detalles.forEach(objDetalle => {
-                let detalle = new DetallePrestamo();
-                detalle.inicializar(objDetalle);
-
-                this.detalles.push(detalle);
-            });
+            if(!!datos.detalles){
+                datos.detalles.forEach(objDetalle => {
+                    let detalle = new DetallePrestamo();
+                    detalle.inicializar(objDetalle);
+    
+                    this.detalles.push(detalle);
+                });
+            }
         }
     }
 
