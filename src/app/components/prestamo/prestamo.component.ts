@@ -61,7 +61,9 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
 
   public mensajes = {
     registroCreado: 'El registro se ha creado correctamente',
-    registroActualizado: 'El registro se ha actualizado correctamente'
+    registroActualizado: 'El registro se ha actualizado correctamente',
+    preguntaEliminar: '¿Está seguro de eliminar el registro? Esta opción no se puede deshacer.',
+    registroEliminado: 'El registro se ha eliminado correctamente'
   }
 
   constructor(
@@ -163,6 +165,23 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
   private quitarDetalleLista(detalle: DetallePrestamo){
     const indice = this.prestamo.detalles.indexOf(detalle);
     this.prestamo.detalles.splice(indice);
+  }
+
+  public eliminar(){
+    Utilidades.dialogPregunta('', this.mensajes.preguntaEliminar, 'Sí, eliminar').then(
+      result => {
+        if(result.isConfirmed){
+          this._prestamoService.eliminar(this.prestamo.id).subscribe(
+            result => {
+              if(result.resultado){
+                Utilidades.dialogSuccess(this.mensajes.registroEliminado);
+                this.limpiar();
+              }
+            }
+          );
+        }
+      }
+    );
   }
 
 }

@@ -167,18 +167,22 @@ export class PersonaComponent implements OnInit, AfterViewInit {
   }
 
   public eliminar(){
-    Utilidades.dialogPregunta('', this.mensajes.preguntaEliminar, 'Sí, eliminar').then((result) => {
-      this._personaService.eliminar(this.persona.id).subscribe(
-        result=> {
-          if(result.resultado){
-            this.listadoPersonas.consultarListado();
-            Utilidades.dialogSuccess(this.mensajes.personaEliminada);
-          }
-        },
-        error => {
-          Utilidades.dialogErrorHttp(error.error.codigo_http, error.error.mensaje);
+    Utilidades.dialogPregunta('', this.mensajes.preguntaEliminar, 'Sí, eliminar').then(
+      result => {
+        if(result.isConfirmed){
+          this._personaService.eliminar(this.persona.id).subscribe(
+            result=> {
+              if(result.resultado){
+                this.listadoPersonas.consultarListado();
+                this.limpiar();
+                Utilidades.dialogSuccess(this.mensajes.personaEliminada);
+              }
+            },
+            error => {
+              Utilidades.dialogErrorHttp(error.error.codigo_http, error.error.mensaje);
+            }
+          );
         }
-      );
     });
   }
 

@@ -76,4 +76,15 @@ export class PrestamoService{
         return this._http.post(this.url, parametros);
     }
 
+    public eliminar(id: number): Observable<any>{
+        const usuario = Utilidades.obtenerUsuario();
+
+        const parametros: HttpParams = new HttpParams().
+        set('token', usuario.token).
+        set('solicitud', 'eliminar').
+        set('id', id.toString());
+
+        return this._http.post(this.url, parametros);
+    }
+
 }
