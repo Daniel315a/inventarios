@@ -8,7 +8,8 @@
                 class="input"
                 type="text" 
                 placeholder="{{labels.buscar}}"
-                name="">
+                name="filtro"
+                [(ngModel)]="filtro">
 
             <span class="icon is-small is-left">
                 <i class="fas fa-search"></i>
@@ -50,16 +51,16 @@
 
         <tbody>
 
-            <tr *ngFor="let prestamo of listadoPrestamos">
+            <tr *ngFor="let prestamo of listadoPrestamos | filtroPrestamos: [ filtro ]">
 
                 <td>
-                    {{prestamo.numero_documento}}
+                    {{prestamo.numeroDocumento}}
                 </td>
                 <td>
                     {{prestamo.nombre}}
                 </td>
                 <td>
-                    {{prestamo.fecha_prestamo}}
+                    {{prestamo.fechaPrestamo}}
                 </td>
                 <td>
                     

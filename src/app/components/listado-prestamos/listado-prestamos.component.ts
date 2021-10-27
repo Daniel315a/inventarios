@@ -23,6 +23,7 @@ export class ListadoPrestamosComponent implements OnInit, AfterViewInit {
   @ViewChild('divForm')
   public divForm: ElementRef;
   public altoDivTabla: number = 0;
+  public filtro:string;
 
   public labels = {
     buscar: 'Buscar'
@@ -68,7 +69,18 @@ export class ListadoPrestamosComponent implements OnInit, AfterViewInit {
     this._prestamoService.consultarListado().subscribe(
       result => {
         if(result.resultado){
-          this.listadoPrestamos = result.datos;
+          result.datos.forEach(item => {
+            let prestamo: any = new Object();
+
+            prestamo.id = item.id;
+            prestamo.numeroDocumento = item.numero_documento;
+            prestamo.nombre = item.nombre;
+            prestamo.fechaPrestamo = item.fecha_prestamo;
+            
+            this.listadoPrestamos.push(prestamo);
+          });
+
+          this.filtro = '';
         }
       }
     );
