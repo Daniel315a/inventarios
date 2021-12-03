@@ -31,7 +31,8 @@
             #txtCliente
             [labelPersona]="labels.cliente"
             [tipoPersona]="tipoPersonaCliente"
-            [persona]="factura.cliente">
+            [persona]="factura.cliente"
+            (personaSeleccionada)="clienteSeleccionado($event)">
         </app-txt-persona>
 
         <!-- FIN: Cliente -->
@@ -42,7 +43,8 @@
             #txtVendedor
             [labelPersona]="labels.vendedor"
             [tipoPersona]="tipoPersonaVendedor"
-            [persona]="factura.vendedor">
+            [persona]="factura.vendedor"
+            (personaSeleccionada)="vendedorSeleccionado($event)">
         </app-txt-persona>
 
         <!-- FIN: Vendedor -->

@@ -9,7 +9,7 @@ export class FiltroFacturasPipe implements PipeTransform {
     const resultado = [];
     const fechaInicial: Date = args[1];
     const fechaFinal: Date = args[2];
-    const filtroTexto = args[0].toLowerCase();
+    const filtroTexto = !!args[0] ? args[0].toLowerCase() : '';
     
     for(const factura of facturas){
       const nombreCliente = factura.nombreCliente.toLowerCase();

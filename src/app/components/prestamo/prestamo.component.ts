@@ -104,6 +104,12 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
       result => {
         if(result.resultado){
           this.prestamo.inicializar(result.datos);
+
+          this.txtDistribuidor.persona = this.prestamo.distribuidor;
+          this.txtEncargado.persona = this.prestamo.encargado;
+
+          this.txtDistribuidor.consultarPersonaPorNumeroDocumento();
+          this.txtEncargado.consultarPersonaPorNumeroDocumento();
         }
       }
     );
@@ -130,6 +136,9 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
     this.prestamo = new Prestamo();
     this.txtDistribuidor.nombrePersona = '';
     this.txtEncargado.nombrePersona = '';
+
+    this.txtDistribuidor.consultarPersonaPorNumeroDocumento();
+    this.txtEncargado.consultarPersonaPorNumeroDocumento();
   }
 
   public guardar(){
@@ -206,6 +215,14 @@ export class PrestamoComponent implements OnInit, AfterViewInit {
 
   public abrirModalDevolucion(){
     this.modalDevolucionActivo = true;
+  }
+
+  public distribuidorSeleccionado(distribuidor){
+    this.prestamo.distribuidor = distribuidor;
+  }
+
+  public encargadoSeleccionado(encargado){
+    this.prestamo.encargado = encargado;
   }
 
 }

@@ -187,6 +187,9 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     this.factura = new Factura();
     this.txtCliente.nombrePersona = '';
     this.txtVendedor.nombrePersona = '';
+
+    this.txtCliente.consultarPersonaPorNumeroDocumento();
+    this.txtVendedor.consultarPersonaPorNumeroDocumento();
   }
 
   public consultarPorId(){
@@ -195,6 +198,11 @@ export class FacturaComponent implements OnInit, AfterViewInit {
         if(result.resultado){
           this.factura = new Factura();
           this.factura.inicializar(result.datos);
+          this.txtCliente.persona = this.factura.cliente;
+          this.txtVendedor.persona = this.factura.vendedor;
+          
+          this.txtCliente.consultarPersonaPorNumeroDocumento();
+          this.txtVendedor.consultarPersonaPorNumeroDocumento();
         }
       }
     );
@@ -211,5 +219,13 @@ export class FacturaComponent implements OnInit, AfterViewInit {
       );
     });
   }
-  
+
+  public vendedorSeleccionado(vendedor){
+    this.factura.vendedor = vendedor;
+  }
+ 
+  public clienteSeleccionado(cliente){
+    this.factura.cliente = cliente;
+  }
+
 }

@@ -51,7 +51,8 @@
             #txtDistribuidor
             [labelPersona]="labels.distribuidor"
             [tipoPersona]="tipoPersonaDistribuidor"
-            [persona]="prestamo.distribuidor">
+            [persona]="prestamo.distribuidor"
+            (personaSeleccionada)="distribuidorSeleccionado($event)">
         </app-txt-persona>
 
         <!-- FIN: Distribuidor -->
@@ -62,7 +63,8 @@
             #txtDistribuidor
             [labelPersona]="labels.encargado"
             [consultarEmpleados]="true"
-            [persona]="prestamo.encargado">
+            [persona]="prestamo.encargado"
+            (personaSeleccionada)="encargadoSeleccionado($event)">
         </app-txt-persona>
 
         <!-- FIN: Empleado -->

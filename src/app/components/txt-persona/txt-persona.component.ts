@@ -28,6 +28,8 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
   public tipoPersona: TipoPersona = new TipoPersona();
   @Input()
   public consultarEmpleados: boolean;
+  @Output()
+  public personaSeleccionada: EventEmitter<Persona> = new EventEmitter<Persona>();
   @ViewChild('listadoPersonas')
   public listadoPersonas: PersonasComponent;
   public modalConsultarPersonasActivo: boolean = false;
@@ -47,7 +49,6 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void{
-    
     if(this.consultarEmpleados == true){
       this.listadoPersonas.consultarEmpleados();
     } else {
@@ -69,9 +70,14 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
             
             this.persona.inicializar(result.datos);
             this.nombrePersona = !!this.persona.razonSocial ? this.persona.razonSocial : this.persona.nombres + ' ' + this.persona.apellidos;
+            this.onPersonaSeleccionada();
           }
         }
       );
+    } else {
+      this.persona = new Persona();
+      this.nombrePersona = '';
+      this.onPersonaSeleccionada();
     }
   }
 
@@ -93,6 +99,7 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
     this.persona.id = id;
     this.consultarPersonaPorId();
     this.cerrarModalConsultarPersonas();
+    this.onPersonaSeleccionada();
   }
 
   public abrirModalConsultarPersonas(){
@@ -121,6 +128,10 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
     this.persona = persona;
     this.nombrePersona = !!this.persona.razonSocial ? this.persona.razonSocial : this.persona.nombres + ' ' + this.persona.apellidos;
     this.cerrarModalCrearPersona();
+  }
+
+  public onPersonaSeleccionada(){
+    this.personaSeleccionada.emit(this.persona);
   }
 
 }

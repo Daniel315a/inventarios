@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Cotizacion } from 'src/app/models/cotizacion';
 import { DetalleCotizacion } from 'src/app/models/detalle-cotizacion';
 import { Utilidades } from 'src/app/models/utilidades';
@@ -50,9 +51,15 @@ export class CotizacionesComponent implements OnInit, AfterViewInit {
     eliminar: 'Eliminar'
   };
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
+    // if(this.route.snapshot.queryParams.id != undefined) {
+    //   this.cotizacion.id =  this.route.snapshot.queryParams.id;
+    //   this.consultarPorId();
+    // }
   }
 
   ngAfterViewInit(): void {
