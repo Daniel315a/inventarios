@@ -77,6 +77,23 @@ export class PersonasComponent implements OnInit {
     );
   }
 
+  public consultarEmpleados(){
+    this.personas = new Array<Persona>();
+
+    this._personaService.consultarEmpleados().subscribe(
+      result => {
+        if(result.resultado){
+          result.datos.forEach(item => {
+            let persona: Persona = new Persona();
+            persona.inicializar(item);
+
+            this.personas.push(persona);
+          });
+        }
+      }
+    );
+  }
+
   private onPersonaSeleccionada(id: number, clickFila: boolean = false){
     if(this.esBuscador && clickFila){
       this.personaSeleccionada.emit(id);

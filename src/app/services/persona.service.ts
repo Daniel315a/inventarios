@@ -36,7 +36,6 @@ export class PersonaService {
         return this._http.get(this.url, {params:  parametros});
     }
 
-
     public consultarPorId(id: number): Observable<any> {
         const usuario = Utilidades.obtenerUsuario();
         const parametros: HttpParams = new HttpParams().
@@ -53,6 +52,16 @@ export class PersonaService {
         set('token', usuario.token).
         set('solicitud', 'consultar_por_documento').
         set('numero_documento', numeroDocumento);
+
+        return this._http.get(this.url, {params:  parametros});
+    }
+
+    public consultarEmpleados(): Observable<any>{
+        const usuario = Utilidades.obtenerUsuario();
+        const parametros: HttpParams = new HttpParams().
+        set('token', usuario.token).
+        set('solicitud', 'consultar_por_tipo_empleado').
+        set('empresa', usuario.empresa.id);
 
         return this._http.get(this.url, {params:  parametros});
     }

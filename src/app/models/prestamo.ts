@@ -21,7 +21,7 @@ export class Prestamo{
 
             this.id = datos.id!! ? datos.id : this.id;
             this.fecha = datos.fecha!! ? datos.fecha : this.fecha;
-            this.fechaEntrega = datos.fecha_entrega!! ? datos.fecha_entrega : this.fechaEntrega;
+            this.fechaEntrega = datos.fecha_devolucion!! ? datos.fecha_devolucion : this.fechaEntrega;
             this.notas = datos.notas!! ? datos.notas : this.notas;
             
             this.distribuidor.inicializar(datos.distribuidor);
