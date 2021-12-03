@@ -43,6 +43,7 @@
         <thead>
             <tr>
                 <th width="15%">{{columnas.documentoCliente}}</th>
+                <th width="15%">{{columnas.fecha}}</th>
                 <th>{{columnas.nombreCliente}}</th>
                 <th width="10%">{{columnas.acciones}}</th>
             </tr>
@@ -54,6 +55,9 @@
 
                 <td>
                     {{cotizacion.numeroDocumento}}
+                </td>
+                <td>
+                    {{cotizacion.fecha}}
                 </td>
                 <td>
                     {{cotizacion.nombre}}
@@ -81,4 +85,15 @@
 
     </table>
 
+</div>
+
+<div class="buttons is-right">
+    <button 
+        class="button is-success"
+        (click)="exportarExcel()">
+        <span>{{botones.excel}}</span>
+        <span class="icon">
+            <i class="fas fa-file-excel"></i>
+        </span>
+    </button>
 </div>

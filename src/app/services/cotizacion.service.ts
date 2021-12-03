@@ -6,7 +6,7 @@ import { Utilidades } from "../models/utilidades";
 
 @Injectable()
 export class CotizacionService {
-
+    
     public url: string = environment.url + 'Cotizacion';
 
     constructor(
@@ -19,6 +19,16 @@ export class CotizacionService {
         set('token', usuario.token).
         set('solicitud', 'consultar_por_empresa').
         set('empresa', usuario.empresa.id);
+
+        return this._http.get(this.url, {params:  parametros});
+    }
+
+    consultarInformeCsv(filtro: string): Observable<any>{
+        const usuario = Utilidades.obtenerUsuario();
+        const parametros: HttpParams = new HttpParams().
+        set('token', usuario.token).
+        set('solicitud', 'informe_csv').
+        set('texto', filtro);
 
         return this._http.get(this.url, {params:  parametros});
     }

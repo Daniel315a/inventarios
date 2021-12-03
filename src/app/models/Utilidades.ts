@@ -86,7 +86,7 @@ export class Utilidades {
               El documento se ha creado correctamente
               <br>
               <a href="${enlace}" target="_blank">
-                  Abrir documento
+                  Descargar documento
               </a>
           </p>
       `;

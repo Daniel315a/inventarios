@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Utilidades } from 'src/app/models/utilidades';
 import { CotizacionService } from 'src/app/services/cotizacion.service';
 
 @Component({
@@ -28,11 +29,13 @@ export class ListadoCotizacionesComponent implements OnInit, AfterViewInit {
   }
 
   public botones = {
-    nuevo: 'Crear cotización'
+    nuevo: 'Crear cotización',
+    excel: 'Exportar a excel'
   }
 
   public columnas = {
     documentoCliente: 'N° Documento',
+    fecha: 'Fecha',
     nombreCliente: 'Nombre / Razón social',
     acciones: 'Acciones'
   }
@@ -53,7 +56,7 @@ export class ListadoCotizacionesComponent implements OnInit, AfterViewInit {
 
   public onResize(){
     let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-    let altoDivTabla = window.innerHeight - altoDivForm - 110;
+    let altoDivTabla = window.innerHeight - altoDivForm - 140;
     
     if(altoDivTabla != this.altoDivTabla){
       this.altoDivTabla = altoDivTabla;
@@ -71,6 +74,7 @@ export class ListadoCotizacionesComponent implements OnInit, AfterViewInit {
             let cotizacion: any = new Object();
 
             cotizacion.id = item.id;
+            cotizacion.fecha = item.fecha;
             cotizacion.numeroDocumento = item.numero_documento;
             cotizacion.nombre = item.nombre;
 
@@ -79,6 +83,14 @@ export class ListadoCotizacionesComponent implements OnInit, AfterViewInit {
 
           this.filtro = '';
         }
+      }
+    );
+  }
+
+  public exportarExcel(){
+    this._cotizacionService.consultarInformeCsv(this.filtro).subscribe(
+      result => {
+        Utilidades.dialogImprimir(result.datos.ruta);
       }
     );
   }
