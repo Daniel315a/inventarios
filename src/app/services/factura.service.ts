@@ -7,7 +7,7 @@ import { Utilidades } from "../models/utilidades";
 
 @Injectable()
 export class FacturaService {
- 
+    
     private url: string = environment.url + 'Factura';
 
     constructor(
@@ -29,6 +29,18 @@ export class FacturaService {
         set('token', usuario.token).
         set('solicitud', 'por_id').
         set('id', id.toString());
+
+        return this._http.get(this.url, { params: parametros });
+    }
+
+    public consultarInformeCsv(fechaInicial: Date, fechaFinal: Date, texto: string): Observable<any> {
+        const usuario = Utilidades.obtenerUsuario();
+        const parametros: HttpParams = new HttpParams().
+        set('token', usuario.token).
+        set('solicitud', 'informe_csv').
+        set('fecha_inicial', fechaInicial.toString().split("T")[0]).
+        set('fecha_final', fechaFinal.toString().split("T")[0]).
+        set('texto', texto);
 
         return this._http.get(this.url, { params: parametros });
     }

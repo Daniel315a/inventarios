@@ -209,6 +209,7 @@ h1 {
 .div-tabla{
     overflow: auto;
     border: 1px solid gray;
+    margin-bottom: 10px;
 }
 
 .modal-listado {

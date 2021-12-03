@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Utilidades } from 'src/app/models/utilidades';
 import { FacturaService } from 'src/app/services/factura.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class ListadoFacturasComponent implements OnInit, AfterViewInit {
   public altoDivTabla: number;
   @Input()
   public componenteHijo: boolean = false;
-  public filtro: string;
+  public filtroTexto: string;
   public fechaInicialFiltro: Date;
   public fechaFinalFiltro: Date;
 
@@ -41,7 +42,8 @@ export class ListadoFacturasComponent implements OnInit, AfterViewInit {
   };
 
   public botones = {
-    nuevo: 'Crear factura'
+    nuevo: 'Crear factura',
+    excel: 'Exportar a excel'
   }
 
   constructor(
@@ -64,7 +66,7 @@ export class ListadoFacturasComponent implements OnInit, AfterViewInit {
     }
 
     let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-    let altoDivTabla = window.innerHeight - altoDivForm - 110;
+    let altoDivTabla = window.innerHeight - altoDivForm - 140;
     
     if(altoDivTabla != this.altoDivTabla){
       this.altoDivTabla = altoDivTabla;
@@ -91,11 +93,19 @@ export class ListadoFacturasComponent implements OnInit, AfterViewInit {
             this.facturas.push(factura);
           });
 
-          this.filtro = '';
+          this.filtroTexto = '';
           this.fechaInicialFiltro = this.facturas[0].fecha;
           this.fechaFinalFiltro = this.facturas[this.facturas.length - 1].fecha;
 
         }
+      }
+    );
+  }
+
+  public exportarExcel(){
+    this._facturaService.consultarInformeCsv(this.fechaInicialFiltro, this.fechaFinalFiltro, this.filtroTexto).subscribe(
+      result => {
+        Utilidades.dialogImprimir(result.datos.ruta);
       }
     );
   }

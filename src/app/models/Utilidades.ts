@@ -83,7 +83,8 @@ export class Utilidades {
 
       let html: string = `
           <p>
-              La solicitud de arrendamiento se ha creado correctamente:
+              El documento se ha creado correctamente
+              <br>
               <a href="${enlace}" target="_blank">
                   Abrir documento
               </a>

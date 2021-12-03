@@ -28,8 +28,8 @@
                 class="input"
                 type="text" 
                 placeholder="{{labels.buscar}}"
-                name="filtro"
-                [(ngModel)]="filtro">
+                name="filtroTexto"
+                [(ngModel)]="filtroTexto">
 
             <span class="icon is-small is-left">
                 <i class="fas fa-search"></i>
@@ -70,7 +70,7 @@
 
         <tbody>
 
-            <tr *ngFor="let factura of facturas | filtroFacturas: [ filtro, fechaInicialFiltro, fechaFinalFiltro ]">
+            <tr *ngFor="let factura of facturas | filtroFacturas: [ filtroTexto, fechaInicialFiltro, fechaFinalFiltro ]">
 
                 <td>{{factura.consecutivo}}</td>
                 <td>{{factura.nombreCliente}}</td>
@@ -94,4 +94,15 @@
 
     </table>
 
+</div>
+
+<div class="buttons is-right">
+    <button 
+        class="button is-success"
+        (click)="exportarExcel()">
+        <span>{{botones.excel}}</span>
+        <span class="icon">
+            <i class="fas fa-file-excel"></i>
+        </span>
+    </button>
 </div>
