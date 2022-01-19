@@ -128,6 +128,7 @@
                         <div class="select">
         
                             <app-select-departamentos
+                                #selectDepartamentos
                                 [departamento]="persona.municipio.departamento"
                                 (departamentoSeleccionado)="departamentoSeleccionado($event)">
                             </app-select-departamentos>

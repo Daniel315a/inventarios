@@ -1,8 +1,11 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Departamento } from 'src/app/models/departamento';
+import { Municipio } from 'src/app/models/municipio';
 import { Persona } from 'src/app/models/persona';
 import { Utilidades } from 'src/app/models/utilidades';
 import { PersonaService } from 'src/app/services/persona.service';
 import { PersonasComponent } from '../personas/personas.component';
+import { SelectDepartamentosComponent } from '../select-departamentos/select-departamentos.component';
 import { SelectMunicipiosComponent } from '../select-municipios/select-municipios.component';
 
 @Component({
@@ -29,6 +32,8 @@ export class PersonaComponent implements OnInit, AfterViewInit {
   public listadoPersonas: PersonasComponent;
   @ViewChild('selectMunicipios')
   public selectMunicipios: SelectMunicipiosComponent;
+  @ViewChild('selectDepartamentos')
+  public selectDepartamentos: SelectDepartamentosComponent;
   @Input()
   public creacionPersona: boolean = false;
   @Output()
@@ -116,8 +121,7 @@ export class PersonaComponent implements OnInit, AfterViewInit {
           this.persona = new Persona();
           this.persona.inicializar(result.datos);
 
-          this.departamentoSeleccionado(this.persona.municipio.departamento);
-          this.selectMunicipios.municipio = this.persona.municipio;
+          this.establecerMunicipio();
         }
       }
     );
@@ -188,6 +192,13 @@ export class PersonaComponent implements OnInit, AfterViewInit {
 
   public limpiar(){
     this.persona = new Persona();
+    this.establecerMunicipio();
   }
   
+  public establecerMunicipio(){
+    this.selectDepartamentos.departamento = this.persona.municipio.departamento;
+    this.selectMunicipios.departamento = this.persona.municipio.departamento;
+    this.selectMunicipios.consultarMunicipios(this.persona.municipio);
+  }
+
 }

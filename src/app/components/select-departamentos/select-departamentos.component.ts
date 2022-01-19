@@ -12,7 +12,6 @@ import { DepartamentoService } from 'src/app/services/departamento.service';
 })
 export class SelectDepartamentosComponent implements OnInit {
 
-  @Input()
   public departamento: Departamento = new Departamento();
   public departamentos: Array<Departamento> = new Array<Departamento>();
   @Output()
@@ -46,9 +45,9 @@ export class SelectDepartamentosComponent implements OnInit {
   }
 
   public onDepartamentoSeleccionado(value: number){
-    this.departamento = new Departamento();
-    this.departamento = this.departamentos.find(objDepartamento => objDepartamento.id == value);
-    this.departamentoSeleccionado.emit(this.departamento);
+    let departamento = new Departamento();
+    departamento = this.departamentos.find(objDepartamento => objDepartamento.id == value);
+    this.departamentoSeleccionado.emit(departamento);
   }
 
 }

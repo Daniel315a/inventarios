@@ -27,18 +27,19 @@ export class SelectMunicipiosComponent implements OnInit {
     this.consultarMunicipios();
   }
 
-  public onMunicipioSeleccionado(id: number){
-    this.municipio = new Municipio();
-    this.municipio = this.municipios.find(objMunicipio => objMunicipio.id == id);
-    this.municipioSeleccionado.emit(this.municipio);
+  public onMunicipioSeleccionado(id){
+    let municipio = new Municipio();
+    municipio = this.municipios.find(objMunicipio => objMunicipio.id == id);
+    this.municipioSeleccionado.emit(municipio);
   }
 
-  public consultarMunicipios(){
+  public consultarMunicipios(municipio: Municipio = undefined){
     this.municipios = new Array<Municipio>();
     
     this.municipios.push(new Municipio(
       0,
-      'Seleccione un municipio'
+      'Seleccione un municipio',
+      this.departamento
     ));
 
     this._municipioService.consultarPorDepartamento(this.departamento).subscribe(
@@ -50,7 +51,11 @@ export class SelectMunicipiosComponent implements OnInit {
             this.municipios.push(municipio);
           });
 
-          this.municipio = this.municipios[0];
+          if(!!municipio) {
+            this.municipio = municipio;
+          } else {
+            this.municipio.id = 0;
+          }
         }
       }
     );

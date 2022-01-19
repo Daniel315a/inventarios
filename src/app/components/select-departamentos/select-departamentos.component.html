@@ -1,5 +1,6 @@
 <select 
-    name="departamento" 
+    name="departamento"
+    [(ngModel)]="departamento.id"
     (change)="onDepartamentoSeleccionado($event.target.value)">
     <option *ngFor="let departamento of departamentos" [value]="departamento.id">{{departamento.nombre}}</option>
 </select>

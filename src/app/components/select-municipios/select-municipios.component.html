@@ -1,5 +1,6 @@
 <select 
     name="municipio" 
+    [(ngModel)]="municipio.id"
     (change)="onMunicipioSeleccionado($event.target.value)">
-    <option *ngFor="let municipio of municipios" [value]="municipio.id">{{municipio.nombre}}</option>
+    <option *ngFor="let municipio of municipios" value="{{municipio.id}}">{{municipio.nombre}}</option>
 </select>
