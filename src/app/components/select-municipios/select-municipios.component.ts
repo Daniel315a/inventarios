@@ -27,9 +27,10 @@ export class SelectMunicipiosComponent implements OnInit {
     this.consultarMunicipios();
   }
 
-  public onMunicipioSeleccionado(){
-    let municipio = this.municipios.find(municipio => municipio.id == this.municipio.id);
-    this.municipioSeleccionado.emit(municipio);
+  public onMunicipioSeleccionado(id: number){
+    this.municipio = new Municipio();
+    this.municipio = this.municipios.find(objMunicipio => objMunicipio.id == id);
+    this.municipioSeleccionado.emit(this.municipio);
   }
 
   public consultarMunicipios(){
@@ -48,6 +49,8 @@ export class SelectMunicipiosComponent implements OnInit {
 
             this.municipios.push(municipio);
           });
+
+          this.municipio = this.municipios[0];
         }
       }
     );

@@ -45,9 +45,10 @@ export class SelectDepartamentosComponent implements OnInit {
     );
   }
 
-  public onDepartamentoSeleccionado(){
-    let departamento = this.departamentos.find(departamento => departamento.id == this.departamento.id);
-    this.departamentoSeleccionado.emit(departamento);
+  public onDepartamentoSeleccionado(value: number){
+    this.departamento = new Departamento();
+    this.departamento = this.departamentos.find(objDepartamento => objDepartamento.id == value);
+    this.departamentoSeleccionado.emit(this.departamento);
   }
 
 }
