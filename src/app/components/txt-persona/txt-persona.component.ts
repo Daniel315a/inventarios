@@ -25,7 +25,7 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
   @Input()
   public labelPersona: string = '';
   @Input()
-  public tipoPersona: TipoPersona = new TipoPersona();
+  public tipoPersona: TipoPersona;
   @Input()
   public consultarEmpleados: boolean;
   @Output()
@@ -49,12 +49,6 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void{
-    if(this.consultarEmpleados == true){
-      this.listadoPersonas.consultarEmpleados();
-    } else {
-      this.listadoPersonas.consultarListadoPorTipo(this.tipoPersona)
-    }
-
     setTimeout(() => {
       this.listadoPersonas.altoTabla = 300;
     });
@@ -106,7 +100,11 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
     if(this.consultarEmpleados == true){
       this.listadoPersonas.consultarEmpleados();
     } else {
-      this.listadoPersonas.consultarListadoPorTipo(this.tipoPersona)
+      if(this.tipoPersona){
+        this.listadoPersonas.consultarListadoPorTipo(this.tipoPersona)
+      } else {
+        this.listadoPersonas.consultarListado();
+      }
     }
     
     this.modalConsultarPersonasActivo = true;
