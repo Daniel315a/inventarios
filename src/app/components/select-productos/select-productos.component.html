@@ -1,6 +1,28 @@
-<select 
-    name="producto" 
-    [(ngModel)]="producto.id"
-    (change)="onProductoSeleccionado()">
-    <option *ngFor="let producto of productos" [value]="producto.id">{{producto.detalle}}</option>
-</select>
+<div [ngClass]="listadoActivo ? 'dropdown is-active' : 'dropdown'" (focusout)="focusout()">
+    
+    <div class="dropdown-trigger">
+
+        <input 
+            type="text" 
+            name="producto"
+            class="input"
+            [(ngModel)]="producto.referencia"
+            (keyup)="onChangedBusquedaProducto($event.key)">
+
+    </div>
+
+    <div class="dropdown-menu">
+
+        <div class="dropdown-content">
+
+            <a [ngClass]="itemActivo == producto ? 'dropdown-item is-active' : 'dropdown-item'"
+                *ngFor="let producto of productosFiltrados"
+                (click)="establecerProducto(producto.referencia)">
+                {{producto.referencia}}
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

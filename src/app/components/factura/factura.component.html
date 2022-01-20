@@ -1,6 +1,6 @@
 <div #divForm class="form-filtros">
 
-    <form autocomplete="off">
+    <form autocomplete="off" (keydown.enter)="$event.preventDefault()">
 
         <!-- Fecha -->
 
@@ -96,12 +96,16 @@
 
                 <div class="control">
                         
-                    <div class="select">
+                    <!-- <div class="select">
                         
                         <app-select-productos
                             (productoSeleccionado)="productoSeleccionado($event)"></app-select-productos>
 
-                    </div>
+                    </div> -->
+
+                    <app-select-productos
+                        (productoSeleccionado)="productoSeleccionado($event)">
+                    </app-select-productos>
 
                 </div>
 

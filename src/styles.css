@@ -105,6 +105,12 @@ h1 {
     color: var(--neutroLuz);
 }
 
+a.dropdown-item.is-active {
+    background-color: var(--principal);
+    pointer-events: none;
+    cursor: default;
+}
+
 .header {
     display: flex;
     flex-direction: row;
