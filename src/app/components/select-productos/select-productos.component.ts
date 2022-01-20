@@ -19,6 +19,7 @@ export class SelectProductosComponent implements OnInit {
   public productosFiltrados: Array<Producto> = new Array<Producto>();
   public listadoActivo: boolean = false;
   public itemActivo: Producto;
+  public filtroProducto: string;
   @Output()
   public productoSeleccionado: EventEmitter<Producto> = new EventEmitter<Producto>();
 
@@ -52,8 +53,8 @@ export class SelectProductosComponent implements OnInit {
   public onChangedBusquedaProducto(key){
     this.listadoActivo = false;
 
-    if(this.producto.referencia.length > 1){
-      this.productosFiltrados = new FiltroProductosPipe().transform(this.productos, [this.producto.referencia]);
+    if(this.filtroProducto.length > 1){
+      this.productosFiltrados = new FiltroProductosPipe().transform(this.productos, [this.filtroProducto]);
 
       if(this.productosFiltrados.length > 0){
         this.listadoActivo = true;
@@ -81,10 +82,10 @@ export class SelectProductosComponent implements OnInit {
   public establecerProducto(referencia: string){
     this.itemActivo = this.productosFiltrados.find(producto => producto.referencia == referencia);
     this.producto = this.itemActivo;
-  }
-
-  public focusout(){
+    this.filtroProducto = this.producto.referencia;
     this.listadoActivo = false;
+    
+    this.onProductoSeleccionado();    
   }
 
 }

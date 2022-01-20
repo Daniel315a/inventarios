@@ -194,6 +194,14 @@ a.dropdown-item.is-active {
     margin-top: 10px;
 }
 
+.is-uppercase {
+    text-transform: uppercase;
+}
+
+.is-lowercase {
+    text-transform: lowercase;
+}
+
 /*Sección de componentes*/
 
 .seccion-componentes{

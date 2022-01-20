@@ -77,7 +77,8 @@
                             type="text"
                             placeholder="{{labels.nombres}}"
                             name="nombres"
-                            [(ngModel)]="persona.nombres">
+                            [(ngModel)]="persona.nombres"
+                            (focusout)="formatearNombres($event.originalTarget.name)">
                     </div>
                     <div class="control is-expanded">
                         <input 
@@ -85,7 +86,8 @@
                             type="text"
                             placeholder="{{labels.apellidos}}"
                             name="apellidos"
-                            [(ngModel)]="persona.apellidos">
+                            [(ngModel)]="persona.apellidos"
+                            (focusout)="formatearNombres($event.originalTarget.name)">
                     </div>
                 </div>
 
@@ -106,7 +108,8 @@
                     class="input" 
                     type="text" 
                     name="razonSocial"
-                    [(ngModel)]="persona.razonSocial">
+                    [(ngModel)]="persona.razonSocial"
+                    (focusout)="formatearNombres($event.originalTarget.name)">
 
             </div>
         </div>
@@ -165,7 +168,7 @@
 
         <!-- FIN: Domicilio -->
 
-        <!-- Dirección y teléfono -->
+        <!-- Contacto -->
 
         <div class="field is-horizontal">
             <div class="field-label is-normal">
@@ -184,7 +187,7 @@
                     </div>
                     <div class="control is-expanded">
                         <input 
-                            class="input" 
+                            class="input is-lowercase" 
                             type="email"
                             placeholder="{{labels.email}}" 
                             name="email"
@@ -195,7 +198,7 @@
             </div>
         </div>
 
-        <!-- FIN: Dirección y teléfono -->
+        <!-- FIN: Contacto -->
 
         <div class="field is-grouped is-grouped-right">
 

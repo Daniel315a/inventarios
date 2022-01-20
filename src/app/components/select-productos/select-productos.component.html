@@ -1,12 +1,12 @@
-<div [ngClass]="listadoActivo ? 'dropdown is-active' : 'dropdown'" (focusout)="focusout()">
+<div [ngClass]="listadoActivo ? 'dropdown is-active' : 'dropdown'">
     
     <div class="dropdown-trigger">
 
         <input 
             type="text" 
             name="producto"
-            class="input"
-            [(ngModel)]="producto.referencia"
+            class="input is-uppercase"
+            [(ngModel)]="filtroProducto"
             (keyup)="onChangedBusquedaProducto($event.key)">
 
     </div>
@@ -18,7 +18,7 @@
             <a [ngClass]="itemActivo == producto ? 'dropdown-item is-active' : 'dropdown-item'"
                 *ngFor="let producto of productosFiltrados"
                 (click)="establecerProducto(producto.referencia)">
-                {{producto.referencia}}
+                {{producto.referencia}}: {{producto.detalle}}
             </a>
 
         </div>

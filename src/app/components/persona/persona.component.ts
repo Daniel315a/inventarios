@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { stringify } from 'querystring';
 import { Departamento } from 'src/app/models/departamento';
 import { Municipio } from 'src/app/models/municipio';
 import { Persona } from 'src/app/models/persona';
@@ -199,6 +200,29 @@ export class PersonaComponent implements OnInit, AfterViewInit {
     this.selectDepartamentos.departamento = this.persona.municipio.departamento;
     this.selectMunicipios.departamento = this.persona.municipio.departamento;
     this.selectMunicipios.consultarMunicipios(this.persona.municipio);
+  }
+
+  private formatearNombres(campo){
+    if(campo == 'nombres') {
+      this.persona.nombres = this.primeraMayuscula(this.persona.nombres);
+    } else if(campo == 'apellidos') {
+      this.persona.apellidos = this.primeraMayuscula(this.persona.apellidos);
+    } else if(campo == 'razonSocial') {
+      this.persona.razonSocial = this.primeraMayuscula(this.persona.razonSocial);
+    }
+  }
+
+  private primeraMayuscula(texto: string): string{
+    texto = texto.trim();
+    let arrTexto = texto.split(' ');
+    let textoFinal = '';
+
+    arrTexto.forEach(palabra => {
+      palabra = palabra.charAt(0).toUpperCase() + palabra.slice(1);
+      textoFinal += palabra + ' ';
+    });
+
+    return textoFinal.trim();
   }
 
 }

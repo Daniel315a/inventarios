@@ -29,6 +29,8 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   @ViewChild('divForm')
   public divForm: ElementRef;
+  @ViewChild('frmFactura')
+  public frmFactura: ElementRef;
   @ViewChild('txtCliente')
   public txtCliente: TxtPersonaComponent;
   @ViewChild('txtVendedor')
@@ -106,8 +108,14 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   public productoSeleccionado(producto){
     this.detalleActual.producto = producto;
-    this.detalleActual.descripcion = this.detalleActual.producto.detalle;
+    this.detalleActual.descripcion = this.detalleActual.producto.referencia + ': ' + this.detalleActual.producto.detalle;
     this.detalleActual.precioUnitario = this.detalleActual.producto.precio;
+    
+    const inputDetalle = this.frmFactura.nativeElement["detalle"];
+
+    if(inputDetalle) {
+      inputDetalle.focus();
+    }
   }
 
   public agregarDetalle(){
@@ -154,7 +162,7 @@ export class FacturaComponent implements OnInit, AfterViewInit {
       totalIva += detalle.valorIva;
 
       if(!detalle.esInstalacion){
-        netoComision += (detalle.cantidad + detalle.precioUnitario) - detalle.valorDescuento;
+        netoComision += (detalle.cantidad * detalle.precioUnitario) - detalle.valorDescuento;
       }
 
     });
