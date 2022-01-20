@@ -68,6 +68,7 @@ export class PersonaService {
 
     public crear(persona: Persona): Observable<any>{
         const usuario = Utilidades.obtenerUsuario();
+        Utilidades.trim(persona);
         const parametros: HttpParams = new HttpParams().
         set('token', usuario.token).
         set('solicitud', 'crear').
@@ -89,6 +90,7 @@ export class PersonaService {
 
     public actualizar(persona: Persona): Observable<any>{
         const usuario = Utilidades.obtenerUsuario();
+        Utilidades.trim(persona);
         const parametros: HttpParams = new HttpParams().
         set('token', usuario.token).
         set('solicitud', 'actualizar').

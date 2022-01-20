@@ -37,6 +37,8 @@ export class PrestamoService{
 
     public crear(prestamo: Prestamo): Observable<any> {
         const usuario = Utilidades.obtenerUsuario();
+        Utilidades.trim(prestamo);
+        
         const detalles: string = JSON.stringify(prestamo.detalles);
         
         const parametros: HttpParams = new HttpParams().
@@ -53,6 +55,7 @@ export class PrestamoService{
 
     crearDetalle(idPrestamo: number, detalleActual: DetallePrestamo): Observable<any> {
         const usuario = Utilidades.obtenerUsuario();
+        Utilidades.trim(detalleActual);
         
         const parametros: HttpParams = new HttpParams().
         set('token', usuario.token).
@@ -66,7 +69,8 @@ export class PrestamoService{
 
     public actualizar(prestamo: Prestamo): Observable<any> {
         const usuario = Utilidades.obtenerUsuario();
-        
+        Utilidades.trim(prestamo);
+
         const parametros: HttpParams = new HttpParams().
         set('token', usuario.token).
         set('solicitud', 'actualizar').

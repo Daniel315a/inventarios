@@ -47,6 +47,7 @@ export class FacturaService {
 
     public crear(factura: Factura): Observable<any>{
         let detalles: string = JSON.stringify(factura.detalles);
+        Utilidades.trim(factura);
 
         detalles = detalles.replace('porcentajeDescuento', 'porcentaje_descuento');
         detalles = detalles.replace('valorDescuento', 'valor_descuento');

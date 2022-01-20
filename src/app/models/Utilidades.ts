@@ -122,4 +122,8 @@ export class Utilidades {
     return 2 * Math.round(x / 2);  
  }
 
+ static trim(obj: any){
+    Object.keys(obj).map(k => obj[k] = typeof obj[k] == 'string' ? obj[k].trim() : obj[k]);
+ }
+
 }

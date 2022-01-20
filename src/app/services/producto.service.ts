@@ -46,6 +46,8 @@ export class ProductoService {
 
     public crear(producto: Producto): Observable<any>{
         const usuario = Utilidades.obtenerUsuario();
+        Utilidades.trim(producto);
+
         let parametros: HttpParams = new HttpParams().
         set('token', usuario.token).
         set('solicitud', 'crear').
@@ -64,6 +66,8 @@ export class ProductoService {
 
     public actualizar(producto: Producto): Observable<any>{
         const usuario = Utilidades.obtenerUsuario();
+        Utilidades.trim(producto);
+        
         const parametros: HttpParams = new HttpParams().
         set('token', usuario.token).
         set('solicitud', 'actualizar').
