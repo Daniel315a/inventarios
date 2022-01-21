@@ -95,14 +95,8 @@
 
                 <div class="control">
                         
-                    <!-- <div class="select">
-                        
-                        <app-select-productos
-                            (productoSeleccionado)="productoSeleccionado($event)"></app-select-productos>
-
-                    </div> -->
-
                     <app-select-productos
+                        #selectProductos
                         (productoSeleccionado)="productoSeleccionado($event)">
                     </app-select-productos>
 
@@ -173,7 +167,9 @@
                 </div>
                 
                 <div class="control">
-                    <button class="button is-danger">
+                    <button 
+                        class="button is-danger"
+                        (click)="limpiarDetalle()">
                         <span class="icon is-small">
                             <i class="fas fa-minus"></i>
                         </span>
@@ -211,7 +207,7 @@
 
         <tbody>
 
-            <tr *ngFor="let detalle of factura.detalles">
+            <tr *ngFor="let detalle of factura.detalles; let i = index" (click)="detalleSeleccionado(detalle, i)">
 
                 <td>{{detalle.cantidad}}</td>
                 <td>{{detalle.producto.referencia}}</td>

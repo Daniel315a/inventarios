@@ -19,9 +19,13 @@ export class SelectProductosComponent implements OnInit {
   public productosFiltrados: Array<Producto> = new Array<Producto>();
   public listadoActivo: boolean = false;
   public itemActivo: Producto;
-  public filtroProducto: string;
+  public filtroProducto: string = '';
   @Output()
   public productoSeleccionado: EventEmitter<Producto> = new EventEmitter<Producto>();
+
+  public labels = {
+    producto: 'Producto'
+  };
 
   constructor(
     private _productoService: ProductoService

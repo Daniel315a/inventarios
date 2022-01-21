@@ -6,6 +6,7 @@ import { Utilidades } from 'src/app/models/utilidades';
 import { FacturaService } from 'src/app/services/factura.service';
 import { TxtPersonaComponent } from '../txt-persona/txt-persona.component';
 import { ActivatedRoute } from '@angular/router';
+import { SelectProductosComponent } from '../select-productos/select-productos.component';
 
 @Component({
   selector: 'app-factura',
@@ -35,6 +36,8 @@ export class FacturaComponent implements OnInit, AfterViewInit {
   public txtCliente: TxtPersonaComponent;
   @ViewChild('txtVendedor')
   public txtVendedor: TxtPersonaComponent;
+  @ViewChild('selectProductos')
+  public selectProductos: SelectProductosComponent;
   public tipoPersonaCliente: TipoPersona = Utilidades.getTipoCliente();
   public tipoPersonaVendedor: TipoPersona = Utilidades.getTipoVendedor();
   public altoTablaDetalles: number = 0;
@@ -122,7 +125,7 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     if(this.detalleActual.cantidad > 0){
       this.calcularTotalesDetalle();
       this.factura.detalles.push(this.detalleActual);
-      this.detalleActual = new DetalleFactura();
+      this.limpiarDetalle();
       this.calcularTotales();
     }
   }
@@ -234,6 +237,19 @@ export class FacturaComponent implements OnInit, AfterViewInit {
  
   public clienteSeleccionado(cliente){
     this.factura.cliente = cliente;
+  }
+
+  public detalleSeleccionado(detalle: DetalleFactura, indiceDetalle: number){
+    if(this.detalleActual.producto.referencia == '' && this.factura.id == 0){
+      this.detalleActual = detalle;
+      this.factura.detalles.splice(indiceDetalle, 1);
+      this.calcularTotales();
+    }
+  }
+
+  public limpiarDetalle(){
+    this.detalleActual = new DetalleFactura();
+    this.selectProductos.filtroProducto = '';
   }
 
 }

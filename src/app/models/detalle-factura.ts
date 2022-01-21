@@ -5,7 +5,7 @@ export class DetalleFactura{
     constructor(
         public id: number = 0,
         public producto: Producto = new Producto(),
-        public cantidad: number = 0,
+        public cantidad: number = undefined,
         public descripcion: string = '', 
         public porcentajeDescuento: number = null,
         public valorDescuento: number = 0.00,

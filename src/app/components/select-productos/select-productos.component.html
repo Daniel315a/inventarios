@@ -6,6 +6,7 @@
             type="text" 
             name="producto"
             class="input is-uppercase"
+            placeholder="{{labels.producto}}"
             [(ngModel)]="filtroProducto"
             (keyup)="onChangedBusquedaProducto($event.key)">
 
