@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Utilidades } from 'src/app/models/utilidades';
 import { trigger, style, transition, state, animate } from '@angular/animations';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-dashboard',
@@ -149,6 +150,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     {
       this.renderer.setStyle(this.divContenedor.nativeElement, 'width', '100%');
     }
+  }
+
+  public cerrarSesion(){
+    localStorage.removeItem('usr-decoraytransforma');
+    window.location.reload();
   }
 
 }

@@ -122,7 +122,7 @@ export class FacturaComponent implements OnInit, AfterViewInit {
   }
 
   public agregarDetalle(){
-    if(this.detalleActual.cantidad > 0){
+    if(this.detalleActual.cantidad > 0 && this.detalleActual.producto.id != 0){
       this.calcularTotalesDetalle();
       this.factura.detalles.push(this.detalleActual);
       this.limpiarDetalle();
