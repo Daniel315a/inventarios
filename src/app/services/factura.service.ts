@@ -49,15 +49,15 @@ export class FacturaService {
         let detalles: string = JSON.stringify(factura.detalles);
         Utilidades.trim(factura);
 
-        detalles = detalles.replace('porcentajeDescuento', 'porcentaje_descuento');
-        detalles = detalles.replace('valorDescuento', 'valor_descuento');
-        detalles = detalles.replace('porcentajeIva', 'porcentaje_iva');
-        detalles = detalles.replace('valorIva', 'valor_iva');
-        detalles = detalles.replace('precioUnitario', 'precio_unitario');
-        detalles = detalles.replace('precioTotal', 'precio_total');
-        detalles = detalles.replace('esInstalacion', 'es_instalacion');
-        detalles = detalles.replace('true', '1');
-        detalles = detalles.replace('false', '0');
+        detalles = detalles.replace(/porcentajeDescuento/gi, 'porcentaje_descuento');
+        detalles = detalles.replace(/valorDescuento/gi, 'valor_descuento');
+        detalles = detalles.replace(/porcentajeIva/gi, 'porcentaje_iva');
+        detalles = detalles.replace(/valorIva/gi, 'valor_iva');
+        detalles = detalles.replace(/precioUnitario/gi, 'precio_unitario');
+        detalles = detalles.replace(/precioTotal/gi, 'precio_total');
+        detalles = detalles.replace(/esInstalacion/gi, 'es_instalacion');
+        detalles = detalles.replace(/true/gi, '1');
+        detalles = detalles.replace(/false/gi, '0');
 
         const usuario = Utilidades.obtenerUsuario();
         const parametros: HttpParams = new HttpParams().

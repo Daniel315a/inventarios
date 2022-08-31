@@ -19,7 +19,6 @@ import { FacturaComponent } from './components/factura/factura.component';
 import { TxtPersonaComponent } from './components/txt-persona/txt-persona.component';
 import { SelectProductosComponent } from './components/select-productos/select-productos.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CotizacionesComponent } from './components/cotizaciones/cotizaciones.component';
 import { CotizacionComponent } from './components/cotizacion/cotizacion.component';
 import { PrestamoComponent } from './components/prestamo/prestamo.component';
 import { ListadoCotizacionesComponent } from './components/listado-cotizaciones/listado-cotizaciones.component';
@@ -46,7 +45,6 @@ import { FiltroProductosPipe } from './pipes/filtro-productos.pipe';
     FacturaComponent,
     TxtPersonaComponent,
     SelectProductosComponent,
-    CotizacionesComponent,
     CotizacionComponent,
     PrestamoComponent,
     ListadoCotizacionesComponent,

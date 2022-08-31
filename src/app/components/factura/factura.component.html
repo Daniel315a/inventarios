@@ -159,19 +159,10 @@
                 <div class="control">
                     <button 
                         class="button is-primary"
-                        (click)="agregarDetalle()">
+                        (click)="agregarDetalle()"
+                        (keydown.enter)="agregarDetalle()">
                         <span class="icon is-small">
                             <i class="fas fa-plus"></i>
-                        </span>
-                    </button>
-                </div>
-                
-                <div class="control">
-                    <button 
-                        class="button is-danger"
-                        (click)="limpiarDetalle()">
-                        <span class="icon is-small">
-                            <i class="fas fa-minus"></i>
                         </span>
                     </button>
                 </div>

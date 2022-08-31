@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CotizacionesComponent } from "./components/cotizaciones/cotizaciones.component";
+import { CotizacionComponent } from "./components/cotizacion/cotizacion.component";
 import { FacturaComponent } from "./components/factura/factura.component";
 import { ListadoCotizacionesComponent } from "./components/listado-cotizaciones/listado-cotizaciones.component";
 import { ListadoFacturasComponent } from "./components/listado-facturas/listado-facturas.component";
@@ -36,7 +36,7 @@ const routes: Routes = [
     },
     {
         path: 'cotizacion',
-        component: CotizacionesComponent
+        component: CotizacionComponent
     },
     {
         path: 'prestamos',

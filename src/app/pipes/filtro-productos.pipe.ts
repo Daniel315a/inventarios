@@ -9,7 +9,7 @@ export class FiltroProductosPipe implements PipeTransform {
     const resultado = [];
 
     for(const producto of productos) {
-      const detalle = producto.detalle.toLowerCase();
+      const detalle = producto.detalle.toString().toLowerCase();
       const referencia = producto.referencia.toString().toLowerCase();
       const filtroTexto = args[0].toLowerCase();
 

@@ -202,7 +202,7 @@ export class PersonaComponent implements OnInit, AfterViewInit {
     this.selectMunicipios.consultarMunicipios(this.persona.municipio);
   }
 
-  private formatearNombres(campo){
+  public formatearNombres(campo){
     if(campo == 'nombres') {
       this.persona.nombres = this.primeraMayuscula(this.persona.nombres);
     } else if(campo == 'apellidos') {
