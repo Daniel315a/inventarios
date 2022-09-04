@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class TipoDocumento {\n  constructor(id = 0, nombre = '') {\n    this.id = id;\n    this.nombre = nombre;\n  }\n\n  inicializar(datos) {\n    if (!!datos) {\n      this.id = !!datos.id ? datos.id : this.id;\n      this.nombre = !!datos.nombre ? datos.nombre : this.nombre;\n    }\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
