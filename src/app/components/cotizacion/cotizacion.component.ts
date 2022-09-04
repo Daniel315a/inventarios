@@ -7,9 +7,9 @@ import { CotizacionService } from 'src/app/services/cotizacion.service';
 import { SelectProductosComponent } from '../select-productos/select-productos.component';
 
 @Component({
-  selector: 'app-Cotizacion',
-  templateUrl: './Cotizacion.component.html',
-  styleUrls: ['./Cotizacion.component.css'],
+  selector: 'app-cotizacion',
+  templateUrl: './cotizacion.component.html',
+  styleUrls: ['./cotizacion.component.css'],
   providers: [
     CotizacionService
   ],

@@ -194,6 +194,10 @@ a.dropdown-item.is-active {
     margin-top: 10px;
 }
 
+.div-form-login {
+    margin-top: 20%;
+}
+
 .is-uppercase {
     text-transform: uppercase;
 }

@@ -1,79 +1,77 @@
-<header class="hero is-light">
-    <div class="hero-body">
-        <h1 class="title has-text-centered">{{labels.mensajeLogin}}</h1>
-    </div>
-</header>
-
 <div class="columns columns-form-login">
 
-    <div class="column is-one-third"></div>
+    <div class="column is-two-fifths"></div>
     
     <div class="column">
 
-        <form>
+        <div class="box div-form-login">
 
-            <!-- Usuario -->
+            <h1 class="title has-text-centered">{{labels.mensajeLogin}}</h1>
 
-            <div class="field">
-                <div class="control has-icons-left">
+            <form>
 
-                    <input 
-                        type="text" 
-                        name="usuario" 
-                        class="input"
-                        placeholder="{{labels.usuario}}"
-                        [(ngModel)]="usuario">
-
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-user"></i>
+                <!-- Usuario -->
+    
+                <div class="field">
+                    <div class="control has-icons-left">
+    
+                        <input 
+                            type="text" 
+                            name="usuario" 
+                            class="input"
+                            placeholder="{{labels.usuario}}"
+                            [(ngModel)]="usuario">
+    
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                </div>
+    
+                <!-- FIN: Usuario -->
+    
+                <!-- Contraseña -->
+    
+                <div class="field">
+                    <div class="control has-icons-left">
+    
+                        <input 
+                            type="password" 
+                            name="contrasenna" 
+                            class="input"
+                            placeholder="{{labels.contrasenna}}"
+                            [(ngModel)]="contrasenna"
+                            (keyup)="keyupContrasenna($event.key)">
+    
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
+                </div>
+    
+                <!-- FIN: Contraseña -->
+    
+                <div class="field">
+                    <span class="tag is-danger is-light" *ngIf="mensaje">
+                        {{mensaje}}
                     </span>
                 </div>
-            </div>
-
-            <!-- FIN: Usuario -->
-
-            <!-- Contraseña -->
-
-            <div class="field">
-                <div class="control has-icons-left">
-
-                    <input 
-                        type="password" 
-                        name="contrasenna" 
-                        class="input"
-                        placeholder="{{labels.contrasenna}}"
-                        [(ngModel)]="contrasenna"
-                        (keyup)="keyupContrasenna($event.key)">
-
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-lock"></i>
-                    </span>
-                </div>
-            </div>
-
-            <!-- FIN: Contraseña -->
-
-            <div class="field">
-                <span class="tag is-danger is-light" *ngIf="mensaje">
-                    {{mensaje}}
-                </span>
-            </div>
-
-            <!-- Botón de login -->
-
-            <div class="field is-grouped is-grouped-centered">
-                <div class="control">
+    
+                <!-- Botón de login -->
+    
+                <div class="field">
                     <a 
-                        class="button is-primary"
+                        class="button is-primary is-fullwidth"
                         (click)="login()">
                         {{botones.login}}
                     </a>
                 </div>
-            </div>
+    
+                <!-- FIN: Botón de login -->
+    
+            </form>
 
-            <!-- FIN: Botón de login -->
-
-        </form>
+        </div>
 
     </div>
 

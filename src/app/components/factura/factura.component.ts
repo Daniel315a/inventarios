@@ -102,7 +102,7 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   public onResize(){
     let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-    let altoDivTabla = window.innerHeight - altoDivForm - 370;
+    let altoDivTabla = window.innerHeight - altoDivForm - 220;
     
     if(altoDivTabla != this.altoTablaDetalles){
       this.altoTablaDetalles = altoDivTabla;
