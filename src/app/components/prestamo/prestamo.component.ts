@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DetallePrestamo } from 'src/app/models/detalle-prestamo';

@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
-import { stringify } from 'querystring';
 import { Departamento } from 'src/app/models/departamento';
 import { Municipio } from 'src/app/models/municipio';
 import { Persona } from 'src/app/models/persona';

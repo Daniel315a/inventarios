@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Elemento {\n  constructor(id = 0, controlador = '') {\n    this.id = id;\n    this.controlador = controlador;\n  }\n\n  inicializar(datos) {\n    if (!!datos) {\n      this.id = !!datos.id ? datos.id : 0;\n      this.controlador = !!datos.controlador ? datos.controlador : '';\n    }\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Accion {\n  constructor(nombre = '', valor = false) {\n    this.nombre = nombre;\n    this.valor = valor;\n  }\n\n  inicializar(datos) {\n    if (!!datos) {\n      this.nombre = !!datos.nombre ? datos.nombre : '';\n      this.valor = !!datos.valor ? datos.valor : false;\n    }\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
