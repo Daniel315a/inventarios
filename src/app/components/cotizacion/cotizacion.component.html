@@ -16,7 +16,7 @@
                 <div class="control">
 
                     <input 
-                        class="input"
+                        class="input is-small"
                         type="date"
                         name="fecha"
                         [(ngModel)]="cotizacion.fecha">
@@ -48,7 +48,8 @@
             <div class="field-body">
 
             <textarea 
-                class="textarea"
+                class="textarea is-small is-uppercase"
+                rows="2"
                 name="notas"
                 [(ngModel)]="cotizacion.notas">
             </textarea>
@@ -66,9 +67,11 @@
                 
                 <!-- Cantidad -->
 
-                <div class="control txt-pequenno">
+                <div
+                    class="control txt-pequenno"
+                    [attr.data-tooltip]="detalleActual.cantidad == null ? null : labels.cantidad">
                     <input 
-                        class="input"
+                        class="input is-small"
                         type="number"
                         placeholder="{{labels.cantidad}}"
                         name="cantidad"
@@ -89,9 +92,11 @@
 
                 <!-- Descripcion -->
 
-                <div class="control is-expanded">
+                <div
+                    class="control is-expanded"
+                    [attr.data-tooltip]="detalleActual.descripcion == null || detalleActual.descripcion.length == 0 ? null : labels.descripcion">
                     <input 
-                        class="input"
+                        class="input is-small is-uppercase"
                         type="text"
                         placeholder="{{labels.descripcion}}"
                         name="descripcion"
@@ -102,9 +107,11 @@
 
                 <!-- Porcentaje de IVA -->
 
-                <div class="control txt-valor">
+                <div
+                    class="control txt-valor"
+                    [attr.data-tooltip]="detalleActual.porcentajeIva == null ? null : labels.iva">
                     <input 
-                        class="input"
+                        class="input is-small"
                         type="number"
                         placeholder="{{labels.iva}}"
                         name="iva"
@@ -115,9 +122,11 @@
 
                 <!-- Precio -->
 
-                <div class="control txt-valor">
+                <div
+                    class="control txt-valor"
+                    [attr.data-tooltip]="detalleActual.precioUnitario == null ? null : labels.precioUnitario">
                     <input 
-                        class="input"
+                        class="input is-small"
                         type="number"
                         placeholder="{{labels.precioUnitario}}"
                         name="precioUnitario"
@@ -130,7 +139,7 @@
 
                 <div class="control">
                     <button 
-                        class="button is-primary"
+                        class="button is-small is-primary"
                         (click)="agregarDetalle()"
                         (keydown.enter)="agregarDetalle()">
                         <span class="icon is-small">
@@ -151,7 +160,7 @@
 
 </div>
 
-<div #divTablaDetalles class="div-tabla" [style.height.px]="altoTablaDetalles">
+<div #divTablaDetalles class="div-tabla is-size-7" [style.height.px]="altoTablaDetalles">
 
     <table class="table is-fullwidth is-bordered">
 
@@ -159,7 +168,7 @@
             <tr>
                 <th width="10%">{{columnas.cantidad}}</th>
                 <th>{{columnas.descripcion}}</th>
-                <th width="12%">{{columnas.precioUnitario}}</th>
+                <th width="15%">{{columnas.precioUnitario}}</th>
                 <th width="12%">{{columnas.iva}}</th>
                 <th width="12%">{{columnas.precioTotal}}</th>
             </tr>
@@ -196,7 +205,7 @@
             <div class="field-body">
 
                 <input 
-                    class="input"
+                    class="input is-small"
                     type="text"
                     name="totalIva"
                     [(ngModel)]="cotizacion.totalIva"
@@ -213,7 +222,7 @@
             <div class="field-body">
 
                 <input 
-                    class="input"
+                    class="input is-small"
                     type="text"
                     name="precioTotal"
                     [(ngModel)]="cotizacion.precioTotal"
@@ -234,20 +243,20 @@
     
     <div class="control">
         <button
-            class="button is-primary"
+            class="button is-small is-primary"
             (click)="guardar()">
             {{botones.guardar}}
         </button>
     </div>
 
     <div class="control">
-        <button class="button is-danger">
+        <button class="button is-small is-danger">
             {{botones.eliminar}}
         </button>
     </div>
 
     <div class="control">
-        <button class="button has-text-primary">
+        <button class="button is-small has-text-primary">
             <span class="icon is-small">
                 <i class="fas fa-eraser"></i>
             </span>

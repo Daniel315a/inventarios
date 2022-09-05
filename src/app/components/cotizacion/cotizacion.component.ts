@@ -84,7 +84,7 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
 
   public onResize(){
     let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-    let altoDivTabla = window.innerHeight - altoDivForm - 280;
+    let altoDivTabla = window.innerHeight - altoDivForm - 250;
     
     if(altoDivTabla != this.altoTablaDetalles){
       this.altoTablaDetalles = altoDivTabla;
