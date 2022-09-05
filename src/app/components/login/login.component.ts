@@ -62,10 +62,4 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  public keyupContrasenna(key){
-    if(key == 'Enter'){
-      this.login();
-    }
-  }
-
 }

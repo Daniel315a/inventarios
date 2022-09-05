@@ -20,7 +20,8 @@
                             name="usuario" 
                             class="input"
                             placeholder="{{labels.usuario}}"
-                            [(ngModel)]="usuario">
+                            [(ngModel)]="usuario"
+                            (keydown.enter)="login()">
     
                         <span class="icon is-small is-left">
                             <i class="fas fa-user"></i>
@@ -41,7 +42,7 @@
                             class="input"
                             placeholder="{{labels.contrasenna}}"
                             [(ngModel)]="contrasenna"
-                            (keyup)="keyupContrasenna($event.key)">
+                            (keydown.enter)="login()">
     
                         <span class="icon is-small is-left">
                             <i class="fas fa-lock"></i>
