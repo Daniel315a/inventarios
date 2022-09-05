@@ -52,7 +52,7 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     descuento: '% Dto',
     esInstalacion: 'Instalación',
     valorUnitario: 'Precio unitario',
-    comision: 'Porcentaje de comisión',
+    comision: 'Comisión (%)',
     totalDescuento: 'Descuento',
     totalIva: 'IVA',
     totalFactura: 'Total',
@@ -102,7 +102,7 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   public onResize(){
     let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-    let altoDivTabla = window.innerHeight - altoDivForm - 220;
+    let altoDivTabla = window.innerHeight - altoDivForm - 340;
     
     if(altoDivTabla != this.altoTablaDetalles){
       this.altoTablaDetalles = altoDivTabla;

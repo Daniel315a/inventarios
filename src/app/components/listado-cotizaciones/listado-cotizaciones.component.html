@@ -5,7 +5,7 @@
         <div class="control is-expanded has-icons-left">
 
             <input 
-                class="input"
+                class="input is-small"
                 type="text" 
                 placeholder="{{labels.buscar}}"
                 name="filtro"
@@ -20,7 +20,7 @@
         <div class="control">
 
             <a 
-                class="button is-primary"
+                class="button is-small is-primary"
                 [routerLink]="['/cotizacion']">
                 <span>
                     {{botones.nuevo}}
@@ -36,7 +36,7 @@
 
 </div>
 
-<div class="div-tabla" [style.height.px]="altoDivTabla">
+<div class="div-tabla is-size-7" [style.height.px]="altoDivTabla">
 
     <table class="table is-bordered is-fullwidth">
 
@@ -89,7 +89,7 @@
 
 <div class="buttons is-right">
     <button 
-        class="button is-success"
+        class="button is-small is-success"
         (click)="exportarExcel()">
         <span>{{botones.excel}}</span>
         <span class="icon">

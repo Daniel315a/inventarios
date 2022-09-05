@@ -13,7 +13,7 @@
                 <div class="control">
 
                     <input 
-                        class="input"
+                        class="input is-small"
                         type="date"
                         name="fecha"
                         [(ngModel)]="factura.fecha">
@@ -60,7 +60,7 @@
                 <div class="control">
 
                     <input 
-                        class="input"
+                        class="input is-small"
                         type="number"
                         name="porcentajeComision"
                         [(ngModel)]="factura.porcentajeComision"
@@ -80,9 +80,11 @@
 
                 <!-- Cantidad -->
 
-                <div class="control txt-pequenno">
-                    <input 
-                        class="input" 
+                <div 
+                    class="control txt-pequenno"
+                    [attr.data-tooltip]="detalleActual.cantidad == null ? null : labels.cantidad">
+                    <input
+                        class="input is-small" 
                         type="number"
                         placeholder="{{labels.cantidad}}"
                         name="cantidad"
@@ -106,9 +108,11 @@
 
                 <!-- Descripción -->
 
-                <div class="control is-expanded">
+                <div
+                    class="control is-expanded"
+                    [attr.data-tooltip]="detalleActual.descripcion == null || detalleActual.descripcion.length == 0 ? null : labels.detalle">
                     <input 
-                        class="input"
+                        class="input is-small is-uppercase"
                         type="text"
                         placeholder="{{labels.detalle}}"
                         name="detalle"
@@ -119,9 +123,11 @@
 
                 <!-- IVA -->
 
-                <div class="control txt-pequenno">
+                <div 
+                    class="control txt-pequenno"
+                    [attr.data-tooltip]="detalleActual.porcentajeIva == null ? null : labels.iva">
                     <input 
-                        class="input"
+                        class="input is-small"
                         type="number"
                         placeholder="{{labels.iva}}"
                         name="iva"
@@ -132,9 +138,11 @@
 
                 <!-- Descuento -->
 
-                <div class="control txt-pequenno">
+                <div
+                    class="control txt-pequenno"
+                    [attr.data-tooltip]="detalleActual.porcentajeDescuento == null ? null : labels.descuento">
                     <input 
-                        class="input"
+                        class="input is-small"
                         type="number"
                         placeholder="{{labels.descuento}}"
                         name="descuento"
@@ -145,9 +153,11 @@
 
                 <!-- Valor unitario -->
 
-                <div class="control txt-valor">
+                <div 
+                    class="control txt-valor"
+                    [attr.data-tooltip]="detalleActual.precioUnitario == null ? null : labels.valorUnitario">
                     <input 
-                        class="input"
+                        class="input is-small"
                         type="number"
                         placeholder="{{labels.valorUnitario}}"
                         name="valorUnitario"
@@ -158,7 +168,7 @@
 
                 <div class="control">
                     <button 
-                        class="button is-primary"
+                        class="button is-small is-primary"
                         (click)="agregarDetalle()"
                         (keydown.enter)="agregarDetalle()">
                         <span class="icon is-small">
@@ -184,13 +194,13 @@
         <thead>
 
             <tr>
-                <th width="5%">{{columnas.cantidad}}</th>
+                <th width="3%">{{columnas.cantidad}}</th>
                 <th width="8%">{{columnas.referenciaProducto}}</th>
                 <th>{{columnas.descripcion}}</th>
-                <th width="10%">{{columnas.valorUnitario}}</th>
+                <th width="15%">{{columnas.valorUnitario}}</th>
                 <th width="10%">{{columnas.iva}}</th>
                 <th width="10%">{{columnas.descuento}}</th>
-                <th width="10%">{{columnas.valorTotal}}</th>
+                <th width="13%">{{columnas.valorTotal}}</th>
                 <th width="5%">{{columnas.instalacion}}</th>
             </tr>
 
@@ -198,15 +208,15 @@
 
         <tbody>
 
-            <tr *ngFor="let detalle of factura.detalles; let i = index" (click)="detalleSeleccionado(detalle, i)">
+            <tr *ngFor="let detalle of factura.detalles; let i = index">
 
-                <td>{{detalle.cantidad}}</td>
-                <td>{{detalle.producto.referencia}}</td>
-                <td>{{detalle.descripcion}}</td>
-                <td>{{detalle.precioUnitario}}</td>
-                <td>{{detalle.valorIva}}</td>
-                <td>{{detalle.valorDescuento}}</td>
-                <td>{{detalle.precioTotal}}</td>
+                <td (click)="detalleSeleccionado(detalle, i)">{{detalle.cantidad}}</td>
+                <td (click)="detalleSeleccionado(detalle, i)">{{detalle.producto.referencia}}</td>
+                <td (click)="detalleSeleccionado(detalle, i)">{{detalle.descripcion}}</td>
+                <td (click)="detalleSeleccionado(detalle, i)">{{detalle.precioUnitario}}</td>
+                <td (click)="detalleSeleccionado(detalle, i)">{{detalle.valorIva}}</td>
+                <td (click)="detalleSeleccionado(detalle, i)">{{detalle.valorDescuento}}</td>
+                <td (click)="detalleSeleccionado(detalle, i)">{{detalle.precioTotal}}</td>
                 <td>
 
                     <div class="has-text-centered">
@@ -242,7 +252,7 @@
                 <div class="field-body">
                     <div class="control txt-valor">
                         <input 
-                            class="input"
+                            class="input is-small"
                             type="text"
                             name="totalDescuento"
                             [(ngModel)]="factura.totalDescuento"
@@ -265,7 +275,7 @@
                 <div class="field-body">
                     <div class="control txt-valor">
                         <input 
-                            class="input"
+                            class="input is-small"
                             type="text"
                             name="totalIva"
                             [(ngModel)]="factura.totalIva"
@@ -288,7 +298,7 @@
                 <div class="field-body">
                     <div class="control txt-valor">
                         <input 
-                            class="input"
+                            class="input is-small"
                             type="text"
                             name="totalFactura"
                             [(ngModel)]="factura.valorTotal"
@@ -311,7 +321,7 @@
                 <div class="field-body">
                     <div class="control txt-valor">
                         <input 
-                            class="input"
+                            class="input is-small"
                             type="text"
                             name="comision"
                             [(ngModel)]="factura.valorComision"
@@ -329,7 +339,7 @@
 
     <div class="control">
         <button 
-            class="button is-danger"
+            class="button is-small is-danger"
             (click)="anularFactura()"
             [disabled]="factura.id == 0">
             {{botones.anular}}
@@ -338,7 +348,7 @@
 
     <div class="control">
         <button 
-            class="button is-primary"
+            class="button is-small is-primary"
             (click)="crear()"
             [disabled]="factura.id != 0">
             {{botones.guardar}}
@@ -347,7 +357,7 @@
 
     <div class="control">
         <button 
-            class="button"
+            class="button is-small"
             (click)="limpiarCampos()">
             <span class="icon is-small has-text-primary">
                 <i class="fas fa-eraser"></i>
