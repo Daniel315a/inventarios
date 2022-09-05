@@ -18,6 +18,7 @@ export class ProductosComponent implements OnInit, AfterViewInit {
 
   public producto: Producto = new Producto();
   public productos: Array<any> = new Array<any>();
+  public filtroProductos: string = '';
 
   /**
    * Propiedades del diseño
@@ -30,9 +31,11 @@ export class ProductosComponent implements OnInit, AfterViewInit {
   public labels = {
     referencia: 'Referencia',
     detalle: 'Detalle',
+    cantidad: 'Cantidad',
     cantidadInterna: 'Cantidad interna',
     cantidadDisponible: 'Cantidad disponible',
-    precio: 'Precio unitario'
+    precio: 'Precio unitario',
+    buscar: 'Buscar por código o descripción'
   };
 
   public botones = {
@@ -68,7 +71,7 @@ export class ProductosComponent implements OnInit, AfterViewInit {
 
   public onResize(){
     let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-    let altoDivTabla = window.innerHeight - altoDivForm - 110;
+    let altoDivTabla = window.innerHeight - altoDivForm - 190;
     
     if(altoDivTabla != this.altoDivTabla){
       this.altoDivTabla = altoDivTabla;

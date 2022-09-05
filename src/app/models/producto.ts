@@ -7,8 +7,8 @@ export class Producto{
         public empresa: Empresa = new Empresa(),
         public referencia: string = '',
         public detalle: string = '',
-        public cantidadInterna: number = 0.0,
-        public cantidadDisponible: number = 0.0,
+        public cantidadInterna: number = null,
+        public cantidadDisponible: number = null,
         public precio: number = 0.0,
         public habilitado: boolean = false
     ){}
