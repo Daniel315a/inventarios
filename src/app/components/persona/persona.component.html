@@ -10,7 +10,7 @@
             <div class="field-body">
                 <div class="control">
                     
-                    <div class="select">
+                    <div class="select is-small">
                         <app-select-tipos-persona
                             [tipoPersona]="persona.tipo"
                             (tipoPersonaSeleccionado)="tipoPersonaSeleccionado($event)">
@@ -35,7 +35,7 @@
 
                     <div class="control">
 
-                        <div class="select">
+                        <div class="select is-small">
         
                             <app-select-tipos-documento
                                 [tipoDocumento]="persona.tipoDocumento"
@@ -46,9 +46,11 @@
         
                     </div>
         
-                    <div class="control is-expanded">
+                    <div 
+                        class="control"
+                        [attr.data-tooltip]="persona.numeroDocumento == null || persona.numeroDocumento.length == 0 ? null : labels.numeroDocumento">
                         <input 
-                            class="input"
+                            class="input is-small is-uppercase is-uppercase"
                             type="text"
                             placeholder="{{labels.numeroDocumento}}"
                             name="numeroDocumento"
@@ -71,18 +73,22 @@
             <div class="field-body">
 
                 <div class="field is-grouped">
-                    <div class="control is-expanded">
+                    <div
+                        class="control is-expanded"
+                        [attr.data-tooltip]="persona.nombres == null || persona.nombres.length == 0 ? null : labels.nombres">
                         <input 
-                            class="input" 
+                            class="input is-small is-uppercase" 
                             type="text"
                             placeholder="{{labels.nombres}}"
                             name="nombres"
                             [(ngModel)]="persona.nombres"
                             (focusout)="formatearNombres($event.originalTarget.name)">
                     </div>
-                    <div class="control is-expanded">
+                    <div 
+                        class="control is-expanded"
+                        [attr.data-tooltip]="persona.apellidos == null || persona.apellidos.length == 0 ? null : labels.apellidos">
                         <input 
-                            class="input" 
+                            class="input is-small is-uppercase" 
                             type="text"
                             placeholder="{{labels.apellidos}}"
                             name="apellidos"
@@ -105,7 +111,7 @@
             <div class="field-body">
 
                 <input 
-                    class="input" 
+                    class="input is-small is-uppercase" 
                     type="text" 
                     name="razonSocial"
                     [(ngModel)]="persona.razonSocial"
@@ -128,7 +134,7 @@
 
                     <div class="control">
 
-                        <div class="select">
+                        <div class="select is-small">
         
                             <app-select-departamentos
                                 #selectDepartamentos
@@ -141,7 +147,7 @@
         
                     <div class="control">
         
-                        <div class="select">
+                        <div class="select is-small">
         
                             <app-select-municipios
                                 #selectMunicipios
@@ -152,9 +158,11 @@
         
                     </div>
 
-                    <div class="control is-expanded">
+                    <div 
+                        class="control is-expanded"
+                        [attr.data-tooltip]="persona.direccion == null || persona.direccion.length == 0 ? null : labels.direccion">
                         <input 
-                            class="input" 
+                            class="input is-small is-uppercase" 
                             type="text" 
                             placeholder="{{labels.direccion}}"
                             name="direccion"
@@ -177,17 +185,21 @@
             <div class="field-body">
 
                 <div class="field is-grouped">
-                    <div class="control is-expanded">
+                    <div
+                        class="control is-expanded"
+                        [attr.data-tooltip]="persona.telefono == null || persona.telefono.length == 0 ? null : labels.telefono">
                         <input 
-                            class="input" 
+                            class="input is-small is-uppercase"
                             type="text" 
                             placeholder="{{labels.telefono}}"
                             name="telefono"
                             [(ngModel)]="persona.telefono">
                     </div>
-                    <div class="control is-expanded">
+                    <div
+                        class="control is-expanded"
+                        [attr.data-tooltip]="persona.email == null || persona.email.length == 0 ? null : labels.email">
                         <input 
-                            class="input is-lowercase" 
+                            class="input is-small is-lowercase" 
                             type="email"
                             placeholder="{{labels.email}}" 
                             name="email"
@@ -232,7 +244,7 @@
     </form>
 </div>
 
-<div class="div-inferior" *ngIf="!creacionPersona">
+<div class="box div-inferior" *ngIf="!creacionPersona">
     <app-personas 
         #listadoPersonas
         (personaSeleccionada)="personaSeleccionada($event)">

@@ -106,7 +106,7 @@ export class PersonaComponent implements OnInit, AfterViewInit {
   public onResize(){
     if(!this.creacionPersona){
       let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-      let altoDivTabla = window.innerHeight - altoDivForm - 140;
+      let altoDivTabla = window.innerHeight - altoDivForm - 180;
       
       if(altoDivTabla != this.listadoPersonas.altoTabla){
         this.listadoPersonas.altoTabla = altoDivTabla;
