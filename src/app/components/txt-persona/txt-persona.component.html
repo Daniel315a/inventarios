@@ -4,7 +4,7 @@
     </div>
     <div class="field-body">
 
-        <div class="field is-grouped">
+        <div class="field is-grouped is-grouped-multiline">
 
             <div class="control">
                 <input 
@@ -17,37 +17,43 @@
             </div>
 
             <div class="control is-expanded">
-                <input 
-                    class="input is-small"
-                    type="text" 
-                    placeholder="{{labels.nombreCompleto}}"
-                    name="nombreCompleto"
-                    [(ngModel)]="nombrePersona"
-                    disabled>
-            </div>
+                <div class="field has-addons has-addons-right">
 
-            <div class="control">
+                    <div class="control is-expanded">
+                        <input 
+                            class="input is-small"
+                            type="text" 
+                            placeholder="{{labels.nombreCompleto}}"
+                            name="nombreCompleto"
+                            [(ngModel)]="nombrePersona"
+                            disabled>
+                    </div>
+
+                    <div class="control">
             
-                <button 
-                    class="button is-small is-primary"
-                    (click)="abrirModalConsultarPersonas()">
-                    <span class="icon is-small">
-                        <i class="fas fa-search"></i>
-                    </span>
-                </button>
+                        <button 
+                            class="button is-small addon-button is-primary"
+                            (click)="abrirModalConsultarPersonas()">
+                            <span class="icon is-small">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </button>
+        
+                    </div>
+        
+                    <div class="control">
+                    
+                        <button 
+                            class="button is-small addon-button is-primary"
+                            (click)="abrirModalCrearPersona()">
+                            <span class="icon is-small">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+        
+                    </div>
 
-            </div>
-
-            <div class="control">
-            
-                <button 
-                    class="button is-small is-primary"
-                    (click)="abrirModalCrearPersona()">
-                    <span class="icon is-small">
-                        <i class="fas fa-plus"></i>
-                    </span>
-                </button>
-
+                </div>
             </div>
 
         </div>

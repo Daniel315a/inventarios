@@ -1,0 +1,103 @@
+<div #frmDetalle class="box div-detalle">
+                
+    <form autocomplete="off">
+
+        <div class="columns">
+        
+            <!-- Cantidad -->
+    
+            <div class="column is-1">
+    
+                <div
+                    class="control"
+                    [attr.data-tooltip]="detalle.cantidad == null ? null : labels.cantidad">
+                    <input 
+                        class="input is-small"
+                        type="number"
+                        placeholder="{{labels.cantidad}}"
+                        name="cantidad"
+                        [(ngModel)]="detalle.cantidad">
+                </div>
+    
+            </div>
+            
+            <!-- FIN: Cantidad -->
+    
+            <!-- Producto -->
+    
+            <div class="column is-2">
+    
+                <div class="contol">
+                    
+                    <app-select-productos #selectProducto
+                        (productoSeleccionado)="productoSeleccionado($event)">
+                    </app-select-productos>
+                    
+                </div>
+
+            </div>
+            
+            <!-- FIN: Producto -->
+    
+            <!-- Descripción -->
+    
+            <div class="column">
+    
+                <div
+                    class="control is-expanded"
+                    [attr.data-tooltip]="detalle.descripcion == null || detalle.descripcion.length == 0 ? null : labels.descripcion">
+                    <input 
+                        class="input is-small is-uppercase"
+                        type="text"
+                        placeholder="{{labels.descripcion}}"
+                        name="descripcion"
+                        [(ngModel)]="detalle.descripcion">
+                </div>
+    
+            </div>
+    
+            <!-- FIN: Descripción -->
+            
+            <!-- Porcentaje de IVA -->
+    
+            <div class="column is-2">
+    
+                <div
+                    class="control"
+                    [attr.data-tooltip]="detalle.porcentajeIva == null ? null : labels.iva">
+                    <input 
+                        class="input is-small"
+                        type="number"
+                        placeholder="{{labels.iva}}"
+                        name="iva"
+                        [(ngModel)]="detalle.porcentajeIva">
+                </div>
+    
+            </div>
+            
+            <!-- Porcentaje de IVA -->
+    
+            <!-- Precio unitario -->
+    
+            <div class="column is-2">
+                
+                <div
+                    class="control"
+                    [attr.data-tooltip]="detalle.precioUnitario == null ? null : labels.precioUnitario">
+                    <input 
+                        class="input is-small"
+                        type="number"
+                        placeholder="{{labels.precioUnitario}}"
+                        name="precioUnitario"
+                        [(ngModel)]="detalle.precioUnitario">
+                </div>
+    
+            </div>
+    
+            <!-- Precio unitario -->
+    
+        </div>
+
+    </form>
+    
+</div>

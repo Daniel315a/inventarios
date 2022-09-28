@@ -1,11 +1,13 @@
-<div [ngClass]="listadoActivo ? 'dropdown is-active' : 'dropdown'">
+<div
+    class="dropdown"
+    [ngClass]="listadoActivo ? 'is-active' : ''">
     
     <div class="dropdown-trigger">
 
         <input
+            class="input is-small is-uppercase"
             type="text" 
             name="producto"
-            class="input is-small is-uppercase"
             placeholder="{{labels.producto}}"
             [(ngModel)]="filtroProducto"
             (keyup)="onChangedBusquedaProducto($event.key)">

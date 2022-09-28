@@ -1,7 +1,30 @@
-<div #divForm class="form-filtros">
+<div #divTabs 
+    *ngIf="appMovil" 
+    class="tabs is-boxed">
+
+    <ul>
+       <li [ngClass]="pestannaGeneral ? 'is-active' : ''">
+            <a
+                (click)="establecerPestanna(true)">
+                {{labels.informacionGeneral}}
+            </a>
+       </li> 
+       <li [ngClass]="!pestannaGeneral ? 'is-active' : ''">
+            <a
+                (click)="establecerPestanna(false)">
+                {{labels.detalles}}
+            </a>
+       </li> 
+    </ul>
+
+</div>
+
+<div #divForm 
+    class="form-filtros">
 
     <form 
-        #frmCotizacion 
+        #frmCotizacion
+        [style.display]="generalActivo ? '' : 'none'"
         autocomplete="off" 
         (keydown.enter)="$event.preventDefault()">
 
@@ -59,134 +82,49 @@
 
         <!-- FIN: Notas -->
 
-        <!-- Detalles -->
+    </form>
 
-        <div class="box">
-                
-            <div class="field is-grouped">
-                
-                <!-- Cantidad -->
+    <br>
 
-                <div
-                    class="control txt-pequenno"
-                    [attr.data-tooltip]="detalleActual.cantidad == null ? null : labels.cantidad">
-                    <input 
-                        class="input is-small"
-                        type="number"
-                        placeholder="{{labels.cantidad}}"
-                        name="cantidad"
-                        [(ngModel)]="detalleActual.cantidad">
+    <!-- Detalles -->
+
+    <div 
+        #divDetalles
+        [style.display]="detallesActivo ? '' : 'none'"
+        class="box lista-detalles"
+        [style.height.px]="altoDetalles">
+
+        <div class="columns is-mobile">
+
+            <div class="column">
+                <div class="label is-large">
+                    <label class="level-left">{{labels.detalles}}</label>
                 </div>
-                
-                <!-- FIN: Cantidad -->
-
-                <!-- Producto -->
-
-                <div class="control">
-                    <app-select-productos #selectProducto
-                        (productoSeleccionado)="productoSeleccionado($event)">
-                    </app-select-productos>
-                </div>
-
-                <!-- FIN: Producto -->
-
-                <!-- Descripcion -->
-
-                <div
-                    class="control is-expanded"
-                    [attr.data-tooltip]="detalleActual.descripcion == null || detalleActual.descripcion.length == 0 ? null : labels.descripcion">
-                    <input 
-                        class="input is-small is-uppercase"
-                        type="text"
-                        placeholder="{{labels.descripcion}}"
-                        name="descripcion"
-                        [(ngModel)]="detalleActual.descripcion">
-                </div>
-
-                <!-- FIN: Descripcion -->
-
-                <!-- Porcentaje de IVA -->
-
-                <div
-                    class="control txt-valor"
-                    [attr.data-tooltip]="detalleActual.porcentajeIva == null ? null : labels.iva">
-                    <input 
-                        class="input is-small"
-                        type="number"
-                        placeholder="{{labels.iva}}"
-                        name="iva"
-                        [(ngModel)]="detalleActual.porcentajeIva">
-                </div>
-
-                <!-- Porcentaje de IVA -->
-
-                <!-- Precio -->
-
-                <div
-                    class="control txt-valor"
-                    [attr.data-tooltip]="detalleActual.precioUnitario == null ? null : labels.precioUnitario">
-                    <input 
-                        class="input is-small"
-                        type="number"
-                        placeholder="{{labels.precioUnitario}}"
-                        name="precioUnitario"
-                        [(ngModel)]="detalleActual.precioUnitario">
-                </div>
-
-                <!-- Precio -->
-
-                <!-- Botón de agregar detalle -->
-
-                <div class="control">
+            </div>
+            <div class="column is-narrow-mobile">
+                <div class="buttons is-right">
+                    <!-- (click)="agregarDetalle()"
+                    (keydown.enter)="agregarDetalle()" -->
                     <button 
-                        class="button is-small is-primary"
-                        (click)="agregarDetalle()"
-                        (keydown.enter)="agregarDetalle()">
+                        class="button is-small is-primary">
+                        <span>{{botones.agregar}}</span>
                         <span class="icon is-small">
                             <i class="fas fa-plus"></i>
                         </span>
                     </button>
                 </div>
-
-                <!-- FIN: Botón de agregar detalle -->
-
             </div>
 
         </div>
 
-        <!-- FIN: Detalles -->
+        <app-detalle-cotizacion 
+            *ngFor="let detalle of cotizacion.detalles"
+            [detalle]="detalle">
+        </app-detalle-cotizacion>
+        
+    </div>
 
-    </form>
-
-</div>
-
-<div #divTablaDetalles class="div-tabla is-size-7" [style.height.px]="altoTablaDetalles">
-
-    <table class="table is-fullwidth is-bordered">
-
-        <thead>
-            <tr>
-                <th width="10%">{{columnas.cantidad}}</th>
-                <th>{{columnas.descripcion}}</th>
-                <th width="15%">{{columnas.precioUnitario}}</th>
-                <th width="12%">{{columnas.iva}}</th>
-                <th width="12%">{{columnas.precioTotal}}</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            <tr *ngFor="let detalle of cotizacion.detalles; let i = index" (click)="llenarDetalle(detalle, i)">
-                <td>{{detalle.cantidad}}</td>
-                <td>{{detalle.descripcion}}</td>
-                <td>{{detalle.precioUnitario}}</td>
-                <td>{{detalle.valorIva}}</td>
-                <td>{{detalle.precioTotal}}</td>
-            </tr>
-
-        </tbody>
-
-    </table>
+    <!-- FIN: Detalles -->
 
 </div>
 
