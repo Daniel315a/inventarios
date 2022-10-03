@@ -103,10 +103,9 @@
             </div>
             <div class="column is-narrow-mobile">
                 <div class="buttons is-right">
-                    <!-- (click)="agregarDetalle()"
-                    (keydown.enter)="agregarDetalle()" -->
                     <button 
-                        class="button is-small is-primary">
+                        class="button is-small is-primary"
+                        (click)="agregarDetalle()">
                         <span>{{botones.agregar}}</span>
                         <span class="icon is-small">
                             <i class="fas fa-plus"></i>
@@ -118,8 +117,10 @@
         </div>
 
         <app-detalle-cotizacion 
-            *ngFor="let detalle of cotizacion.detalles"
-            [detalle]="detalle">
+            *ngFor="let detalle of cotizacion.detalles; let i = index"
+            [detalle]="detalle"
+            [indiceDetalle]="i"
+            (detalleEliminado)="detalleEliminado($event)">
         </app-detalle-cotizacion>
         
     </div>

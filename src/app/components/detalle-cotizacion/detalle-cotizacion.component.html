@@ -1,5 +1,14 @@
 <div #frmDetalle class="box div-detalle">
-                
+
+    <div
+        *ngIf="appMovil"
+        class="buttons is-right">
+        <button 
+                class="delete"
+                (click)="onDetalleEliminado()">
+        </button>
+    </div>
+
     <form autocomplete="off">
 
         <div class="columns">
@@ -95,6 +104,22 @@
             </div>
     
             <!-- Precio unitario -->
+
+            <!-- Botón eliminar -->
+
+            <div
+                *ngIf="!appMovil" 
+                class="column is-narrow">
+                <button 
+                        class="button is-small boton-listado is-danger"
+                        (click)="onDetalleEliminado()">
+                    <span class="icon">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                </button>
+            </div>
+
+            <!-- FIN: Botón eliminar -->
     
         </div>
 

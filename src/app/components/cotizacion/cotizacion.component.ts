@@ -19,7 +19,6 @@ import { CotizacionService } from 'src/app/services/cotizacion.service';
 export class CotizacionComponent implements OnInit, AfterViewInit {
 
   public cotizacion: Cotizacion = new Cotizacion();
-  public detalleActual: DetalleCotizacion = new DetalleCotizacion();
   
   /**
    * Propiedades del diseño
@@ -94,18 +93,18 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   }
 
   public onResize(){
-    let altoDivDetalles: number = 0;
-    let altoSuperior: number = 0;
-
     if(this.appMovil){
-      altoDivDetalles = this.frmCotizacion.nativeElement.offsetHeight;
+      this.altoDetalles = 270;
     } else {
+      let altoDivDetalles: number = 0;
+      let altoSuperior: number = 0;
+
       altoSuperior = this.divForm.nativeElement.offsetHeight;
       altoDivDetalles = window.innerHeight - altoSuperior - 250;
-    }
 
-    if(altoDivDetalles != this.altoDetalles){
-      this.altoDetalles = altoDivDetalles;
+      if(altoDivDetalles != this.altoDetalles){
+        this.altoDetalles = altoDivDetalles;
+      }
     }
   }
 
@@ -114,20 +113,14 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   }
 
   public agregarDetalle(){
-    if(this.detalleActual.cantidad > 0){
-      this.detalleActual.porcentajeIva = this.detalleActual.porcentajeIva == null ? 0 : this.detalleActual.porcentajeIva;
-      this.calcularTotalesDetalle();
-      this.cotizacion.detalles.push(this.detalleActual);
-      this.detalleActual = new DetalleCotizacion();
-      this.calcularTotales();
-    }
-  }
-
-  public calcularTotalesDetalle(){
-    this.detalleActual.precioTotal = this.detalleActual.cantidad * this.detalleActual.precioUnitario;
-
-    this.detalleActual.valorIva = Utilidades.redondear(this.detalleActual.precioTotal * (this.detalleActual.porcentajeIva / 100));
-    this.detalleActual.precioTotal += Utilidades.redondear(this.detalleActual.valorIva);
+    this.cotizacion.detalles.push(new DetalleCotizacion());
+    // if(this.detalleActual.cantidad > 0){
+    //   this.detalleActual.porcentajeIva = this.detalleActual.porcentajeIva == null ? 0 : this.detalleActual.porcentajeIva;
+    //   this.calcularTotalesDetalle();
+    //   this.cotizacion.detalles.push(this.detalleActual);
+    //   this.detalleActual = new DetalleCotizacion();
+    //   this.calcularTotales();
+    // }
   }
 
   public calcularTotales(){
@@ -166,6 +159,10 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
         this.generalActivo = false;
       }
     }
+  }
+
+  public detalleEliminado(indice: number) {
+    this.cotizacion.detalles.splice(indice, 1);
   }
 
 }

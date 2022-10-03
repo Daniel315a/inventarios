@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://192.168.68.103:8001/',
+  url: 'http://localhost:8001/',
   tipoPersonaCliente: {
     id: 1,
     nombre: 'Cliente'
