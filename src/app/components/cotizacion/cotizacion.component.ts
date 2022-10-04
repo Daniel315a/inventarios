@@ -51,7 +51,8 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   };
 
   public mensajes = {
-    cotizacionCreada: 'La cotización se ha creado correctamente'
+    cotizacionCreada: 'La cotización se ha creado correctamente',
+    cotizacionActualizada: 'La cotización se ha actualizado correctamente'
   }
 
   public columnas = {
@@ -74,16 +75,16 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    this.cotizacion.detalles.push(new DetalleCotizacion());
-
     if(this.appMovil) {
       this.establecerPestanna(true);
     }
 
-    // if(this.route.snapshot.queryParams.id != undefined) {
-    //   this.cotizacion.id =  this.route.snapshot.queryParams.id;
-    //   this.consultarPorId();
-    // }
+    if(this.route.snapshot.queryParams.id != undefined) {
+      this.cotizacion.id =  this.route.snapshot.queryParams.id;
+      this.consultarPorId();
+    } else {
+      this.cotizacion.detalles.push(new DetalleCotizacion());
+    }
   }
 
   ngAfterViewInit(): void {
@@ -108,19 +109,20 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
     }
   }
 
+  public consultarPorId() {
+    this._cotizacionService.consultarPorId(this.cotizacion.id).subscribe(
+      result => {
+        this.cotizacion.inicializar(result.datos);
+      }
+    );
+  }
+
   public clienteSeleccionado(cliente){
     this.cotizacion.cliente = cliente;
   }
 
   public agregarDetalle(){
     this.cotizacion.detalles.push(new DetalleCotizacion());
-    // if(this.detalleActual.cantidad > 0){
-    //   this.detalleActual.porcentajeIva = this.detalleActual.porcentajeIva == null ? 0 : this.detalleActual.porcentajeIva;
-    //   this.calcularTotalesDetalle();
-    //   this.cotizacion.detalles.push(this.detalleActual);
-    //   this.detalleActual = new DetalleCotizacion();
-    //   this.calcularTotales();
-    // }
   }
 
   public calcularTotales(){
@@ -137,9 +139,30 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   }
 
   public guardar() {
+    if(this.cotizacion.id == 0){
+      this.crearCotizacion();
+    } else {
+      this.actualizarCotizacion();
+    }
+  }
+
+  private crearCotizacion() {
     this._cotizacionService.crear(this.cotizacion).subscribe(
       result => {
         Utilidades.dialogSuccess(this.mensajes.cotizacionCreada);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  private actualizarCotizacion() {
+    this._cotizacionService.actualizar(this.cotizacion).subscribe(
+      result => {
+        Utilidades.dialogSuccess(this.mensajes.cotizacionActualizada);
+        this.cotizacion = new Cotizacion(this.cotizacion.id);
+        this.consultarPorId();
       },
       error => {
         console.log(error);

@@ -56,7 +56,8 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     totalDescuento: 'Descuento',
     totalIva: 'IVA',
     totalFactura: 'Total',
-    valorComision: 'Comisión'
+    valorComision: 'Comisión',
+    numeroFactura: 'Número de factura'
   }
 
   public columnas = {

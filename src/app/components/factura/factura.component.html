@@ -2,6 +2,18 @@
 
     <form #frmFactura autocomplete="off" (keydown.enter)="$event.preventDefault()">
 
+        <!-- Número de factura (Prefijo y consecutivo) -->
+        
+        <div *ngIf="factura.id != 0" class="control is-expanded">
+            
+            <label class="label is-large level-right">
+                {{labels.numeroFactura + ': ' + factura.consecutivo }}
+            </label>
+            
+        </div>
+
+        <!-- FIN: Número de factura (Prefijo y consecutivo) -->
+
         <!-- Fecha -->
 
         <div class="field is-horizontal">
@@ -19,7 +31,7 @@
                         [(ngModel)]="factura.fecha">
 
                 </div>
-
+                
             </div>
         </div>
 

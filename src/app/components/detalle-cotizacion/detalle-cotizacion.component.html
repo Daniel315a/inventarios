@@ -9,7 +9,7 @@
         </button>
     </div>
 
-    <form autocomplete="off">
+    <form autocomplete="off" onKeyPress="if(event.keyCode == 13) event.returnValue = false;">
 
         <div class="columns">
         
@@ -25,7 +25,8 @@
                         type="number"
                         placeholder="{{labels.cantidad}}"
                         name="cantidad"
-                        [(ngModel)]="detalle.cantidad">
+                        [(ngModel)]="detalle.cantidad"
+                        (blur)="calcularTotal()">
                 </div>
     
             </div>
@@ -39,6 +40,7 @@
                 <div class="contol">
                     
                     <app-select-productos #selectProducto
+                        [producto]="detalle.producto.referencia"
                         (productoSeleccionado)="productoSeleccionado($event)">
                     </app-select-productos>
                     
@@ -79,7 +81,8 @@
                         type="number"
                         placeholder="{{labels.iva}}"
                         name="iva"
-                        [(ngModel)]="detalle.porcentajeIva">
+                        [(ngModel)]="detalle.porcentajeIva"
+                        (blur)="calcularTotal()">
                 </div>
     
             </div>
@@ -98,7 +101,8 @@
                         type="number"
                         placeholder="{{labels.precioUnitario}}"
                         name="precioUnitario"
-                        [(ngModel)]="detalle.precioUnitario">
+                        [(ngModel)]="detalle.precioUnitario"
+                        (blur)="calcularTotal()">
                 </div>
     
             </div>

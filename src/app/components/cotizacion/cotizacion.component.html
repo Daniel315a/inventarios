@@ -55,6 +55,7 @@
 
         <app-txt-persona
             #txtCliente
+            [persona]="cotizacion.cliente"
             [labelPersona]="labels.cliente"
             [tipoPersona]="tipoPersonaCliente"
             (personaSeleccionada)="clienteSeleccionado($event)">
@@ -120,7 +121,8 @@
             *ngFor="let detalle of cotizacion.detalles; let i = index"
             [detalle]="detalle"
             [indiceDetalle]="i"
-            (detalleEliminado)="detalleEliminado($event)">
+            (detalleEliminado)="detalleEliminado($event)"
+            (totalCalculado)="calcularTotales()">
         </app-detalle-cotizacion>
         
     </div>

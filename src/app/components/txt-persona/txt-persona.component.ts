@@ -51,6 +51,10 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void{
     setTimeout(() => {
       this.listadoPersonas.altoTabla = 300;
+
+      if(this.persona.id != 0) {
+        this.nombrePersona = !!this.persona.razonSocial ? this.persona.razonSocial : this.persona.nombres + ' ' + this.persona.apellidos;
+      }
     });
   }
 

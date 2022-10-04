@@ -5,6 +5,7 @@ export class Factura{
     
     constructor(
         public id: number = 0,
+        public consecutivo = 0,
         public fecha: string = new Date().toISOString().split("T")[0],
         public cliente: Persona = new Persona(),
         public vendedor: Persona = new Persona(),
@@ -19,6 +20,7 @@ export class Factura{
     public inicializar(datos){
         if(!!datos){
             this.id = !!datos.id ? datos.id : this.id;
+            this.consecutivo = !!datos.consecutivo ? datos.consecutivo : this.consecutivo;
             this.fecha = !!datos.fecha ? datos.fecha : this.fecha;
             this.cliente.inicializar(datos.cliente);
             this.vendedor.inicializar(datos.vendedor);
