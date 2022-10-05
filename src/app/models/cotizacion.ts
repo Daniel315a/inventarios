@@ -1,10 +1,12 @@
 import { DetalleCotizacion } from "./detalle-cotizacion";
 import { Persona } from "./persona";
+import { Usuario } from "./usuario";
 
 export class Cotizacion {
     
     constructor(
         public id: number = 0,
+        public usuario: Usuario = new Usuario(),
         public fecha: string = new Date().toISOString().split("T")[0],
         public cliente: Persona = new Persona(),
         public notas: string = '',
@@ -22,6 +24,7 @@ export class Cotizacion {
             this.precioTotal = !!datos.precio_total ? datos.precio_total : this.precioTotal;
 
             this.cliente.inicializar(datos.cliente);
+            this.usuario.inicializar(datos.usuario);
             datos.detalles.forEach(element => {
                 let detalle: DetalleCotizacion = new DetalleCotizacion();
                 detalle.inicializar(element);

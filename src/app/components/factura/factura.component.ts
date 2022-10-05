@@ -7,13 +7,16 @@ import { FacturaService } from 'src/app/services/factura.service';
 import { TxtPersonaComponent } from '../txt-persona/txt-persona.component';
 import { ActivatedRoute } from '@angular/router';
 import { SelectProductosComponent } from '../select-productos/select-productos.component';
+import { CotizacionService } from 'src/app/services/cotizacion.service';
+import { Cotizacion } from 'src/app/models/cotizacion';
 
 @Component({
   selector: 'app-factura',
   templateUrl: './factura.component.html',
   styleUrls: ['./factura.component.css'],
   providers:[
-    FacturaService
+    FacturaService,
+    CotizacionService
   ],
   host: {
     '(window:resize)': 'onResize($event)'
@@ -85,16 +88,19 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
-    private _facturaService: FacturaService
+    private _facturaService: FacturaService,
+    private _cotizacionService: CotizacionService
   ) { }
 
   ngOnInit(): void {
     if(this.route.snapshot.queryParams.id != undefined) {
       this.factura.id =  this.route.snapshot.queryParams.id;
       this.consultarPorId();
+    } else if (this.route.snapshot.queryParams.id_cotizacion != undefined) {
+      this.llenarFacturaConCotizacion(this.route.snapshot.queryParams.id_cotizacion);
     }
   }
-
+  
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.onResize();
@@ -108,6 +114,37 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     if(altoDivTabla != this.altoTablaDetalles){
       this.altoTablaDetalles = altoDivTabla;
     }
+  }
+
+  public llenarFacturaConCotizacion(idCotizacion: number) {
+    this._cotizacionService.consultarPorId(idCotizacion).subscribe(
+      result => {
+        const cotizacion = new Cotizacion();
+        cotizacion.inicializar(result.datos);
+
+        this.factura.cliente = cotizacion.cliente;
+        this.factura.vendedor = cotizacion.usuario.persona;
+
+        cotizacion.detalles.forEach(detalleCotizacion => {
+          let detalleFactura = new DetalleFactura();
+
+          detalleFactura.cantidad = detalleCotizacion.cantidad;
+          detalleFactura.producto = detalleCotizacion.producto;
+          detalleFactura.descripcion = detalleCotizacion.descripcion;
+          detalleFactura.porcentajeIva = detalleCotizacion.porcentajeIva;
+          detalleFactura.valorIva = detalleCotizacion.valorIva;
+          detalleFactura.precioUnitario = detalleCotizacion.precioUnitario;
+          detalleFactura.precioTotal = detalleCotizacion.precioTotal;
+
+          this.factura.detalles.push(detalleFactura);
+        });
+
+        this.calcularTotales();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   public productoSeleccionado(producto){
@@ -244,6 +281,8 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     if(this.detalleActual.producto.referencia == '' && this.factura.id == 0){
       this.detalleActual = detalle;
       this.factura.detalles.splice(indiceDetalle, 1);
+      this.selectProductos.producto = this.detalleActual.producto;
+      this.selectProductos.filtroProducto = this.detalleActual.producto.referencia;
       this.calcularTotales();
     }
   }

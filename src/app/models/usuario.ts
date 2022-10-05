@@ -1,14 +1,18 @@
 import { Permiso } from "./permiso";
 import { Empresa } from "./empresa"
+import { TipoUsuario } from "./tipo-usuario";
+import { Persona } from "./persona";
 
 export class Usuario {
         
     constructor(
         public id: number = 0,
+        public tipo: TipoUsuario = new TipoUsuario(),
         public nombre: string = '',
         public token: string = '',
         public permisos: Array<Permiso> = new Array<Permiso>(),
-        public empresa: Empresa = new Empresa()
+        public empresa: Empresa = new Empresa(),
+        public persona: Persona = new Persona()
     ) {
         
     }
@@ -21,6 +25,8 @@ export class Usuario {
             this.empresa = new Empresa();
             
             this.empresa.inicializar(datos.empresa);
+            this.tipo.inicializar(datos.tipo);
+            this.persona.inicializar(datos.persona);
 
             let permisos: Array<any> = !!datos.permisos ? datos.permisos : new Array<any>();
 

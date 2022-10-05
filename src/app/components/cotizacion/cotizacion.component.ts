@@ -52,7 +52,8 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
 
   public mensajes = {
     cotizacionCreada: 'La cotización se ha creado correctamente',
-    cotizacionActualizada: 'La cotización se ha actualizado correctamente'
+    cotizacionActualizada: 'La cotización se ha actualizado correctamente',
+    cotizacionEliminada: 'La cotización se ha eliminado correctamente'
   }
 
   public columnas = {
@@ -66,7 +67,8 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   public botones = {
     guardar: 'Guardar',
     eliminar: 'Eliminar',
-    agregar: 'Agregar'
+    agregar: 'Agregar',
+    facturar: 'Facturar'
   };
 
   constructor(
@@ -150,6 +152,7 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
     this._cotizacionService.crear(this.cotizacion).subscribe(
       result => {
         Utilidades.dialogSuccess(this.mensajes.cotizacionCreada);
+        this.cotizacion.id = result.datos.id;
       },
       error => {
         console.log(error);
@@ -186,6 +189,18 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
 
   public detalleEliminado(indice: number) {
     this.cotizacion.detalles.splice(indice, 1);
+  }
+
+  public eliminarCotizacion() {
+    this._cotizacionService.eliminar(this.cotizacion).subscribe(
+      result => {
+        Utilidades.dialogSuccess(this.mensajes.cotizacionEliminada);
+        this.cotizacion = new Cotizacion();
+      }, 
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }

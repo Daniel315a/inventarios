@@ -52,7 +52,7 @@ export class PersonaComponent implements OnInit, AfterViewInit {
     razonSocial: 'Razón social',
     contacto: 'Contacto',
     direccion: 'Direccion',
-    telefono: 'telefono',
+    telefono: 'Teléfono',
     email: 'E-mail'
   };
 

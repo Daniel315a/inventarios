@@ -7,7 +7,7 @@ import { Utilidades } from "../models/utilidades";
 
 @Injectable()
 export class CotizacionService {
-            
+                
     public url: string = environment.url + 'Cotizacion';
 
     constructor(
@@ -15,11 +15,13 @@ export class CotizacionService {
     ){}
 
     public consultarListado(): Observable<any>{
+        // TODO: Agregar consulta por empresa
+        
         const usuario = Utilidades.obtenerUsuario();
+        const solicitud:string = 'consultar_por_usuario';
         const parametros: HttpParams = new HttpParams().
         set('token', usuario.token).
-        set('solicitud', 'consultar_por_empresa').
-        set('empresa', usuario.empresa.id);
+        set('solicitud', solicitud);
 
         return this._http.get(this.url, {params:  parametros});
     }
@@ -101,6 +103,16 @@ export class CotizacionService {
         set('token', usuario.token).
         set('solicitud', 'eliminar_detalle').
         set('id', idDetalle);
+
+        return this._http.post(this.url, parametros);
+    }
+
+    public eliminar(cotizacion: Cotizacion): Observable<any> {
+        const usuario = Utilidades.obtenerUsuario();
+        const parametros: HttpParams = new HttpParams().
+        set('token', usuario.token).
+        set('solicitud', 'eliminar').
+        set('id', cotizacion.id);
 
         return this._http.post(this.url, parametros);
     }
