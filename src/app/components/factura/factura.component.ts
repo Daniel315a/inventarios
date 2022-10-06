@@ -44,6 +44,7 @@ export class FacturaComponent implements OnInit, AfterViewInit {
   public tipoPersonaCliente: TipoPersona = Utilidades.getTipoCliente();
   public tipoPersonaVendedor: TipoPersona = Utilidades.getTipoVendedor();
   public altoTablaDetalles: number = 0;
+  public modalRemisionActivo: boolean = false;
 
   public labels = {
     fecha: 'Fecha',
@@ -77,7 +78,8 @@ export class FacturaComponent implements OnInit, AfterViewInit {
   public botones = {
     agregarDetalle: 'Agregar detalle',
     guardar: 'Guardar',
-    anular: 'Anular'
+    anular: 'Anular',
+    remisionar: 'Remisionar'
   }
 
   public mensajes = {
@@ -290,6 +292,14 @@ export class FacturaComponent implements OnInit, AfterViewInit {
   public limpiarDetalle(){
     this.detalleActual = new DetalleFactura();
     this.selectProductos.filtroProducto = '';
+  }
+
+  public cerrarModalRemision(){
+    this.modalRemisionActivo = false;
+  }
+
+  public abrirModalRemision(){
+    this.modalRemisionActivo = true;
   }
 
 }

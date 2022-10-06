@@ -361,6 +361,15 @@
     <div class="control">
         <button 
             class="button is-small is-primary"
+            (click)="abrirModalRemision()"
+            [disabled]="factura.id == 0">
+            {{botones.remisionar}}
+        </button>
+    </div>
+
+    <div class="control">
+        <button 
+            class="button is-small is-primary"
             (click)="crear()"
             [disabled]="factura.id != 0">
             {{botones.guardar}}
@@ -377,4 +386,17 @@
         </button>
     </div>
 
+</div>
+
+<div class="modal"
+        [ngClass]="modalRemisionActivo ? 'is-active' : ''">
+    <div 
+        class="modal-background"
+        (click)="cerrarModalRemision()">
+    </div>
+    <div class="modal-content modal-listado">
+        <div class="box">
+            <app-remision></app-remision>
+        </div>
+    </div>
 </div>

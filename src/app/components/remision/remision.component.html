@@ -1,0 +1,148 @@
+<div>
+
+    <form autocomplete="off">
+
+        <!-- Fecha de entrega -->
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="level-left">
+                    {{labels.fechaDespacho}}
+                </label>
+            </div>
+            <div class="field-body">
+
+                <div class="control">
+                    <input
+                        type="date"
+                        name="fechaDespacho"
+                        class="input">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FIN: Fecha de entrega -->
+
+        <!-- Fecha de entrega -->
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="level-left">
+                    {{labels.fechaInstalacion}}
+                </label>
+            </div>
+            <div class="field-body">
+
+                <div class="control">
+                    <input
+                        type="date"
+                        name="fechaInstalacion"
+                        class="input">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FIN: Fecha de entrega -->
+
+        <!-- Encargado -->
+
+        <app-txt-persona
+            #txtEncargado
+            [labelPersona]="labels.despachador"
+            [persona]="remision.encargado"
+            (personaSeleccionada)="encargadoSeleccionado($event)">
+        </app-txt-persona>
+
+        <!-- FIN: Encargado -->
+
+        <!-- Notas -->
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="level-left">{{labels.notas}}</label>
+            </div>
+            <div class="field-body">
+
+            <textarea 
+                class="textarea is-small is-uppercase"
+                rows="2"
+                name="notas"
+                [(ngModel)]="remision.notas">
+            </textarea>
+
+            </div>
+        </div>        
+
+        <!-- FIN: Notas -->
+
+        <!-- Documento de soporte -->
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="level-left">{{labels.documentoSoporte}}</label>
+            </div>
+            <div class="field-body">
+
+                <div class="control">
+
+                    <div class="file">
+                        <label class="file-label">
+                            <input 
+                                type="file" 
+                                name="archivo" 
+                                class="file-input">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    {{labels.seleccionarArchivo}}
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FIN: Documento de soporte -->
+
+    </form>
+
+    <div class="buttons is-right">
+
+        <!-- Eliminar -->
+
+        <button 
+            class="button is-danger is-small"
+            [attr.disabled]="remision.id == 0 ? '' : null">
+            {{botones.eliminar}}
+        </button>
+
+        <!-- FIN: Eliminar -->
+
+        <!-- Imprimir -->
+
+        <button 
+            class="button is-primary is-small"
+            [attr.disabled]="remision.id == 0 ? '' : null">
+            {{botones.imprimir}}
+        </button>
+
+        <!-- FIN: Imprimir -->
+
+        <!-- Guardar -->
+
+        <button class="button is-primary is-small">
+            {{botones.guardar}}
+        </button>
+
+        <!-- FIN: Guardar -->
+
+    </div>
+
+</div>
