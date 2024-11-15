@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  url: 'https://ec2-18-227-72-82.us-east-2.compute.amazonaws.com/',
+  url: 'https://backend.sipsoftware.co/',
   tipoPersonaCliente: {
     id: 1,
     nombre: 'Cliente'
