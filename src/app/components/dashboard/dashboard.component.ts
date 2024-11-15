@@ -153,7 +153,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   public cerrarSesion(){
-    localStorage.removeItem('usr-decoraytransforma');
+    localStorage.removeItem('usr-inventarios');
     window.location.reload();
   }
 

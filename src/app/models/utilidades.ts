@@ -8,15 +8,15 @@ export class Utilidades {
     static appMovil: boolean = false;
 
     static establecerUsuario(usuario: Usuario): void {
-      localStorage.setItem('usr-decoraytransforma', JSON.stringify(usuario));
+      localStorage.setItem('usr-inventarios', JSON.stringify(usuario));
     }
     
     public static verificarLogin(): boolean {
-        return !!localStorage.getItem('usr-decoraytransforma');
+        return !!localStorage.getItem('usr-inventarios');
     }
     
     public static obtenerUsuario(): any{
-      return JSON.parse(localStorage.getItem('usr-decoraytransforma'));
+      return JSON.parse(localStorage.getItem('usr-inventarios'));
     }
 
     public static encriptar(cadena: string): string {
