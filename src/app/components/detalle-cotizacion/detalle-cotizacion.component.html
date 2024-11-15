@@ -1,0 +1,132 @@
+<div #frmDetalle class="box div-detalle">
+
+    <div
+        *ngIf="appMovil"
+        class="buttons is-right">
+        <button 
+                class="delete"
+                (click)="onDetalleEliminado()">
+        </button>
+    </div>
+
+    <form autocomplete="off" onKeyPress="if(event.keyCode == 13) event.returnValue = false;">
+
+        <div class="columns">
+        
+            <!-- Cantidad -->
+    
+            <div class="column is-1">
+    
+                <div
+                    class="control"
+                    [attr.data-tooltip]="detalle.cantidad == null ? null : labels.cantidad">
+                    <input 
+                        class="input is-small"
+                        type="number"
+                        placeholder="{{labels.cantidad}}"
+                        name="cantidad"
+                        [(ngModel)]="detalle.cantidad"
+                        (blur)="calcularTotal()">
+                </div>
+    
+            </div>
+            
+            <!-- FIN: Cantidad -->
+    
+            <!-- Producto -->
+    
+            <div class="column is-2">
+    
+                <div class="contol">
+                    
+                    <app-select-productos #selectProducto
+                        [producto]="detalle.producto.referencia"
+                        (productoSeleccionado)="productoSeleccionado($event)">
+                    </app-select-productos>
+                    
+                </div>
+
+            </div>
+            
+            <!-- FIN: Producto -->
+    
+            <!-- Descripción -->
+    
+            <div class="column">
+    
+                <div
+                    class="control is-expanded"
+                    [attr.data-tooltip]="detalle.descripcion == null || detalle.descripcion.length == 0 ? null : labels.descripcion">
+                    <input 
+                        class="input is-small is-uppercase"
+                        type="text"
+                        placeholder="{{labels.descripcion}}"
+                        name="descripcion"
+                        [(ngModel)]="detalle.descripcion">
+                </div>
+    
+            </div>
+    
+            <!-- FIN: Descripción -->
+            
+            <!-- Porcentaje de IVA -->
+    
+            <div class="column is-2">
+    
+                <div
+                    class="control"
+                    [attr.data-tooltip]="detalle.porcentajeIva == null ? null : labels.iva">
+                    <input 
+                        class="input is-small"
+                        type="number"
+                        placeholder="{{labels.iva}}"
+                        name="iva"
+                        [(ngModel)]="detalle.porcentajeIva"
+                        (blur)="calcularTotal()">
+                </div>
+    
+            </div>
+            
+            <!-- Porcentaje de IVA -->
+    
+            <!-- Precio unitario -->
+    
+            <div class="column is-2">
+                
+                <div
+                    class="control"
+                    [attr.data-tooltip]="detalle.precioUnitario == null ? null : labels.precioUnitario">
+                    <input 
+                        class="input is-small"
+                        type="number"
+                        placeholder="{{labels.precioUnitario}}"
+                        name="precioUnitario"
+                        [(ngModel)]="detalle.precioUnitario"
+                        (blur)="calcularTotal()">
+                </div>
+    
+            </div>
+    
+            <!-- Precio unitario -->
+
+            <!-- Botón eliminar -->
+
+            <div
+                *ngIf="!appMovil" 
+                class="column is-narrow">
+                <button 
+                        class="button is-small boton-listado is-danger"
+                        (click)="onDetalleEliminado()">
+                    <span class="icon">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                </button>
+            </div>
+
+            <!-- FIN: Botón eliminar -->
+    
+        </div>
+
+    </form>
+    
+</div>

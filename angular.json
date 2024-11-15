@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "FrontDecoraYTransforma": {
+    "inventarios": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -16,7 +16,7 @@
             "allowedCommonJsDependencies": [
               "sweetalert2"
             ],
-            "outputPath": "dist/FrontDecoraYTransforma",
+            "outputPath": "dist/inventarios",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,6 +28,7 @@
             ],
             "styles": [
               "./node_modules/bulma/css/bulma.min.css",
+              "./node_modules/@creativebulma/bulma-tooltip/dist/bulma-tooltip.min.css",
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css"
             ],
@@ -43,7 +44,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -60,24 +61,31 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "optimization": false
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "defaultConfiguration": "development",
           "options": {
-            "browserTarget": "FrontDecoraYTransforma:build"
+            "browserTarget": "inventarios:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "FrontDecoraYTransforma:build:production"
+              "browserTarget": "inventarios:build:production"
+            },
+            "development": {
+              "browserTarget": "inventarios:build:development"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "FrontDecoraYTransforma:build"
+            "browserTarget": "inventarios:build"
           }
         },
         "test": {
@@ -114,11 +122,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "FrontDecoraYTransforma:serve"
+            "devServerTarget": "inventarios:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "FrontDecoraYTransforma:serve:production"
+              "devServerTarget": "inventarios:serve:production"
             }
           }
         }

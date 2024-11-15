@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, isDevMode, OnInit, ViewChild } from '@angular/core';
 import { DetalleFactura } from 'src/app/models/detalle-factura';
 import { Factura } from 'src/app/models/factura';
 import { TipoPersona } from 'src/app/models/tipo-persona';
@@ -7,13 +7,18 @@ import { FacturaService } from 'src/app/services/factura.service';
 import { TxtPersonaComponent } from '../txt-persona/txt-persona.component';
 import { ActivatedRoute } from '@angular/router';
 import { SelectProductosComponent } from '../select-productos/select-productos.component';
+import { CotizacionService } from 'src/app/services/cotizacion.service';
+import { Cotizacion } from 'src/app/models/cotizacion';
+import { RemisionComponent } from '../remision/remision.component';
+import { Persona } from 'src/app/models/persona';
 
 @Component({
   selector: 'app-factura',
   templateUrl: './factura.component.html',
   styleUrls: ['./factura.component.css'],
   providers:[
-    FacturaService
+    FacturaService,
+    CotizacionService
   ],
   host: {
     '(window:resize)': 'onResize($event)'
@@ -38,9 +43,12 @@ export class FacturaComponent implements OnInit, AfterViewInit {
   public txtVendedor: TxtPersonaComponent;
   @ViewChild('selectProductos')
   public selectProductos: SelectProductosComponent;
+  @ViewChild('formRemision')
+  public formRemision: RemisionComponent;
   public tipoPersonaCliente: TipoPersona = Utilidades.getTipoCliente();
   public tipoPersonaVendedor: TipoPersona = Utilidades.getTipoVendedor();
   public altoTablaDetalles: number = 0;
+  public modalRemisionActivo: boolean = false;
 
   public labels = {
     fecha: 'Fecha',
@@ -52,11 +60,12 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     descuento: '% Dto',
     esInstalacion: 'Instalación',
     valorUnitario: 'Precio unitario',
-    comision: 'Porcentaje de comisión',
+    comision: 'Comisión (%)',
     totalDescuento: 'Descuento',
     totalIva: 'IVA',
     totalFactura: 'Total',
-    valorComision: 'Comisión'
+    valorComision: 'Comisión',
+    numeroFactura: 'Número de factura'
   }
 
   public columnas = {
@@ -73,7 +82,8 @@ export class FacturaComponent implements OnInit, AfterViewInit {
   public botones = {
     agregarDetalle: 'Agregar detalle',
     guardar: 'Guardar',
-    anular: 'Anular'
+    anular: 'Anular',
+    remisionar: 'Remisionar'
   }
 
   public mensajes = {
@@ -84,16 +94,19 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
-    private _facturaService: FacturaService
+    private _facturaService: FacturaService,
+    private _cotizacionService: CotizacionService
   ) { }
 
   ngOnInit(): void {
     if(this.route.snapshot.queryParams.id != undefined) {
       this.factura.id =  this.route.snapshot.queryParams.id;
       this.consultarPorId();
+    } else if (this.route.snapshot.queryParams.id_cotizacion != undefined) {
+      this.llenarFacturaConCotizacion(this.route.snapshot.queryParams.id_cotizacion);
     }
   }
-
+  
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.onResize();
@@ -102,11 +115,42 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   public onResize(){
     let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-    let altoDivTabla = window.innerHeight - altoDivForm - 220;
+    let altoDivTabla = window.innerHeight - altoDivForm - 340;
     
     if(altoDivTabla != this.altoTablaDetalles){
       this.altoTablaDetalles = altoDivTabla;
     }
+  }
+
+  public llenarFacturaConCotizacion(idCotizacion: number) {
+    this._cotizacionService.consultarPorId(idCotizacion).subscribe(
+      result => {
+        const cotizacion = new Cotizacion();
+        cotizacion.inicializar(result.datos);
+
+        this.factura.cliente = cotizacion.cliente;
+        this.factura.vendedor = cotizacion.usuario.persona;
+
+        cotizacion.detalles.forEach(detalleCotizacion => {
+          let detalleFactura = new DetalleFactura();
+
+          detalleFactura.cantidad = detalleCotizacion.cantidad;
+          detalleFactura.producto = detalleCotizacion.producto;
+          detalleFactura.descripcion = detalleCotizacion.descripcion;
+          detalleFactura.porcentajeIva = detalleCotizacion.porcentajeIva;
+          detalleFactura.valorIva = detalleCotizacion.valorIva;
+          detalleFactura.precioUnitario = detalleCotizacion.precioUnitario;
+          detalleFactura.precioTotal = detalleCotizacion.precioTotal;
+
+          this.factura.detalles.push(detalleFactura);
+        });
+
+        this.calcularTotales();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   public productoSeleccionado(producto){
@@ -196,6 +240,10 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   public limpiarCampos(){
     this.factura = new Factura();
+    
+    this.txtCliente.persona = new Persona();
+    this.txtVendedor.persona = new Persona();
+
     this.txtCliente.nombrePersona = '';
     this.txtVendedor.nombrePersona = '';
 
@@ -243,6 +291,8 @@ export class FacturaComponent implements OnInit, AfterViewInit {
     if(this.detalleActual.producto.referencia == '' && this.factura.id == 0){
       this.detalleActual = detalle;
       this.factura.detalles.splice(indiceDetalle, 1);
+      this.selectProductos.producto = this.detalleActual.producto;
+      this.selectProductos.filtroProducto = this.detalleActual.producto.referencia;
       this.calcularTotales();
     }
   }
@@ -250,6 +300,20 @@ export class FacturaComponent implements OnInit, AfterViewInit {
   public limpiarDetalle(){
     this.detalleActual = new DetalleFactura();
     this.selectProductos.filtroProducto = '';
+  }
+
+  public cerrarModalRemision(){
+    this.modalRemisionActivo = false;
+  }
+
+  public abrirModalRemision(){
+    this.formRemision.factura = this.factura;
+    
+    if(this.factura.remisiones.length > 0) {
+      this.formRemision.llenar(this.factura.remisiones[0]);
+    }
+
+    this.modalRemisionActivo = true;
   }
 
 }

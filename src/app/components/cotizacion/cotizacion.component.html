@@ -1,7 +1,30 @@
-<div #divForm class="form-filtros">
+<div #divTabs 
+    *ngIf="appMovil" 
+    class="tabs is-boxed">
+
+    <ul>
+       <li [ngClass]="pestannaGeneral ? 'is-active' : ''">
+            <a
+                (click)="establecerPestanna(true)">
+                {{labels.informacionGeneral}}
+            </a>
+       </li> 
+       <li [ngClass]="!pestannaGeneral ? 'is-active' : ''">
+            <a
+                (click)="establecerPestanna(false)">
+                {{labels.detalles}}
+            </a>
+       </li> 
+    </ul>
+
+</div>
+
+<div #divForm 
+    class="form-filtros">
 
     <form 
-        #frmCotizacion 
+        #frmCotizacion
+        [style.display]="generalActivo ? '' : 'none'"
         autocomplete="off" 
         (keydown.enter)="$event.preventDefault()">
 
@@ -16,7 +39,7 @@
                 <div class="control">
 
                     <input 
-                        class="input"
+                        class="input is-small"
                         type="date"
                         name="fecha"
                         [(ngModel)]="cotizacion.fecha">
@@ -32,6 +55,7 @@
 
         <app-txt-persona
             #txtCliente
+            [persona]="cotizacion.cliente"
             [labelPersona]="labels.cliente"
             [tipoPersona]="tipoPersonaCliente"
             (personaSeleccionada)="clienteSeleccionado($event)">
@@ -48,7 +72,8 @@
             <div class="field-body">
 
             <textarea 
-                class="textarea"
+                class="textarea is-small is-uppercase"
+                rows="2"
                 name="notas"
                 [(ngModel)]="cotizacion.notas">
             </textarea>
@@ -58,126 +83,51 @@
 
         <!-- FIN: Notas -->
 
-        <!-- Detalles -->
+    </form>
 
-        <div class="box">
-                
-            <div class="field is-grouped">
-                
-                <!-- Cantidad -->
+    <br>
 
-                <div class="control txt-pequenno">
-                    <input 
-                        class="input"
-                        type="number"
-                        placeholder="{{labels.cantidad}}"
-                        name="cantidad"
-                        [(ngModel)]="detalleActual.cantidad">
+    <!-- Detalles -->
+
+    <div 
+        #divDetalles
+        [style.display]="detallesActivo ? '' : 'none'"
+        class="box lista-detalles"
+        [style.height.px]="altoDetalles">
+
+        <div class="columns is-mobile">
+
+            <div class="column">
+                <div class="label is-large">
+                    <label class="level-left">{{labels.detalles}}</label>
                 </div>
-                
-                <!-- FIN: Cantidad -->
-
-                <!-- Producto -->
-
-                <div class="control">
-                    <app-select-productos #selectProducto
-                        (productoSeleccionado)="productoSeleccionado($event)">
-                    </app-select-productos>
-                </div>
-
-                <!-- FIN: Producto -->
-
-                <!-- Descripcion -->
-
-                <div class="control is-expanded">
-                    <input 
-                        class="input"
-                        type="text"
-                        placeholder="{{labels.descripcion}}"
-                        name="descripcion"
-                        [(ngModel)]="detalleActual.descripcion">
-                </div>
-
-                <!-- FIN: Descripcion -->
-
-                <!-- Porcentaje de IVA -->
-
-                <div class="control txt-valor">
-                    <input 
-                        class="input"
-                        type="number"
-                        placeholder="{{labels.iva}}"
-                        name="iva"
-                        [(ngModel)]="detalleActual.porcentajeIva">
-                </div>
-
-                <!-- Porcentaje de IVA -->
-
-                <!-- Precio -->
-
-                <div class="control txt-valor">
-                    <input 
-                        class="input"
-                        type="number"
-                        placeholder="{{labels.precioUnitario}}"
-                        name="precioUnitario"
-                        [(ngModel)]="detalleActual.precioUnitario">
-                </div>
-
-                <!-- Precio -->
-
-                <!-- Botón de agregar detalle -->
-
-                <div class="control">
+            </div>
+            <div class="column is-narrow-mobile">
+                <div class="buttons is-right">
                     <button 
-                        class="button is-primary"
-                        (click)="agregarDetalle()"
-                        (keydown.enter)="agregarDetalle()">
+                        class="button is-small is-primary"
+                        (click)="agregarDetalle()">
+                        <span>{{botones.agregar}}</span>
                         <span class="icon is-small">
                             <i class="fas fa-plus"></i>
                         </span>
                     </button>
                 </div>
-
-                <!-- FIN: Botón de agregar detalle -->
-
             </div>
 
         </div>
 
-        <!-- FIN: Detalles -->
+        <app-detalle-cotizacion 
+            *ngFor="let detalle of cotizacion.detalles; let i = index"
+            [detalle]="detalle"
+            [indiceDetalle]="i"
+            (detalleEliminado)="detalleEliminado($event)"
+            (totalCalculado)="calcularTotales()">
+        </app-detalle-cotizacion>
+        
+    </div>
 
-    </form>
-
-</div>
-
-<div #divTablaDetalles class="div-tabla" [style.height.px]="altoTablaDetalles">
-
-    <table class="table is-fullwidth is-bordered">
-
-        <thead>
-            <tr>
-                <th width="10%">{{columnas.cantidad}}</th>
-                <th>{{columnas.descripcion}}</th>
-                <th width="12%">{{columnas.precioUnitario}}</th>
-                <th width="12%">{{columnas.iva}}</th>
-                <th width="12%">{{columnas.precioTotal}}</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            <tr *ngFor="let detalle of cotizacion.detalles; let i = index" (click)="llenarDetalle(detalle, i)">
-                <td>{{detalle.cantidad}}</td>
-                <td>{{detalle.descripcion}}</td>
-                <td>{{detalle.precioUnitario}}</td>
-                <td>{{detalle.valorIva}}</td>
-                <td>{{detalle.precioTotal}}</td>
-            </tr>
-
-        </tbody>
-
-    </table>
+    <!-- FIN: Detalles -->
 
 </div>
 
@@ -196,7 +146,7 @@
             <div class="field-body">
 
                 <input 
-                    class="input"
+                    class="input is-small"
                     type="text"
                     name="totalIva"
                     [(ngModel)]="cotizacion.totalIva"
@@ -213,7 +163,7 @@
             <div class="field-body">
 
                 <input 
-                    class="input"
+                    class="input is-small"
                     type="text"
                     name="precioTotal"
                     [(ngModel)]="cotizacion.precioTotal"
@@ -231,23 +181,36 @@
 <!-- Botones -->
 
 <div class="field is-grouped is-grouped-right">
-    
+
     <div class="control">
         <button
-            class="button is-primary"
+            class="button is-small is-primary"
+            [routerLink]="'/factura'"
+            [queryParams]="{ id_cotizacion: cotizacion.id }"
+            [attr.disabled]="cotizacion.id == 0 ? '' : null">
+            {{botones.facturar}}
+        </button>
+    </div>
+
+    <div class="control">
+        <button
+            class="button is-small is-primary"
             (click)="guardar()">
             {{botones.guardar}}
         </button>
     </div>
 
     <div class="control">
-        <button class="button is-danger">
+        <button 
+            class="button is-small is-danger"
+            [attr.disabled]="cotizacion.id == 0 ? '' : null"
+            (click)="eliminarCotizacion()">
             {{botones.eliminar}}
         </button>
     </div>
 
     <div class="control">
-        <button class="button has-text-primary">
+        <button class="button is-small has-text-primary">
             <span class="icon is-small">
                 <i class="fas fa-eraser"></i>
             </span>

@@ -261,6 +261,10 @@ a.dropdown-item.is-active {
     width: 160px;
 }
 
+.boton-listado {
+    border-radius: 50% !important;
+}
+
 @keyframes aparicion-boton-menu {
     0% {
         left: -35px;

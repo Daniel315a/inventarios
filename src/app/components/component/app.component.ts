@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginOk = Utilidades.verificarLogin();
+    Utilidades.appMovil = window.innerWidth <= 600;
   }
 
 }

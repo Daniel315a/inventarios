@@ -5,14 +5,14 @@
         <!-- Referencia -->
 
         <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label">
                 <label class="level-left">{{labels.referencia}}</label>
             </div>
             <div class="field-body">
 
                 <div class="control">
                     <input 
-                        class="input is-uppercase"
+                        class="input is-small is-uppercase"
                         type="text"
                         name="referencia"
                         [(ngModel)]="producto.referencia">
@@ -26,13 +26,13 @@
         <!-- Detalle -->
 
         <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label">
                 <label class="level-left">{{labels.detalle}}</label>
             </div>
             <div class="field-body">
 
                 <input 
-                    class="input"
+                    class="input is-small is-uppercase"
                     type="text"
                     name="detalle"
                     [(ngModel)]="producto.detalle">
@@ -42,47 +42,45 @@
 
         <!-- FIN: Detalle -->
 
-        <!-- Cantidad interna -->
+        <!-- Cantidad -->
 
         <div class="field is-horizontal">
-            <div class="field-label is-normal">
-                <label class="level-left">{{labels.cantidadInterna}}</label>
+            <div class="field-label">
+                <label class="level-left">{{labels.cantidad}}</label>
             </div>
             <div class="field-body">
 
-                <div class="control">
-                    <input 
-                        class="input"
-                        type="text"
-                        name="cantidadInterna"
-                        [(ngModel)]="producto.cantidadInterna">
+                <div class="field is-grouped">
+
+                    <div 
+                        class="control"
+                        [attr.data-tooltip]="producto.cantidadDisponible == null ? null : labels.cantidadDisponible">
+                        <input
+                            class="input is-small"
+                            type="number"
+                            name="cantidadDisponible"
+                            [(ngModel)]="producto.cantidadDisponible"
+                            placeholder="{{labels.cantidadDisponible}}">
+                    </div>
+
+                    <div 
+                        class="control"
+                        [attr.data-tooltip]="producto.cantidadInterna == null ? null : labels.cantidadInterna">
+                        <input
+                            [attr.data-tooltip]="labels.cantidadInterna"
+                            class="input is-small"
+                            type="number"
+                            name="cantidadInterna"
+                            [(ngModel)]="producto.cantidadInterna"
+                            placeholder="{{labels.cantidadInterna}}">
+                    </div>
+
                 </div>
 
             </div>
         </div>
 
-        <!-- FIN: Cantidad interna -->
-
-        <!-- Cantidad disponible -->
-
-        <div class="field is-horizontal">
-            <div class="field-label is-normal">
-                <label class="level-left">{{labels.cantidadDisponible}}</label>
-            </div>
-            <div class="field-body">
-
-                <div class="control">
-                    <input 
-                        class="input"
-                        type="text"
-                        name="cantidadDisponible"
-                        [(ngModel)]="producto.cantidadDisponible">
-                </div>
-
-            </div>
-        </div>
-
-        <!-- FIN: Cantidad disponible -->
+        <!-- FIN: Cantidad -->
 
         <!-- Precio -->
 
@@ -94,7 +92,7 @@
 
                 <div class="control">
                     <input 
-                        class="input has-text-right"
+                        class="input is-small has-text-right"
                         type="text"
                         name="precio"
                         [(ngModel)]="producto.precio">
@@ -111,20 +109,20 @@
             
             <div class="control">
                 <button 
-                    class="button is-primary"
+                    class="button is-small is-primary"
                     (click)="guardar()">{{botones.guardar}}</button>
             </div>
 
             <div class="control">
                 <button 
-                    class="button is-danger"
+                    class="button is-small is-danger"
                     [disabled]="producto.id == 0"
                     (click)="deshabilitarProducto()">{{botones.eliminar}}</button>
             </div>
 
             <div class="control">
                 <button 
-                    class="button"
+                    class="button is-small"
                     (click)="limpiarProducto()">
                     <span class="icon has-text-primary"><i class="fas fa-eraser"></i></span>
                 </button>
@@ -138,40 +136,61 @@
 
 </div>
 
-<div #divTabla class="div-tabla" [style.height.px]="altoDivTabla">
+<div #divTabla class="box">
 
-    <table class="table is-fullwidth is-bordered">
+    <div class="field">
+        <div class="control has-icons-left">
+            
+            <input
+                class="input is-small is-uppercase"
+                type="text"
+                name="filtroProductos"
+                [(ngModel)]="filtroProductos"
+                placeholder="{{labels.buscar}}">
 
-        <thead>
-            <tr>
-                <th width="15%">{{columnas.referencia}}</th>
-                <th>{{columnas.detalle}}</th>
-                <th width="10%">{{columnas.acciones}}</th>
-            </tr>
-        </thead>
+            <span class="icon is-small is-left">
+                <i class="fas fa-search"></i>
+            </span>
 
-        <tbody>
+        </div>
+    </div>
 
-            <tr *ngFor="let producto of productos">
-                <td>{{producto.referencia}}</td>
-                <td>{{producto.detalle}}</td>
-                <td>
+    <div class="div-tabla is-size-7" [style.height.px]="altoDivTabla">
 
-                    <div class="buttons is-centered">
-                        <button 
-                            class="button is-primary"
-                            (click)="consultarPorId(producto.id)">
-                            <span class="icon">
-                                <i class="fas fa-edit"></i>
-                            </span>
-                        </button>
-                    </div>
-
-                </td>
-            </tr>
-
-        </tbody>
-
-    </table>
+        <table class="table is-fullwidth is-bordered">
+    
+            <thead>
+                <tr>
+                    <th width="15%">{{columnas.referencia}}</th>
+                    <th>{{columnas.detalle}}</th>
+                    <th width="10%">{{columnas.acciones}}</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+    
+                <tr *ngFor="let producto of productos | filtroProductos: [ filtroProductos ]">
+                    <td>{{producto.referencia}}</td>
+                    <td>{{producto.detalle}}</td>
+                    <td>
+    
+                        <div class="buttons is-centered">
+                            <button 
+                                class="button is-small is-primary"
+                                (click)="consultarPorId(producto.id)">
+                                <span class="icon">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                            </button>
+                        </div>
+    
+                    </td>
+                </tr>
+    
+            </tbody>
+    
+        </table>
+    
+    </div>
 
 </div>

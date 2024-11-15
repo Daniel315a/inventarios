@@ -28,6 +28,8 @@ import { FiltroPersonasPipe } from './pipes/filtro-personas.pipe';
 import { FiltroCotizacionesPipe } from './pipes/filtro-cotizaciones.pipe';
 import { FiltroPrestamosPipe } from './pipes/filtro-prestamos.pipe';
 import { FiltroProductosPipe } from './pipes/filtro-productos.pipe';
+import { DetalleCotizacionComponent } from './components/detalle-cotizacion/detalle-cotizacion.component';
+import { RemisionComponent } from './components/remision/remision.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { FiltroProductosPipe } from './pipes/filtro-productos.pipe';
     FiltroPersonasPipe,
     FiltroCotizacionesPipe,
     FiltroPrestamosPipe,
-    FiltroProductosPipe
+    FiltroProductosPipe,
+    DetalleCotizacionComponent,
+    RemisionComponent
   ],
   imports: [
     AppRoutingModule,

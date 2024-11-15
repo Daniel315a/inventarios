@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { Utilidades } from 'src/app/models/utilidades';
 import { FiltroProductosPipe } from 'src/app/pipes/filtro-productos.pipe';
@@ -19,6 +19,7 @@ export class SelectProductosComponent implements OnInit {
   public productosFiltrados: Array<Producto> = new Array<Producto>();
   public listadoActivo: boolean = false;
   public itemActivo: Producto;
+  @Input('producto')
   public filtroProducto: string = '';
   @Output()
   public productoSeleccionado: EventEmitter<Producto> = new EventEmitter<Producto>();

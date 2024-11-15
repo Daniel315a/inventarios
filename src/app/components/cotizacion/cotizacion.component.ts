@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ApplicationModule, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cotizacion } from 'src/app/models/cotizacion';
 import { DetalleCotizacion } from 'src/app/models/detalle-cotizacion';
 import { Utilidades } from 'src/app/models/utilidades';
 import { CotizacionService } from 'src/app/services/cotizacion.service';
-import { SelectProductosComponent } from '../select-productos/select-productos.component';
 
 @Component({
   selector: 'app-cotizacion',
@@ -20,7 +19,6 @@ import { SelectProductosComponent } from '../select-productos/select-productos.c
 export class CotizacionComponent implements OnInit, AfterViewInit {
 
   public cotizacion: Cotizacion = new Cotizacion();
-  public detalleActual: DetalleCotizacion = new DetalleCotizacion();
   
   /**
    * Propiedades del diseño
@@ -30,25 +28,32 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   public divForm: ElementRef;
   @ViewChild('frmCotizacion')
   public frmCotizacion: ElementRef;
-  @ViewChild('selectProducto')
-  public selectProductos: SelectProductosComponent;
-  public altoTablaDetalles: number = 0;
+  @ViewChild('divDetalles')
+  public divDetalles: ElementRef;
+  @ViewChild('divTabs')
+  public divTabs: ElementRef;
+  public altoDetalles: number = 0;
   public tipoPersonaCliente = Utilidades.getTipoCliente();
+  public appMovil: boolean = Utilidades.appMovil;
+  public pestannaGeneral: boolean = true;
+  public generalActivo: boolean = true;
+  public detallesActivo: boolean = true;
+
 
   public labels = {
+    detalles: 'Detalles',
+    informacionGeneral: 'Información general',
     fecha: 'Fecha',
     cliente: 'Cliente',
     notas: 'Notas',
-    cantidad: 'Cantidad',
-    descripcion: 'Detalle',
-    precioUnitario: 'Precio unitario',
-    iva: '% IVA',
     totalIva: 'IVA',
     precioTotal: 'Total'
   };
 
   public mensajes = {
-    cotizacionCreada: 'La cotización se ha creado correctamente'
+    cotizacionCreada: 'La cotización se ha creado correctamente',
+    cotizacionActualizada: 'La cotización se ha actualizado correctamente',
+    cotizacionEliminada: 'La cotización se ha eliminado correctamente'
   }
 
   public columnas = {
@@ -61,7 +66,9 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
 
   public botones = {
     guardar: 'Guardar',
-    eliminar: 'Eliminar'
+    eliminar: 'Eliminar',
+    agregar: 'Agregar',
+    facturar: 'Facturar'
   };
 
   constructor(
@@ -70,10 +77,16 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    // if(this.route.snapshot.queryParams.id != undefined) {
-    //   this.cotizacion.id =  this.route.snapshot.queryParams.id;
-    //   this.consultarPorId();
-    // }
+    if(this.appMovil) {
+      this.establecerPestanna(true);
+    }
+
+    if(this.route.snapshot.queryParams.id != undefined) {
+      this.cotizacion.id =  this.route.snapshot.queryParams.id;
+      this.consultarPorId();
+    } else {
+      this.cotizacion.detalles.push(new DetalleCotizacion());
+    }
   }
 
   ngAfterViewInit(): void {
@@ -83,46 +96,35 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   }
 
   public onResize(){
-    let altoDivForm:number = this.divForm.nativeElement.offsetHeight;
-    let altoDivTabla = window.innerHeight - altoDivForm - 280;
-    
-    if(altoDivTabla != this.altoTablaDetalles){
-      this.altoTablaDetalles = altoDivTabla;
+    if(this.appMovil){
+      this.altoDetalles = 270;
+    } else {
+      let altoDivDetalles: number = 0;
+      let altoSuperior: number = 0;
+
+      altoSuperior = this.divForm.nativeElement.offsetHeight;
+      altoDivDetalles = window.innerHeight - altoSuperior - 250;
+
+      if(altoDivDetalles != this.altoDetalles){
+        this.altoDetalles = altoDivDetalles;
+      }
     }
+  }
+
+  public consultarPorId() {
+    this._cotizacionService.consultarPorId(this.cotizacion.id).subscribe(
+      result => {
+        this.cotizacion.inicializar(result.datos);
+      }
+    );
   }
 
   public clienteSeleccionado(cliente){
     this.cotizacion.cliente = cliente;
   }
 
-  public productoSeleccionado(producto){
-    this.detalleActual.producto = producto;
-    this.detalleActual.descripcion = this.detalleActual.producto.detalle;
-    this.detalleActual.precioUnitario = this.detalleActual.producto.precio;
-
-    const inputDetalle = this.frmCotizacion.nativeElement["detalle"];
-
-    if(inputDetalle) {
-      inputDetalle.focus();
-    }
-  }
-
   public agregarDetalle(){
-    if(this.detalleActual.cantidad > 0){
-      this.detalleActual.porcentajeIva = this.detalleActual.porcentajeIva == null ? 0 : this.detalleActual.porcentajeIva;
-      this.calcularTotalesDetalle();
-      this.cotizacion.detalles.push(this.detalleActual);
-      this.detalleActual = new DetalleCotizacion();
-      this.calcularTotales();
-      this.limpiarDetalle();
-    }
-  }
-
-  public calcularTotalesDetalle(){
-    this.detalleActual.precioTotal = this.detalleActual.cantidad * this.detalleActual.precioUnitario;
-
-    this.detalleActual.valorIva = Utilidades.redondear(this.detalleActual.precioTotal * (this.detalleActual.porcentajeIva / 100));
-    this.detalleActual.precioTotal += Utilidades.redondear(this.detalleActual.valorIva);
+    this.cotizacion.detalles.push(new DetalleCotizacion());
   }
 
   public calcularTotales(){
@@ -138,27 +140,63 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
     this.cotizacion.precioTotal = Utilidades.redondear(total);
   }
 
-  public llenarDetalle(detalle, indice) 
-  {
-    if(this.detalleActual.producto.referencia == '' && this.cotizacion.id == 0){
-      this.detalleActual = detalle;
-      this.cotizacion.detalles.splice(indice, 1);
-      this.selectProductos.filtroProducto = this.detalleActual.producto.referencia;
-
-      this.calcularTotales();
+  public guardar() {
+    if(this.cotizacion.id == 0){
+      this.crearCotizacion();
+    } else {
+      this.actualizarCotizacion();
     }
   }
 
-  public limpiarDetalle(){
-    this.detalleActual = new DetalleCotizacion();
-    this.selectProductos.filtroProducto = '';
-  }
-
-  public guardar() {
+  private crearCotizacion() {
     this._cotizacionService.crear(this.cotizacion).subscribe(
       result => {
         Utilidades.dialogSuccess(this.mensajes.cotizacionCreada);
+        this.cotizacion.id = result.datos.id;
       },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  private actualizarCotizacion() {
+    this._cotizacionService.actualizar(this.cotizacion).subscribe(
+      result => {
+        Utilidades.dialogSuccess(this.mensajes.cotizacionActualizada);
+        this.cotizacion = new Cotizacion(this.cotizacion.id);
+        this.consultarPorId();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  public establecerPestanna(pestannaGeneral: boolean){
+    this.pestannaGeneral = pestannaGeneral;
+
+    if(this.appMovil) {
+      if(this.pestannaGeneral) { 
+        this.generalActivo = true;
+        this.detallesActivo = false;
+      } else {
+        this.detallesActivo = true;
+        this.generalActivo = false;
+      }
+    }
+  }
+
+  public detalleEliminado(indice: number) {
+    this.cotizacion.detalles.splice(indice, 1);
+  }
+
+  public eliminarCotizacion() {
+    this._cotizacionService.eliminar(this.cotizacion).subscribe(
+      result => {
+        Utilidades.dialogSuccess(this.mensajes.cotizacionEliminada);
+        this.cotizacion = new Cotizacion();
+      }, 
       error => {
         console.log(error);
       }
