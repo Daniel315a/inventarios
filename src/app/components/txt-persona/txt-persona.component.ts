@@ -85,7 +85,7 @@ export class TxtPersonaComponent implements OnInit, AfterViewInit {
         if(result.resultado){
           this.persona = new Persona();
           this.nombrePersona = '';
-          
+
           this.persona.inicializar(result.datos);
           this.nombrePersona = !!this.persona.razonSocial ? this.persona.razonSocial : this.persona.nombres + ' ' + this.persona.apellidos;
         }

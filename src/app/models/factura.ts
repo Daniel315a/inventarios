@@ -1,10 +1,12 @@
 import { DetalleFactura } from "./detalle-factura";
 import { Persona } from "./persona";
+import { Remision } from "./remision";
 
 export class Factura{
     
     constructor(
         public id: number = 0,
+        public remisiones: Array<Remision> = new Array<Remision>(),
         public consecutivo = 0,
         public fecha: string = new Date().toISOString().split("T")[0],
         public cliente: Persona = new Persona(),
@@ -30,10 +32,15 @@ export class Factura{
             this.totalDescuento = !!datos.total_descuento ? datos.total_descuento : this.totalDescuento;
             this.totalIva = !!datos.total_iva ? datos.total_iva : this.totalIva;
 
+            datos.remisiones.forEach(remision => {
+                let objRemision: Remision = new Remision();
+                objRemision.inicializar(remision);
+                this.remisiones.push(objRemision);
+            });
+
             datos.detalles.forEach(detalle => {
                 let objDetalle: DetalleFactura = new DetalleFactura();
                 objDetalle.inicializar(detalle);
-
                 this.detalles.push(objDetalle);
             });
         }

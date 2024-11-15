@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  url: 'https://appdecoraytransforma.co//decora_transforma/',
+  url: 'http://ec2-18-227-72-82.us-east-2.compute.amazonaws.com/',
   tipoPersonaCliente: {
     id: 1,
     nombre: 'Cliente'

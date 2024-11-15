@@ -56,8 +56,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    * Variables del diseño
    */
 
-  public nombreUsuario: string = 'Juan';
-  public nombreEmpresa: string = 'Decora y transforma';
+  public nombreUsuario: string = '';
+  public nombreEmpresa: string = '';
   public menuActivo: boolean = false;
   public menuLateralVisible: boolean = true;
   public btnVerMenuLateralVisible: boolean = false;

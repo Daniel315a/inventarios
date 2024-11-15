@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, isDevMode, OnInit, ViewChild } from '@angular/core';
 import { DetalleFactura } from 'src/app/models/detalle-factura';
 import { Factura } from 'src/app/models/factura';
 import { TipoPersona } from 'src/app/models/tipo-persona';
@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { SelectProductosComponent } from '../select-productos/select-productos.component';
 import { CotizacionService } from 'src/app/services/cotizacion.service';
 import { Cotizacion } from 'src/app/models/cotizacion';
+import { RemisionComponent } from '../remision/remision.component';
+import { Persona } from 'src/app/models/persona';
 
 @Component({
   selector: 'app-factura',
@@ -41,6 +43,8 @@ export class FacturaComponent implements OnInit, AfterViewInit {
   public txtVendedor: TxtPersonaComponent;
   @ViewChild('selectProductos')
   public selectProductos: SelectProductosComponent;
+  @ViewChild('formRemision')
+  public formRemision: RemisionComponent;
   public tipoPersonaCliente: TipoPersona = Utilidades.getTipoCliente();
   public tipoPersonaVendedor: TipoPersona = Utilidades.getTipoVendedor();
   public altoTablaDetalles: number = 0;
@@ -236,6 +240,10 @@ export class FacturaComponent implements OnInit, AfterViewInit {
 
   public limpiarCampos(){
     this.factura = new Factura();
+    
+    this.txtCliente.persona = new Persona();
+    this.txtVendedor.persona = new Persona();
+
     this.txtCliente.nombrePersona = '';
     this.txtVendedor.nombrePersona = '';
 
@@ -299,6 +307,12 @@ export class FacturaComponent implements OnInit, AfterViewInit {
   }
 
   public abrirModalRemision(){
+    this.formRemision.factura = this.factura;
+    
+    if(this.factura.remisiones.length > 0) {
+      this.formRemision.llenar(this.factura.remisiones[0]);
+    }
+
     this.modalRemisionActivo = true;
   }
 

@@ -5,7 +5,6 @@ export class Remision {
 
     constructor(
         public id: number = 0,
-        public factura: Factura = new Factura(),
         public encargado: Persona = new Persona(),
         public urlArchivo: string = '',
         public notas: string = '',
@@ -20,8 +19,7 @@ export class Remision {
             this.notas = !!datos.notas ? datos.notas : this.notas;
             this.fechaEntrega = !!datos.fecha_entrega ? datos.fecha_entrega : this.fechaEntrega;
             this.fechaInstalacion = !!datos.fecha_instalacion ? datos.fecha_instalacion : this.fechaInstalacion;
-
-            this.factura.inicializar(datos.factura);
+            
             this.encargado.inicializar(datos.encargado);
         }
     }

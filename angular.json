@@ -44,7 +44,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -61,17 +61,24 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "optimization": false
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "defaultConfiguration": "development",
           "options": {
             "browserTarget": "FrontDecoraYTransforma:build"
           },
           "configurations": {
             "production": {
               "browserTarget": "FrontDecoraYTransforma:build:production"
+            },
+            "development": {
+              "browserTarget": "FrontDecoraYTransforma:build:development"
             }
           }
         },
